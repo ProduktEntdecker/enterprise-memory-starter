@@ -95,6 +95,7 @@ More detail: [wiki/concepts/llm-wiki-vs-rag.md](wiki/concepts/llm-wiki-vs-rag.md
 ## Session material
 
 - [docs/agenda.html](docs/agenda.html): agenda with timeline. Open it in a browser and print to PDF, or use [docs/agenda.pdf](docs/agenda.pdf).
+- [`slides/`](slides/): the talk deck (HTML and PDF) with speaker notes and sources.
 - [docs/demo-script.md](docs/demo-script.md): run sheet of the live demo, with prompts, expected output and timing.
 - [docs/fallback/](docs/fallback/): prepared outputs of a correct ingest and lint run.
 
