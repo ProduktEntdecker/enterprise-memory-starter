@@ -1,0 +1,11 @@
+{
+  "session_id": "test-session",
+  "transcript_path": "/tmp/test-transcript.jsonl",
+  "cwd": "__ROOT__",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "__ROOT__/sources/inbox/S99-test-e-mail.md",
+    "content": "From: __EMAIL__\n"
+  }
+}
