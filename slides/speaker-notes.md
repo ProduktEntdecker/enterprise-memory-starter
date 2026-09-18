@@ -95,13 +95,24 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - They complement each other: root map on top, wiki in the middle, retrieval over raw sources as the fallback. Recurring answers move up into the wiki (own observation).
 - Anthropic describes Claude Code as exactly such a hybrid: CLAUDE.md up front, glob and grep just in time.
 
-## Slide 16: Starter repo and Q&A (11:48, Q&A 11:50 to 12:00)
+## Slide 16: API credits (11:47)
+- "Before the questions: everyone in this room gets 50 dollars in Claude API credits."
+- Walk the three steps out loud while they scan. Most people miss step 2 and it is the one that fails.
+- **Say it twice:** the Organization ID from `console.anthropic.com`, not the Claude.ai account ID. A wrong ID is rejected, each person can claim only once, and Anthropic's credit team cannot correct a bad submission.
+- API only. If someone asks whether this pays for their Claude.ai subscription: no.
+- 34 redemptions available. If the room is fuller than that, say so honestly and take names afterwards so the Community team can adjust the cap.
+- The QR is generated locally before the session and is deliberately not in the repository, so the offer cannot be drained by anyone crawling GitHub. Run:
+  `qrencode -t SVG -o slides/qr-credits.svg -l H -s 8 -m 2 "<offer link from the Community team>"`
+  In the committed PDF this slide shows a placeholder instead of the code. Present from `slides-with-credits.pdf` or from the HTML.
+- Source: Claude Community Team, mail of 18 September 2026.
+
+## Slide 17: Starter repo and Q&A (11:48, Q&A 11:50 to 12:00)
 - Scan the QR: the starter repo with the fictional company, root map, fact sheet, ingest and lint.
 - Before 11:00: check that the repository is public, as promised on the slide.
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings.
 - Close: an official Claude Community event, supported by Anthropic. Thank the Community House team.
 
-## Slides 17 to 19: Fallback screenshots (only if the live demo breaks)
+## Slides 18 to 20: Fallback screenshots (only if the live demo breaks)
 - Use instead of slides 12 to 14, same talking points and timing.
 - Frames stay empty ([SCREENSHOT]) until the starter repo exists; then add one screenshot per demo step.
-- Slide 17: ingest diff. Slide 18: lint report with the three findings. Slide 19: fact sheet with the winning value and source.
+- Slide 18: ingest diff. Slide 19: lint report with the three findings. Slide 20: fact sheet with the winning value and source.

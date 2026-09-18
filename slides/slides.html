@@ -185,6 +185,10 @@ svg text { font-family: var(--sans); }
 .closing .who { margin-top: 12px; font-size: 20px; color: #cfcabf; }
 .qr { background: #fff; border-radius: 14px; padding: 14px; width: 380px; height: 380px; }
 .qr svg { display: block; width: 100%; height: 100%; }
+.qr img { display: block; width: 100%; height: 100%; }
+.credits-steps { margin-top: 26px; font-size: 23px; line-height: 1.55; padding-left: 22px; color: var(--ivory); }
+.credits-steps .mono { font-family: var(--mono); font-size: 20px; }
+.credits-warn { font-size: 19px; margin-top: 18px; }
 
 /* Fallback */
 .frame {
@@ -235,7 +239,7 @@ svg text { font-family: var(--sans); }
       <circle cx="210" cy="344" r="6"/><circle cx="290" cy="344" r="6"/><circle cx="350" cy="344" r="6"/>
     </g>
   </svg>
-  <div class="foot"><span class="src">An official Claude Community event, supported by Anthropic.</span><span class="num">1 / 19</span></div>
+  <div class="foot"><span class="src">An official Claude Community event, supported by Anthropic.</span><span class="num">1 / 20</span></div>
 </section>
 
 <!-- 2 -->
@@ -243,7 +247,7 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">1 &middot; The map problem</p>
   <h2 class="xl" style="margin-top:90px">My assistant searched for ten minutes and came back with nothing.</h2>
   <p class="lede">Everything it needed sat in a folder it did not know existed.</p>
-  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 19</span></div>
+  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 20</span></div>
 </section>
 
 <!-- 3 -->
@@ -262,7 +266,7 @@ svg text { font-family: var(--sans); }
       <p>Then load only what the question needs.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">3 / 19</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">3 / 20</span></div>
 </section>
 
 <!-- 4 -->
@@ -274,7 +278,7 @@ svg text { font-family: var(--sans); }
     <div class="card"><h3>Unknown questions</h3><p>Retrieves at question time, including the long tail.</p></div>
     <div class="card"><h3>Fresh documents</h3><p>Add a file to the index. No retraining.</p></div>
   </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024).</span><span class="num">4 / 19</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024).</span><span class="num">4 / 20</span></div>
 </section>
 
 <!-- 5 -->
@@ -286,7 +290,7 @@ svg text { font-family: var(--sans); }
     <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div><div class="t"><span class="tag">Own observation</span></div></div>
     <div class="row"><div class="k">Contradictions side by side</div><div class="v">Both versions reach the prompt. The model must pick one.</div><div class="t"><span class="tag src">Wang et al. 2025</span></div></div>
   </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> row 2.</span><span class="num">5 / 19</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> row 2.</span><span class="num">5 / 20</span></div>
 </section>
 
 <!-- 6 -->
@@ -326,7 +330,7 @@ svg text { font-family: var(--sans); }
       <div class="callout">Evidence that summaries on top of retrieval help. Not evidence that hierarchy beats vector search.</div>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Sarthi et al., RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval (arXiv 2401.18059, 2024).</span><span class="num">6 / 19</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Sarthi et al., RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval (arXiv 2401.18059, 2024).</span><span class="num">6 / 20</span></div>
 </section>
 
 <!-- 7 -->
@@ -385,7 +389,7 @@ svg text { font-family: var(--sans); }
     <text x="0" y="392" style="font-family:var(--serif);font-style:italic;font-size:21px;fill:#141413">&ldquo;A persistent, compounding artifact.&rdquo;</text>
     <text x="0" y="416" class="box-sub">Karpathy, on the wiki</text>
   </svg>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">7 / 19</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">7 / 20</span></div>
 </section>
 
 <!-- 8 -->
@@ -425,7 +429,7 @@ svg text { font-family: var(--sans); }
     <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">status per account</text>
   </svg>
   <p class="lede" style="margin-top:26px">The agent reads the map first, then descends only where the question leads.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">8 / 19</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">8 / 20</span></div>
 </section>
 
 <!-- 9 -->
@@ -444,7 +448,7 @@ svg text { font-family: var(--sans); }
     </table>
   </div>
   <p class="lede" style="margin-top:28px">Other pages link here instead of copying. Every value carries its source.</p>
-  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">9 / 19</span></div>
+  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">9 / 20</span></div>
 </section>
 
 <!-- 10 -->
@@ -480,7 +484,7 @@ svg text { font-family: var(--sans); }
       <p class="aside-small">Karpathy's own research wiki: about 100 articles and 400K words, navigated through index files and summaries.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">10 / 19</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">10 / 20</span></div>
 </section>
 
 <!-- 11 -->
@@ -496,7 +500,7 @@ svg text { font-family: var(--sans); }
     </ul>
     <div class="aside"><span class="tag">Own observation</span><br>Skip lint, and a wrong fact gets filed back, then cited again.</div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">11 / 19</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">11 / 20</span></div>
 </section>
 
 <!-- 12 -->
@@ -510,7 +514,7 @@ svg text { font-family: var(--sans); }
       <p class="lede">A new document for <span class="company">Sotarena S.L.</span> lands in sources/inbox/. Watch which wiki pages change.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">12 / 19</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">12 / 20</span></div>
 </section>
 
 <!-- 13 -->
@@ -528,7 +532,7 @@ svg text { font-family: var(--sans); }
       </div>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">13 / 19</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">13 / 20</span></div>
 </section>
 
 <!-- 14 -->
@@ -550,7 +554,7 @@ svg text { font-family: var(--sans); }
       </div>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">14 / 19</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">14 / 20</span></div>
 </section>
 
 <!-- 15 -->
@@ -569,10 +573,31 @@ svg text { font-family: var(--sans); }
     </div>
   </div>
   <p class="note"><b>Under about 200K tokens?</b> Load it all. No retrieval needed.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">15 / 19</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">15 / 20</span></div>
 </section>
 
 <!-- 16 -->
+<section class="slide dark closing" data-minute="11:47">
+  <p class="eyebrow">Before you go</p>
+  <div class="closing-grid">
+    <div>
+      <h2>$50 in API credits, for everyone in this room</h2>
+      <ol class="credits-steps">
+        <li>Scan the code and open the offer page</li>
+        <li>Copy your <b>Organization ID</b> from <span class="mono">console.anthropic.com</span></li>
+        <li>Submit it. Credits land within a few minutes</li>
+      </ol>
+      <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong ID is rejected, and it cannot be corrected afterwards.</p>
+      <span class="opens">API only &middot; not Claude.ai &middot; one claim per person &middot; 34 available</span>
+    </div>
+    <div class="qr" aria-label="QR code for the Claude API credit offer">
+      <img src="qr-credits.svg" alt="QR code for the Claude API credit offer">
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">16 / 20</span></div>
+</section>
+
+<!-- 17 -->
 <section class="slide dark closing" data-minute="11:48">
   <p class="eyebrow">Take it home</p>
   <div class="closing-grid">
@@ -1175,7 +1200,7 @@ svg text { font-family: var(--sans); }
 </svg>
 </div>
   </div>
-  <div class="foot"><span class="src">Claude Community House Barcelona. An official Claude Community event, supported by Anthropic.</span><span class="num">16 / 19</span></div>
+  <div class="foot"><span class="src">Claude Community House Barcelona. An official Claude Community event, supported by Anthropic.</span><span class="num">17 / 20</span></div>
 </section>
 
 <!-- 17 -->
@@ -1183,7 +1208,7 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">Fallback &middot; live demo step 1 of 3</p>
   <h2>Fallback: Ingest a new source</h2>
   <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">17 / 19</span></div>
+  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">18 / 20</span></div>
 </section>
 
 <!-- 18 -->
@@ -1191,7 +1216,7 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">Fallback &middot; live demo step 2 of 3</p>
   <h2>Fallback: Lint finds a contradiction, a duplicate and a stale fact</h2>
   <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">18 / 19</span></div>
+  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">19 / 20</span></div>
 </section>
 
 <!-- 19 -->
@@ -1199,7 +1224,7 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">Fallback &middot; live demo step 3 of 3</p>
   <h2>Fallback: The fact sheet shows the winning value and its source</h2>
   <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">19 / 19</span></div>
+  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">20 / 20</span></div>
 </section>
 
 </div>

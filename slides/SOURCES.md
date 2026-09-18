@@ -1,6 +1,6 @@
 # Sources: Second Brain for Claude: LLM Wiki vs RAG
 
-All sources retrieved and checked on 14 September 2026. Slide numbers refer to slides.html and slides.pdf (19 pages).
+All sources retrieved and checked on 14 September 2026. Slide numbers refer to slides.html and slides.pdf (20 pages).
 
 ## Cited sources
 
@@ -14,6 +14,7 @@ All sources retrieved and checked on 14 September 2026. Slide numbers refer to s
 | 6 | Lewis, P., et al. (2020). Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks. NeurIPS 2020. arXiv:2005.11401. | https://arxiv.org/abs/2005.11401 | 2026-09-14 | Slide 4; note 4 | RAG combines parametric memory with a non-parametric retrieval index; provenance and updating world knowledge are open problems for parametric-only models. |
 | 7 | Sarthi, P., Abdullah, S., Tuli, A., Khanna, S., Goldie, A., Manning, C. D. (2024). RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval. arXiv:2401.18059. | https://arxiv.org/abs/2401.18059 | 2026-09-14 | Slides 4, 6; notes 4, 6 | Retrieval-augmented models adapt to changes in world state and include long-tail knowledge; RAPTOR recursively embeds, clusters and summarises chunks into a tree and retrieves across levels; beats traditional retrieval-augmented LMs; with GPT-4, +20% absolute accuracy over the previous best on QuALITY. Venue "ICLR 2024" appears in older notes but is not shown on the arXiv page, so the deck cites arXiv 2024. |
 | 8 | Wang, H., Prasad, A., Stengel-Eskin, E., Bansal, M. (2025). Retrieval-Augmented Generation with Conflicting Evidence. COLM 2025. arXiv:2504.13079. | https://arxiv.org/abs/2504.13079 | 2026-09-14 | Slide 5; note 5 | RAG systems must handle conflicting information from several sources; the RAMDocs dataset stays hard for RAG baselines (Llama 3.3 70B Instruct: 32.60 exact match). |
+| 9 | Claude Community Team (2026, 18 September). "Your Claude API credit link for Barcelona / Claude Code Workshop". E-mail to the Munich meetup mailbox. | not public | 2026-09-18 | Slide 16; note 16 | The credit offer: 50 USD in API credits per attendee, 34 redemptions, API only (not Claude.ai), Organization ID from console.anthropic.com rather than the Claude.ai account ID, one claim per person, automated fraud checks and no support capacity for wrong submissions. |
 
 ## Correction applied: RAPTOR
 
@@ -53,3 +54,7 @@ Every Karpathy number and quote in the deck has a working link (sources 1 and 2)
 | Add hybrid BM25 plus vector search from about 300 sources | Own planning note | No source; not needed for the argument. |
 | "Latency 0 ms" for a wiki | Earlier comparison table | Misleading; not used. |
 | "Anthropic LLM Wiki Pattern" as a source | Blog draft source list | Unclear what it refers to; not used. |
+
+## Offer link deliberately not in this repository
+
+Slide 16 shows a QR code for the API credit offer. The link accepts 34 redemptions and Anthropic states that wrong or abusive submissions cannot be corrected, so the link is not committed. `slides/qr-credits.svg` and `slides/credits-link.txt` are gitignored and generated locally before the session; the committed `slides.pdf` carries a placeholder in their place. Present from the HTML or from the gitignored `slides-with-credits.pdf`.
