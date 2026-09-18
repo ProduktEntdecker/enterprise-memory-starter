@@ -230,6 +230,12 @@ table.timeline tr.tr-break td {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   color: #8a4a2c;
   font-size: 0.85rem;
+  text-decoration: none;
+  word-break: break-all;
+}
+.links .placeholder:hover,
+.links .placeholder:focus-visible {
+  text-decoration: underline;
 }
 footer {
   margin-top: 2.2rem;
@@ -380,16 +386,16 @@ footer .venue {
   <section>
     <h2>Links</h2>
     <ul class="links">
-      <li><span class="link-label">RSVP</span><span class="placeholder">luma.com/the-7j6y</span></li>
-      <li><span class="link-label">Starter repo</span><span class="placeholder">github.com/ProduktEntdecker/enterprise-memory-starter</span></li>
-      <li><span class="link-label">Slides</span><span class="placeholder">github.com/ProduktEntdecker/enterprise-memory-starter/blob/main/slides/slides.pdf</span></li>
+      <li><span class="link-label">RSVP</span><a class="placeholder" href="https://luma.com/the-7j6y">luma.com/the-7j6y</a></li>
+      <li><span class="link-label">Starter repo</span><a class="placeholder" href="https://github.com/ProduktEntdecker/enterprise-memory-starter">github.com/ProduktEntdecker/enterprise-memory-starter</a></li>
+      <li><span class="link-label">Slides</span><a class="placeholder" href="https://github.com/ProduktEntdecker/enterprise-memory-starter/blob/main/slides/slides.pdf">github.com/ProduktEntdecker/enterprise-memory-starter/blob/main/slides/slides.pdf</a></li>
     </ul>
   </section>
 
   <footer>
     <p class="venue">Claude Community House</p>
     <p>Carrer de Bilbao 128, Poblenou, Barcelona</p>
-    <p>An official Claude Community event, supported by Anthropic.</p>
+    <p>The Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic.</p>
   </footer>
 </div>
 </body>

@@ -5,7 +5,7 @@
 #
 # Install: cp scripts/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
 # Or run: bash scripts/install-hooks.sh
-# Regression test: hooks/tests/test-init-repo-pre-commit.sh in flos-claude-skills.
+# Regression test: bash scripts/hooks/test-pre-commit.sh
 #
 # How it scans (hardened first in the workshop repos, back here with #280):
 # - Only the lines a staged file ADDS, without the diff prefix. Scanning the raw

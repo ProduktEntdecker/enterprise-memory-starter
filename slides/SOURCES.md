@@ -1,6 +1,6 @@
 # Sources: Second Brain for Claude: LLM Wiki vs RAG
 
-All sources retrieved and checked on 14 September 2026. Slide numbers refer to slides.html and slides.pdf (20 pages).
+Sources 1 to 8 retrieved and checked on 14 September 2026; source 9 received and checked on 18 September 2026. Slide numbers refer to slides.html and slides.pdf (20 pages).
 
 ## Cited sources
 

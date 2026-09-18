@@ -110,9 +110,11 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Scan the QR: the starter repo with the fictional company, root map, fact sheet, ingest and lint.
 - Before 11:00: check that the repository is public, as promised on the slide.
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings.
-- Close: an official Claude Community event, supported by Anthropic. Thank the Community House team.
+- Close: the Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic. Thank the Community House team.
 
-## Slides 18 to 20: Fallback screenshots (only if the live demo breaks)
+## Slides 18 to 20: Fallback output (only if the live demo breaks)
 - Use instead of slides 12 to 14, same talking points and timing.
-- Frames stay empty ([SCREENSHOT]) until the starter repo exists; then add one screenshot per demo step.
-- Slide 18: ingest diff. Slide 19: lint report with the three findings. Slide 20: fact sheet with the winning value and source.
+- Each frame holds the real prepared output from `docs/fallback/`, shortened to the decisive lines, not a placeholder.
+- Slide 18: the ingest summary, with the lead-time conflict highlighted. A real screenshot from the rehearsal can replace the text block later.
+- Slide 19: the lint report with the three findings. A real screenshot from the rehearsal can replace the text block later.
+- Slide 20: the fact sheet rows after the resolution, with the superseded value in the history table. A real screenshot from the rehearsal can replace the text block later.

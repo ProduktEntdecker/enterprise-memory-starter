@@ -62,7 +62,16 @@ Suggested resolution: update the FACTS.md row with the new value, winning source
 
 ## Step 7: Write the report
 
-Path: `<wiki>/outputs/lint-YYYY-MM-DD.md` with today's date. If that file exists, append `-2`, `-3`.
+Pick the file name first and reuse it everywhere. Start from `lint-YYYY-MM-DD.md`
+with today's date. If that file already exists, append `-2`, `-3` before the
+extension (`lint-YYYY-MM-DD-2.md`). Call the name you end up with `<report>`.
+
+`<report>` is the same string in all three places: the file you write, the
+`index.md` entry and the `log.md` entry. Never write a suffixed file and then
+link `lint-YYYY-MM-DD.md`, because index and log would then point at the
+earlier report instead of the one you just wrote.
+
+Path: `<wiki>/outputs/<report>`.
 
 ```markdown
 ---
@@ -112,26 +121,26 @@ updated: YYYY-MM-DD
 - This report changed no page. Reply with the finding numbers to resolve.
 ```
 
-Then add the report to `index.md` (Links down under Outputs, count in Rollup) and append to `log.md`:
+Then add the report to `index.md` (Links down under Outputs, count in Rollup) and append to `log.md`. Both entries link `outputs/<report>`, the file name you picked above:
 
 ```text
 ## [YYYY-MM-DD] lint | <n> findings
 
-- Report: [outputs/lint-YYYY-MM-DD.md](outputs/lint-YYYY-MM-DD.md)
+- Report: [outputs/<report>](outputs/<report>)
 - Findings: <kind and subject, one per line>
 - No content changed.
 ```
 
 ## Step 8: Report to the user
 
-One line per finding (number, kind, subject, severity), the report path, and the question "Which findings should I resolve?". Stop there.
+One line per finding (number, kind, subject, severity), the report path `<wiki>/outputs/<report>`, and the question "Which findings should I resolve?". Stop there.
 
 ## Step 9: Resolve, only after the user names findings
 
 - Apply exactly the suggested resolution of the named findings, nothing else.
 - FACTS.md: new value, new winning source and source date; the old value moves to the history table.
 - Merges: keep one page, add the aliases, repoint every link. Ask before deleting the other page.
-- Log every resolution with a reference to the report: `## [YYYY-MM-DD] resolve | lint-YYYY-MM-DD finding <n>`.
+- Log every resolution with a reference to the report, by the same `<report>` name: `## [YYYY-MM-DD] resolve | <report> finding <n>`.
 - Run `python3 scripts/check_links.py` afterwards.
 
 ## Rules

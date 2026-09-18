@@ -9,6 +9,9 @@
 #   systemMessage                         the warning, shown to the user
 #   hookSpecificOutput.additionalContext  the same warning, for Claude
 # It sets no permissionDecision, so the normal permission flow continues.
+# The warning names the category and the number of matches, never the matching
+# value: a hook that quotes what it found copies the private data into the
+# context it was meant to keep it out of.
 #
 # Needs jq or python3 to read the hook input; without both it stays silent.
 # PRIVACY_HOOK_PARSER=python3 forces the python3 code path (used by the tests).
@@ -99,8 +102,12 @@ content="$(field content)"
 findings=""
 
 # scan LABEL CASE REGEX: CASE is "i" (ignore case) or "s" (case-sensitive).
+# Reports the category and the number of matches only. The matching text never
+# leaves this function, so the warning does not carry the private value on into
+# Claude's context, the terminal and every log that keeps it. Same rule as in
+# scripts/hooks/pre-commit.
 scan() {
-  local label="$1" case_flag="$2" regex="$3" matches count sample
+  local label="$1" case_flag="$2" regex="$3" matches count
   if [ "$case_flag" = "i" ]; then
     matches="$(printf '%s\n' "$content" | LC_ALL=C grep -Eio -e "$regex" 2>/dev/null)"
   else
@@ -108,8 +115,7 @@ scan() {
   fi
   [ -n "$matches" ] || return 0
   count="$(printf '%s\n' "$matches" | wc -l | tr -d '[:space:]')"
-  sample="$(printf '%s\n' "$matches" | head -n 1 | sed -e 's/^[^[:alnum:]+-]*//' | cut -c1-6)"
-  findings="${findings}- ${label}: ${count} match(es), the first starts with \"${sample}...\""$'\n'
+  findings="${findings}- ${label}: ${count} match(es)"$'\n'
 }
 
 scan "E-mail address" s '[[:alnum:]._%+-]+@[[:alnum:]-]+([.][[:alnum:]-]+)*[.][[:alpha:]]{2,}'

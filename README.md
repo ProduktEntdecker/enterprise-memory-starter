@@ -110,6 +110,6 @@ bash .claude/hooks/tests/run-tests.sh
 
 ## Disclaimer
 
-An independent community resource, not affiliated with or endorsed by Anthropic.
+The Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic.
 
 Sotarena S.L. is fictional. Any resemblance to real companies or persons is coincidental.

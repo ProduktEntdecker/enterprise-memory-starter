@@ -197,6 +197,14 @@ svg text { font-family: var(--sans); }
   font-family: var(--mono); font-size: 30px; color: #8a4a2c; letter-spacing: 0.04em;
 }
 .fallback h2 { font-size: 42px; }
+.frame.output {
+  display: block; padding: 22px 26px; overflow: hidden;
+  font-size: 24px; letter-spacing: 0; color: var(--ink); text-align: left;
+}
+.frame.output pre {
+  margin: 0; font-family: var(--mono); font-size: inherit; line-height: 1.5; white-space: pre;
+}
+.frame.output b { font-weight: 700; color: #8a4a2c; }
 
 @page { size: 13.333in 7.5in; margin: 0; }
 @media print {
@@ -239,7 +247,7 @@ svg text { font-family: var(--sans); }
       <circle cx="210" cy="344" r="6"/><circle cx="290" cy="344" r="6"/><circle cx="350" cy="344" r="6"/>
     </g>
   </svg>
-  <div class="foot"><span class="src">An official Claude Community event, supported by Anthropic.</span><span class="num">1 / 20</span></div>
+  <div class="foot"><span class="src">The Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic.</span><span class="num">1 / 20</span></div>
 </section>
 
 <!-- 2 -->
@@ -590,8 +598,8 @@ svg text { font-family: var(--sans); }
       <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong ID is rejected, and it cannot be corrected afterwards.</p>
       <span class="opens">API only &middot; not Claude.ai &middot; one claim per person &middot; 34 available</span>
     </div>
-    <div class="qr" aria-label="QR code for the Claude API credit offer">
-      <img src="qr-credits.svg" alt="QR code for the Claude API credit offer">
+    <div class="qr" role="img" aria-label="QR code for the Claude API credit offer">
+      <img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer">
     </div>
   </div>
   <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">16 / 20</span></div>
@@ -608,7 +616,7 @@ svg text { font-family: var(--sans); }
       <div class="qa">Questions?<span>11:50 to 12:00</span></div>
       <div class="who">Florian Steiner &middot; Claude Community Ambassador Munich</div>
     </div>
-    <div class="qr" aria-label="QR code for https://github.com/ProduktEntdecker/enterprise-memory-starter"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <div class="qr"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for https://github.com/ProduktEntdecker/enterprise-memory-starter">
 	<g id="QRcode">
 		<rect x="0" y="0" width="41" height="41" fill="#ffffff"/>
 		<g id="Pattern" transform="translate(4,4)">
@@ -1200,31 +1208,51 @@ svg text { font-family: var(--sans); }
 </svg>
 </div>
   </div>
-  <div class="foot"><span class="src">Claude Community House Barcelona. An official Claude Community event, supported by Anthropic.</span><span class="num">17 / 20</span></div>
+  <div class="foot"><span class="src">The Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic.</span><span class="num">17 / 20</span></div>
 </section>
 
 <!-- 17 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 1 of 3</p>
   <h2>Fallback: Ingest a new source</h2>
-  <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">18 / 20</span></div>
+  <div class="frame output"><pre>Ingest: S06 Call with Talaverna Hotels
+-&gt; Page: meetings/S06-talaverna-call-note.md
+-&gt; Entities: +Talaverna Hotels, +Andreu Font, ~Garb&iacute;
+-&gt; FACTS.md proposals:
+   add       Talaverna Palma: 60 Garb&iacute; sets, opening 2026-10-30
+   add       Talaverna Hotels revenue 2025: EUR 1.9 million
+   <b>conflict  lead time: S06 says 4 weeks, FACTS.md row 1 says
+             6 weeks (S04, owner Head of Operations). No change.</b></pre></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> the terminal summary of the S06 ingest, shortened.</span><span class="num">18 / 20</span></div>
 </section>
 
 <!-- 18 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 2 of 3</p>
   <h2>Fallback: Lint finds a contradiction, a duplicate and a stale fact</h2>
-  <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">19 / 20</span></div>
+  <div class="frame output"><pre>Report: outputs/lint-2026-09-21.md
+<b>1. Contradiction (High):</b> lead time 6 weeks (row 1, S04)
+   vs 4 weeks (S06 call note)
+<b>2. Duplicate entity (Medium):</b> Color-Vall Coating
+   vs Colorvall Coatings S.L. (SUP-0417)
+<b>3. Stale fact (High):</b> Quality Manager Jaume Rius (S08),
+   superseded by Irene Casado from 2026-06-01 (S09)
+Orphans 0, missing index entries 0, broken links 0.</pre></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> docs/fallback/lint-2026-09-21.md, shortened.</span><span class="num">19 / 20</span></div>
 </section>
 
 <!-- 19 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 3 of 3</p>
   <h2>Fallback: The fact sheet shows the winning value and its source</h2>
-  <div class="frame">[SCREENSHOT]</div>
-  <div class="foot"><span class="src">Replace with a screenshot once the starter repo exists.</span><span class="num">20 / 20</span></div>
+  <div class="frame output"><pre>projects/sotarena/wiki/FACTS.md
+| # | Fact            | Value        | Source | Date       |
+| 1 | Lead time       | 6 weeks      | S04    | 2026-08-03 |
+|<b> 9 | Quality Manager | Irene Casado | S09    | 2026-05-28 </b>|
+
+History of superseded values
+| 9 | Quality Manager | Jaume Rius (S08), valid until 2026-05-31 |</pre></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> FACTS.md rows 1 and 9 after the resolution.</span><span class="num">20 / 20</span></div>
 </section>
 
 </div>

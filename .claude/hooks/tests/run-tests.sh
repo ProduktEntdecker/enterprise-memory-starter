@@ -133,6 +133,36 @@ expect_warning() {
   fi
 }
 
+# expect_no_value NAME HOOK FIXTURE PARSER CATEGORY VALUE...: a valid warning
+# that names CATEGORY (label plus count) and repeats none of the VALUEs. Guards
+# the rule that the hook reports what kind of data it found and how often, never
+# the matching text, so private data does not travel into the context, the
+# terminal and the logs. The failure message deliberately does not print the
+# output, because that would leak the value it just caught.
+expect_no_value() {
+  local name="$1" hook="$2" fixture="$3" parser="$4" category="$5" value leaked=""
+  shift 5
+  run_hook "$hook" "$fixtures_dir/$fixture" "$root" "$parser"
+  if [ "$code" -ne 0 ]; then
+    not_ok "$name" "expected exit 0, got $code"
+    return
+  fi
+  if ! is_warning "$out" "$category"; then
+    not_ok "$name" "no valid non-blocking warning for [$category]"
+    return
+  fi
+  for value in "$@"; do
+    case "$out" in
+      *"$value"*) leaked="yes" ;;
+    esac
+  done
+  if [ -z "$leaked" ]; then
+    ok "$name"
+  else
+    not_ok "$name" "the warning repeats the detected value (output withheld on purpose)"
+  fi
+}
+
 # expect_contains NAME HOOK FIXTURE PROJECT_DIR NEEDLE
 expect_contains() {
   run_hook "$2" "$fixtures_dir/$3" "$4" ""
@@ -206,6 +236,17 @@ expect_warning "Relative file path inside a project wiki warns" \
   warn-private-data.sh pretool-write-relative-path-email.json "" "E-mail address"
 expect_warning "python3 parser path warns too" \
   warn-private-data.sh pretool-write-project-wiki-email.json python3 "E-mail address"
+
+# 3b. PreToolUse: the warning never repeats the value it found
+expect_no_value "E-mail warning names category and count, not the address" \
+  warn-private-data.sh pretool-write-project-wiki-email.json "" "E-mail address: 1 match(es)" \
+  "$sample_email" "${sample_email%%@*}" "${sample_email:0:6}"
+expect_no_value "API key warning names category and count, not the key" \
+  warn-private-data.sh pretool-write-wiki-apikey.json "" "API key or token: 1 match(es)" \
+  "$sample_key" "${sample_key:0:6}"
+expect_no_value "python3 parser path keeps the value out of the warning too" \
+  warn-private-data.sh pretool-write-project-wiki-email.json python3 "E-mail address: 1 match(es)" \
+  "$sample_email" "${sample_email:0:6}"
 
 # 4. PreToolUse: silence
 expect_silent "Realistic wiki content (IDs, prices, dates, ISO numbers) stays silent" \

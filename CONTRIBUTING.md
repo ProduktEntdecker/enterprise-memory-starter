@@ -23,7 +23,7 @@ docs/agenda.html          session agenda with timeline (print to PDF)
 docs/agenda.pdf           exported agenda
 docs/demo-script.md       run sheet for the live demo
 docs/fallback/            prepared outputs for the stage
-.claude/settings.json     hook wiring and two permission rules
+.claude/settings.json     hook wiring and one permission rule
 .claude/skills/           wiki-ingest, wiki-lint, wiki-query
 .claude/hooks/            SessionStart root map, PreToolUse privacy warning, tests
 scripts/check_links.py    link, node-contract and structure checks

@@ -38,7 +38,7 @@ Run sheet for the 15-minute live demo in "Second Brain for Claude: LLM Wiki vs R
 - [ ] `python3 scripts/check_links.py --lint projects/sotarena/wiki` shows one near-duplicate pair and two inbox files.
 - [ ] Start `claude` in the folder once, trust it, and check that `/wiki-ingest`, `/wiki-lint` and `/wiki-query` appear in the slash menu. Quit and start again, so the demo session begins clean.
 - [ ] Use the model you rehearsed with. Large terminal font, window wide enough for tables.
-- [ ] Switch to accept-edits mode (Shift+Tab) before the ingest, so that page writes do not prompt. `mv` from the inbox and `python3 scripts/check_links.py` are pre-approved in `.claude/settings.json`; anything else still asks.
+- [ ] Switch to accept-edits mode (Shift+Tab) before the ingest, so that page writes do not prompt. Only `python3 scripts/check_links.py` is pre-approved in `.claude/settings.json`; anything else still asks, so the ingest stops once for a permission prompt when it moves the source out of the inbox. Approve it and narrate it: raw sources move, they are never edited.
 - [ ] Open `docs/fallback/S06-talaverna-call-note.md` and `docs/fallback/lint-2026-09-21.md` in an editor tab, ready to switch.
 - [ ] Rehearse once end to end and write the real durations into the run sheet.
 - [ ] Reset after the rehearsal:
