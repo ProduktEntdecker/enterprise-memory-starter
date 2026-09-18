@@ -66,7 +66,7 @@ SECRET_PATTERNS=(
     # Private keys
     'private key|-----BEGIN (RSA |EC |DSA |OPENSSH )?PRIVATE KEY-----'
     # GitHub tokens
-    'GitHub token|gh[po]_[A-Za-z0-9]{36}'
+    'GitHub token|(gh[pousr]_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9_]{22,})'
     # GitLab tokens
     'GitLab token|glpat-[A-Za-z0-9_-]{20,}'
     # Generic secrets
@@ -76,19 +76,19 @@ SECRET_PATTERNS=(
 
 # Same "category|regex" form, matched case-sensitively against added lines.
 PII_PATTERNS=(
-    # German IBAN, grouped or not. Taken from hooks/enforce-no-pii.sh: the
+    # IBAN, grouped or not, any country. Taken from hooks/enforce-no-pii.sh: the
     # optional spaces cover "DE11 1111 ..." as well, which makes a separate
     # DE[0-9]{20} redundant.
-    'German IBAN|\bDE[0-9]{2}[[:space:]]?([0-9]{4}[[:space:]]?){4}[0-9]{2}\b'
-    # German phone numbers
-    'German phone number|\+49[0-9 ()-]{6,}'
+    'IBAN|(^|[^[:alnum:]])[A-Z]{2}[0-9]{2}( ?[A-Z0-9]{4}){2,7}( ?[A-Z0-9]{1,4})?'
+    # Phone numbers in international format, any country code
+    'Phone number|\+[1-9][0-9]{0,3}[0-9 ()./-]{6,}'
 )
 
 # Email addresses are handled on their own: ERE has no lookahead, so the matches
 # are extracted first and the allowed ones are filtered out afterwards.
 EMAIL_REGEX='[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+\.)+[A-Za-z]{2,}'
 # Reserved example domains (RFC 2606) and test addresses may be committed.
-EMAIL_ALLOW='@(([A-Za-z0-9-]+\.)*example(\.(com|org|net))?|test\.com)$'
+EMAIL_ALLOW='@(([A-Za-z0-9-]+\.)*example(\.(com|org|net))?)$'
 
 SENSITIVE_FILES=(
     # .env itself and every suffixed variant (.env.local, .env.production).

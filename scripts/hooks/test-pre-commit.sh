@@ -57,6 +57,9 @@ fake_pem="-----BEGIN RSA ""PRIVATE KEY-----"
 fake_mail="jane.doe@""gmail.com"
 ok_mail="elena.vilaro@""sotarena.example"
 fake_iban="DE""89370400440532013000"
+fake_iban_es="ES""9121000418450200051332"
+fake_phone_es="+34"" 600 123 456"
+fake_pat="github_""pat_"$(repeat A 22)
 
 new_repo; stage notes.md "Secrets live in .env (ignored by git)."
 check pass "prose that mentions secrets"
@@ -78,6 +81,15 @@ check pass "e-mail on the reserved .example domain"
 
 new_repo; stage bank.md "IBAN $fake_iban"
 check block "German IBAN, value not printed" "$fake_iban"
+
+new_repo; stage bank-es.md "IBAN $fake_iban_es"
+check block "Spanish IBAN, value not printed" "$fake_iban_es"
+
+new_repo; stage contact-es.md "Reach me on $fake_phone_es"
+check block "phone number with a non-German country code"
+
+new_repo; stage token.md "$fake_pat"
+check block "fine-grained GitHub token, value not printed" "$fake_pat"
 
 new_repo; stage config.txt "$fake_key"
 git -C "$REPO" commit -qm init

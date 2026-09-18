@@ -112,6 +112,8 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings.
 - Close: the Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic. Thank the Community House team.
 
+The credit-offer QR on slide 16 loads `qr-credits.svg`, which is not in the repository. Without it the slide falls back to `qr-credits-placeholder.svg`, so presenting from the HTML never shows a broken image. Generate the real code locally before the session.
+
 ## Slides 18 to 20: Fallback output (only if the live demo breaks)
 - Use instead of slides 12 to 14, same talking points and timing.
 - Each frame holds the real prepared output from `docs/fallback/`, shortened to the decisive lines, not a placeholder.

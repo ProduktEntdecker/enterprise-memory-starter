@@ -37,7 +37,7 @@ scripts/hooks/            pre-commit secret scan
 - No secrets, no client data, no real names of participants or customers.
 - Plain markdown only: no vector database, no build step.
 - The seeded sources and the pre-seeded wiki contain three deliberate findings (a contradiction, a duplicate, a stale fact). Do not fix them in `sources/`, in `_originals/` or in the wiki pages; they are the demo. The design is documented in [docs/demo-script.md](docs/demo-script.md).
-- Every fact must match `company/COMPANY.md`. Do not add facts to a source: each new fact can create a lint finding that nobody planned.
+- Every fact you add must match `company/COMPANY.md`. Do not add facts to a source: each new fact can create a lint finding that nobody planned. The three planted findings are the documented exception, they are meant to disagree: the wiki keeps the old Quality Manager, S06 keeps the four-week lead time, and the powder coater appears under two names.
 
 ## Git workflow
 
