@@ -1,0 +1,11 @@
+{
+  "session_id": "test-session",
+  "transcript_path": "/tmp/test-transcript.jsonl",
+  "cwd": "__ROOT__",
+  "hook_event_name": "PreToolUse",
+  "tool_name": "Write",
+  "tool_input": {
+    "file_path": "__ROOT__/wiki/concepts/test-clean-page.md",
+    "content": "# Talaverna Hotels\n\nOrder PO-26-1184 with supplier SUP-0417. Claim value EUR 64,480 at list price.\nCoating salt-spray tested for 1,000 hours (ISO 9227). Price +7% from 2026-10-01, +11% since 2026-04-01.\nThe Palma hotel opens 30.10.2026. Colour RAL 9016, target Q2 2027, 12 stock RAL colours.\nA desk-sharing-arrangement-for-the-planning-team is planned.\nContact: Beatriz Lozano, Director of Purchasing. Complaints go to the shared quality mailbox.\n"
+  }
+}

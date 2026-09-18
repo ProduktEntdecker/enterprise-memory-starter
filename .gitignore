@@ -1,0 +1,33 @@
+# OS and editors
+.DS_Store
+.idea/
+.vscode/
+
+# Secrets
+.env
+.env.*
+!.env.example
+!.env.template
+!.env.sample
+.envrc
+.envrc.*
+!.envrc.example
+!.envrc.template
+!.envrc.sample
+
+# Dependencies and build output
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+dist/
+
+# Claude Code worktrees
+.claude/worktrees/
+
+*.log
+
+# Credits offer link and QR: local only, never committed (34 redemptions, no support for abuse)
+slides/qr-credits.svg
+slides/credits-link.txt
+slides-with-credits.pdf

@@ -1,2 +1,115 @@
-# enterprise-memory-starter
-Starter kit: a plain-markdown LLM wiki as a second brain for Claude (Claude Community House Barcelona, 21 Sep 2026)
+# Second Brain for Claude: LLM Wiki Starter
+
+Materials for the session **"Second Brain for Claude: LLM Wiki vs RAG"** at the Claude Community House, Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium. Presented by Florian Steiner, Claude Community Ambassador Munich.
+
+## What this is
+
+A working LLM wiki in plain markdown for a fictional company, Sotarena S.L., that you open in Claude Code and use right away. Claude reads a small root map first, keeps one canonical value per fact, and maintains the wiki with skills: ingest turns a raw document into cited pages, lint reports contradictions, duplicates and stale facts without silently fixing them. There is no vector database and no build step, only folders, markdown files, a CLAUDE.md, three skills and two hooks.
+
+## Quickstart (10 minutes)
+
+**You need:** Claude Code, git, bash, and `jq` or `python3` for the hooks and the link checker. macOS or Linux; on Windows use WSL.
+
+**1. Clone and open (1 minute)**
+
+```bash
+git clone https://github.com/ProduktEntdecker/enterprise-memory-starter.git
+cd enterprise-memory-starter
+claude
+```
+
+Trust the folder when Claude Code asks: the hooks in `.claude/settings.json` only run in trusted folders. The SessionStart hook loads `root-map.md` into the session.
+
+**2. Ask a question (2 minutes)**
+
+```text
+What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.
+```
+
+Expect 6 weeks from order confirmation, owned by the Head of Operations, from FACTS.md row 1 (source S04). Watch the path: root map, project index, FACTS.md.
+
+**3. Ingest a document (3 minutes)**
+
+```text
+/wiki-ingest sources/inbox/S06-talaverna-call-note.md
+```
+
+Expect a new page in `projects/sotarena/wiki/meetings/`, a new Talaverna Hotels entity, index and log entries, and a FACTS.md proposal. The call note says 4 weeks; Claude flags that as a conflict with FACTS.md instead of changing the fact. Approve only the rows you agree with.
+
+**4. Lint the wiki (4 minutes)**
+
+```text
+/wiki-lint
+```
+
+Expect a report in `projects/sotarena/wiki/outputs/lint-<date>.md` with three findings: the lead-time contradiction, a duplicate supplier entity and a stale Quality Manager fact. Nothing changes until you say which findings to resolve.
+
+**Next steps:** ingest `sources/inbox/S07-kornhagen-complaint.md`, try `/wiki-query who decides on the air freight for the delayed rope?`, or resolve a lint finding ("resolve finding 3").
+
+**Start over:** these commands discard your local changes in the wiki folders.
+
+```bash
+git restore -- projects sources wiki root-map.md
+git clean -fd -- projects sources wiki
+```
+
+## Folder map
+
+```text
+root-map.md                 router over all stores, printed at session start
+CLAUDE.md                   schema: how Claude works in this wiki
+CONTRIBUTING.md             rules for changing the kit
+company/COMPANY.md          the fictional company (scenario for humans, not a wiki source)
+sources/inbox/              raw documents waiting for ingest
+wiki/                       global wiki: canonical fact, ingest, lint, LLM wiki vs RAG, ...
+projects/sotarena/wiki/     project wiki
+  index.md                  node: rollup, links down, source register
+  FACTS.md                  canonical facts: fact, value, winning source, date, owner
+  log.md                    append-only log of ingests and lint runs
+  entities/                 people, organisations, products
+  summaries/                one page per ingested document
+  meetings/                 call notes and meeting minutes
+  outputs/                  lint reports and filed answers
+  _originals/               ingested raw documents, unchanged
+.claude/skills/             wiki-ingest, wiki-lint, wiki-query
+.claude/hooks/              SessionStart root map, PreToolUse privacy warning, tests
+.claude/settings.json       hook wiring
+scripts/check_links.py      link, node-contract and structure checks
+docs/                       agenda, demo script, prepared fallback outputs
+```
+
+## LLM wiki vs RAG in one table
+
+| | LLM wiki | RAG |
+|---|---|---|
+| Core idea | Compile knowledge once into cited pages and keep them current | Retrieve matching chunks at every question |
+| Fits best | Curated, recurring knowledge: roles, prices, lead times, decisions, customers, suppliers | Large, long-tail corpora: all e-mails, tickets, manuals, contracts |
+| Conflicting sources | Flagged at ingest, reported by lint, decided by the owner of the fact | Both versions can come back; ranking decides |
+| One entity, two spellings | Merged into one page with an alias | Two unrelated chunks |
+| Review and audit | Markdown in git, diffs a human can read | Index and embeddings are not human-readable |
+| Main risk | Error compounding: a wrong page gets cited and looks confirmed | Confident but wrong answers from outdated or badly split chunks |
+| How they combine | The compiled layer and router for recurring questions | The fallback for the long tail; good results get ingested into the wiki |
+
+More detail: [wiki/concepts/llm-wiki-vs-rag.md](wiki/concepts/llm-wiki-vs-rag.md).
+
+## Session material
+
+- [docs/agenda.html](docs/agenda.html): agenda with timeline. Open it in a browser and print to PDF, or use [docs/agenda.pdf](docs/agenda.pdf).
+- [`slides/`](slides/): the talk deck (HTML and PDF) with speaker notes and sources.
+- [docs/demo-script.md](docs/demo-script.md): run sheet of the live demo, with prompts, expected output and timing.
+- [docs/fallback/](docs/fallback/): prepared outputs of a correct ingest and lint run.
+
+## For maintainers
+
+Rules for changing the kit are in [CONTRIBUTING.md](CONTRIBUTING.md). Checks:
+
+```bash
+python3 scripts/check_links.py
+bash .claude/hooks/tests/run-tests.sh
+```
+
+## Disclaimer
+
+The Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic.
+
+Sotarena S.L. is fictional. Any resemblance to real companies or persons is coincidental.
