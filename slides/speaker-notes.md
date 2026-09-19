@@ -110,7 +110,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Scan the QR: the starter repo with the fictional company, root map, fact sheet, ingest and lint.
 - Before 11:00: check that the repository is public, as promised on the slide.
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings.
-- Close: the Claude Community House is an official Claude Community event, supported by Anthropic. This repository is an independent community resource, not affiliated with or endorsed by Anthropic. Thank the Community House team.
+- Close: the repository is an independent community resource. Thank the Community House team.
 
 The credit-offer QR on slide 16 loads `qr-credits.svg`, which is not in the repository. Without it the slide falls back to `qr-credits-placeholder.svg`, so presenting from the HTML never shows a broken image. Generate the real code locally before the session.
 
