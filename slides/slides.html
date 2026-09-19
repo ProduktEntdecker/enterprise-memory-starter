@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Second Brain for Claude: LLM Wiki vs RAG</title>
+<title>Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder</title>
 <style>
 :root {
   --ink: #141413;
@@ -75,7 +75,7 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 
 /* Title slide */
 .title h1 { font-size: 104px; line-height: 1.02; margin-top: 84px; max-width: 760px; }
-.title .subtitle { font-family: var(--serif); font-style: italic; font-size: 52px; color: var(--clay); margin: 18px 0 0; }
+.title .subtitle { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1.15; color: var(--clay); margin: 18px 0 0; max-width: 700px; }
 .title .speaker { margin-top: 44px; font-size: 24px; line-height: 1.45; }
 .title .speaker strong { font-weight: 600; }
 .title .when { font-size: 18px; color: #cfcabf; margin-top: 8px; }
@@ -227,7 +227,7 @@ svg text { font-family: var(--sans); }
 <section class="slide dark title" data-minute="11:00">
   <p class="eyebrow">Claude Community House &middot; Barcelona</p>
   <h1>Second Brain for Claude</h1>
-  <p class="subtitle">LLM Wiki vs RAG</p>
+  <p class="subtitle">Why it forgets your company, and how to fix it in a folder</p>
   <div class="speaker"><strong>Florian Steiner</strong><br>Claude Community Ambassador Munich</div>
   <div class="when">Monday, 21 September 2026 &middot; 11:00 to 12:00 &middot; Auditorium</div>
   <svg class="motif" width="360" height="380" viewBox="0 0 360 380" aria-hidden="true">
@@ -247,16 +247,20 @@ svg text { font-family: var(--sans); }
       <circle cx="210" cy="344" r="6"/><circle cx="290" cy="344" r="6"/><circle cx="350" cy="344" r="6"/>
     </g>
   </svg>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 20</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 18</span></div>
 </section>
+
+
 
 <!-- 2 -->
 <section class="slide" data-minute="11:01">
   <p class="eyebrow">1 &middot; The map problem</p>
   <h2 class="xl" style="margin-top:90px">My assistant searched for ten minutes and came back with nothing.</h2>
   <p class="lede">Everything it needed sat in a folder it did not know existed.</p>
-  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 20</span></div>
+  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 18</span></div>
 </section>
+
+
 
 <!-- 3 -->
 <section class="slide" data-minute="11:03">
@@ -274,84 +278,22 @@ svg text { font-family: var(--sans); }
       <p>Then load only what the question needs.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">3 / 20</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">3 / 18</span></div>
 </section>
+
+
 
 <!-- 4 -->
 <section class="slide" data-minute="11:05">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>What RAG does well</h2>
-  <div class="cards">
-    <div class="card"><h3>Large corpora</h3><p>Scales far past what fits in any context window.</p></div>
-    <div class="card"><h3>Unknown questions</h3><p>Retrieves at question time, including the long tail.</p></div>
-    <div class="card"><h3>Fresh documents</h3><p>Add a file to the index. No retraining.</p></div>
-  </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024).</span><span class="num">4 / 20</span></div>
-</section>
-
-<!-- 5 -->
-<section class="slide" data-minute="11:08">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>Where RAG loses context</h2>
-  <div class="rows">
-    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;The company's revenue grew by 3%.&rdquo; Which company? Which quarter?</div><div class="t"><span class="tag src">Anthropic 2024</span></div></div>
-    <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div><div class="t"><span class="tag">Own observation</span></div></div>
-    <div class="row"><div class="k">Contradictions side by side</div><div class="v">Both versions reach the prompt. The model must pick one.</div><div class="t"><span class="tag src">Wang et al. 2025</span></div></div>
-  </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> row 2.</span><span class="num">5 / 20</span></div>
-</section>
-
-<!-- 6 -->
-<section class="slide" data-minute="11:11">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>Summaries on top of retrieval help</h2>
-  <div class="raptor">
-    <svg width="600" height="360" viewBox="0 0 600 360" role="img" aria-label="RAPTOR tree: chunks are embedded and clustered, clusters are summarised, summaries are summarised again">
-      <g stroke="#b9b4a9" stroke-width="2">
-        <line x1="152" y1="300" x2="235" y2="214"/><line x1="235" y1="300" x2="235" y2="214"/><line x1="318" y1="300" x2="235" y2="214"/>
-        <line x1="402" y1="300" x2="485" y2="214"/><line x1="485" y1="300" x2="485" y2="214"/><line x1="568" y1="300" x2="485" y2="214"/>
-        <line x1="235" y1="170" x2="360" y2="94"/><line x1="485" y1="170" x2="360" y2="94"/>
-      </g>
-      <g fill="#fff" stroke="#141413" stroke-width="1.5">
-        <rect x="120" y="300" width="64" height="40" rx="5"/><rect x="203" y="300" width="64" height="40" rx="5"/><rect x="286" y="300" width="64" height="40" rx="5"/>
-        <rect x="370" y="300" width="64" height="40" rx="5"/><rect x="453" y="300" width="64" height="40" rx="5"/><rect x="536" y="300" width="64" height="40" rx="5"/>
-      </g>
-      <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
-        <rect x="135" y="170" width="200" height="44" rx="6"/><rect x="385" y="170" width="200" height="44" rx="6"/>
-        <rect x="230" y="50" width="260" height="44" rx="6"/>
-      </g>
-      <text x="235" y="198" text-anchor="middle" class="box-text" style="font-size:16px">summary</text>
-      <text x="485" y="198" text-anchor="middle" class="box-text" style="font-size:16px">summary</text>
-      <text x="360" y="78" text-anchor="middle" class="box-text" style="font-size:16px">summary of summaries</text>
-      <text x="0" y="326" class="box-sub" style="font-size:15px;fill:#141413">chunks</text>
-      <text x="0" y="262" class="box-sub" style="fill:#b85c3e">embed +</text>
-      <text x="0" y="280" class="box-sub" style="fill:#b85c3e">cluster</text>
-      <text x="0" y="142" class="box-sub" style="fill:#b85c3e">summarise,</text>
-      <text x="0" y="160" class="box-sub" style="fill:#b85c3e">repeat</text>
-      <text x="0" y="30" class="box-sub">retrieval searches</text>
-      <text x="0" y="48" class="box-sub">all levels</text>
-    </svg>
-    <div>
-      <p>RAPTOR builds its tree with embeddings and clustering, then retrieves across summary levels.</p>
-      <div class="stat">+20%</div>
-      <p class="stat-sub">absolute accuracy on QuALITY with GPT-4, over the previous best result</p>
-      <div class="callout">Evidence that summaries on top of retrieval help. Not evidence that hierarchy beats vector search.</div>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Source:</b> Sarthi et al., RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval (arXiv 2401.18059, 2024).</span><span class="num">6 / 20</span></div>
-</section>
-
-<!-- 7 -->
-<section class="slide" data-minute="11:15">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern</p>
+  <p class="eyebrow">2 &middot; The LLM wiki pattern</p>
   <h2>Retrieve every time, or compile once</h2>
-  <svg class="diagram" width="1088" height="430" viewBox="0 0 1088 430" role="img" aria-label="Two pipelines. RAG: documents, chunk and embed, vector index, top-k chunks per question, answer. LLM wiki: sources, ingest, wiki pages and fact sheet, root map, answer; lint loop and answers filed back.">
+  <svg class="diagram" width="1088" height="430" viewBox="0 0 1088 430" role="img" aria-label="Two pipelines. Retrieval: documents, chunk and embed, vector index, top-k chunks per question, answer. LLM wiki: sources, ingest, wiki pages and fact sheet, root map, answer; lint loop and answers filed back.">
     <defs>
       <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b675f"/></marker>
       <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
     </defs>
     <!-- lane labels -->
-    <text x="0" y="96" style="font-family:var(--serif);font-size:32px;fill:#141413">RAG</text>
+    <text x="0" y="96" style="font-family:var(--serif);font-size:32px;fill:#141413">Retrieval</text>
     <text x="0" y="122" class="box-sub">work at question time</text>
     <text x="0" y="286" style="font-family:var(--serif);font-size:32px;fill:#141413">LLM wiki</text>
     <text x="0" y="312" class="box-sub">work at ingest time</text>
@@ -397,12 +339,14 @@ svg text { font-family: var(--sans); }
     <text x="0" y="392" style="font-family:var(--serif);font-style:italic;font-size:21px;fill:#141413">&ldquo;A persistent, compounding artifact.&rdquo;</text>
     <text x="0" y="416" class="box-sub">Karpathy, on the wiki</text>
   </svg>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">7 / 20</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">4 / 18</span></div>
 </section>
 
-<!-- 8 -->
-<section class="slide" data-minute="11:18">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 1 of 4</p>
+
+
+<!-- 5 -->
+<section class="slide" data-minute="11:09">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 1 of 4</p>
   <h2>Root map: one small file, always loaded</h2>
   <svg class="diagram" width="1088" height="320" viewBox="0 0 1088 320" role="img" aria-label="A root map file routes to four separate stores: two project wikis with fact sheets, meeting notes, and the customer system.">
     <defs>
@@ -437,12 +381,14 @@ svg text { font-family: var(--sans); }
     <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">status per account</text>
   </svg>
   <p class="lede" style="margin-top:26px">The agent reads the map first, then descends only where the question leads.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">8 / 20</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">5 / 18</span></div>
 </section>
 
-<!-- 9 -->
-<section class="slide" data-minute="11:21">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 2 of 4</p>
+
+
+<!-- 6 -->
+<section class="slide" data-minute="11:13">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 2 of 4</p>
   <h2>Canonical fact sheet: one home per fact</h2>
   <div class="sheet">
     <div class="bar"><span>FACTS.md</span><span class="dim">example</span></div>
@@ -456,12 +402,14 @@ svg text { font-family: var(--sans); }
     </table>
   </div>
   <p class="lede" style="margin-top:28px">Other pages link here instead of copying. Every value carries its source.</p>
-  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">9 / 20</span></div>
+  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">6 / 18</span></div>
 </section>
 
-<!-- 10 -->
-<section class="slide" data-minute="11:24">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 3 of 4</p>
+
+
+<!-- 7 -->
+<section class="slide" data-minute="11:16">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 3 of 4</p>
   <h2>Ingest: read once, update many pages</h2>
   <div class="ingest">
     <svg width="690" height="380" viewBox="0 0 690 380" role="img" aria-label="A new source fans out into a summary page, entity and concept pages, the fact sheet, and the index and log.">
@@ -492,12 +440,14 @@ svg text { font-family: var(--sans); }
       <p class="aside-small">Karpathy's own research wiki: about 100 articles and 400K words, navigated through index files and summaries.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">10 / 20</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">7 / 18</span></div>
 </section>
 
-<!-- 11 -->
-<section class="slide" data-minute="11:27">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 4 of 4</p>
+
+
+<!-- 8 -->
+<section class="slide" data-minute="11:19">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 4 of 4</p>
   <h2>Lint: a health check for the wiki</h2>
   <div class="lint">
     <ul class="checks">
@@ -508,12 +458,14 @@ svg text { font-family: var(--sans); }
     </ul>
     <div class="aside"><span class="tag">Own observation</span><br>Skip lint, and a wrong fact gets filed back, then cited again.</div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">11 / 20</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">8 / 18</span></div>
 </section>
 
-<!-- 12 -->
-<section class="slide demo" data-minute="11:30">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+
+
+<!-- 9 -->
+<section class="slide demo" data-minute="11:22">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
   <div class="steps"><span class="on">1 Ingest</span><span>2 Lint</span><span>3 Fact sheet</span></div>
   <div class="demo-body">
     <div class="stepnum">1</div>
@@ -522,12 +474,14 @@ svg text { font-family: var(--sans); }
       <p class="lede">A new document for <span class="company">Sotarena S.L.</span> lands in sources/inbox/. Watch which wiki pages change.</p>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">12 / 20</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">9 / 18</span></div>
 </section>
 
-<!-- 13 -->
-<section class="slide demo" data-minute="11:35">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+
+
+<!-- 10 -->
+<section class="slide demo" data-minute="11:28">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
   <div class="steps"><span>1 Ingest</span><span class="on">2 Lint</span><span>3 Fact sheet</span></div>
   <div class="demo-body">
     <div class="stepnum">2</div>
@@ -540,12 +494,14 @@ svg text { font-family: var(--sans); }
       </div>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">13 / 20</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">10 / 18</span></div>
 </section>
 
-<!-- 14 -->
-<section class="slide demo" data-minute="11:40">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+
+
+<!-- 11 -->
+<section class="slide demo" data-minute="11:35">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
   <div class="steps"><span>1 Ingest</span><span>2 Lint</span><span class="on">3 Fact sheet</span></div>
   <div class="demo-body">
     <div class="stepnum">3</div>
@@ -562,18 +518,20 @@ svg text { font-family: var(--sans); }
       </div>
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">14 / 20</span></div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">11 / 18</span></div>
 </section>
 
-<!-- 15 -->
-<section class="slide" data-minute="11:45">
-  <p class="eyebrow">5 &middot; When to use which</p>
+
+
+<!-- 12 -->
+<section class="slide" data-minute="11:41">
+  <p class="eyebrow">4 &middot; When to use which</p>
   <h2>Compile what matters. Retrieve the rest.</h2>
   <div class="layers-wrap">
     <div class="layers">
       <div class="band b1"><span class="bn">Root map</span><span class="bd">always loaded</span></div>
       <div class="band b2"><span class="bn">LLM wiki</span><span class="bd">curated, recurring, canonical</span></div>
-      <div class="band b3"><span class="bn">RAG over raw sources</span><span class="bd">large, unforeseen, fresh</span></div>
+      <div class="band b3"><span class="bn">Retrieval over raw sources</span><span class="bd">large, unforeseen, fresh</span></div>
     </div>
     <div class="flows">
       <div class="flow"><span class="arr">&uarr;</span><span>Promote recurring answers into the wiki</span></div>
@@ -581,11 +539,13 @@ svg text { font-family: var(--sans); }
     </div>
   </div>
   <p class="note"><b>Under about 200K tokens?</b> Load it all. No retrieval needed.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">15 / 20</span></div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">12 / 18</span></div>
 </section>
 
-<!-- 16 -->
-<section class="slide dark closing" data-minute="11:47">
+
+
+<!-- 13 -->
+<section class="slide dark closing" data-minute="11:44">
   <p class="eyebrow">Before you go</p>
   <div class="closing-grid">
     <div>
@@ -602,18 +562,20 @@ svg text { font-family: var(--sans); }
       <img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer">
     </div>
   </div>
-  <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">16 / 20</span></div>
+  <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">13 / 18</span></div>
 </section>
 
-<!-- 17 -->
-<section class="slide dark closing" data-minute="11:48">
+
+
+<!-- 14 -->
+<section class="slide dark closing" data-minute="11:46">
   <p class="eyebrow">Take it home</p>
   <div class="closing-grid">
     <div>
       <h2>The starter repo</h2>
       <div class="url">github.com/ProduktEntdecker/<br>enterprise-memory-starter</div>
       <span class="opens">Repository opens before the session</span>
-      <div class="qa">Questions?<span>11:50 to 12:00</span></div>
+      <div class="qa">Questions?<span>11:46 to 12:00</span></div>
       <div class="who">Florian Steiner &middot; Claude Community Ambassador Munich</div>
     </div>
     <div class="qr"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for https://github.com/ProduktEntdecker/enterprise-memory-starter">
@@ -1208,10 +1170,25 @@ svg text { font-family: var(--sans); }
 </svg>
 </div>
   </div>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">17 / 20</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">14 / 18</span></div>
 </section>
 
-<!-- 17 -->
+
+
+<!-- 15 -->
+<section class="slide fallback" data-minute="backup">
+  <p class="eyebrow">Backup &middot; only if the question comes up</p>
+  <h2>Why not just retrieval?</h2>
+  <p class="lede">Strong where this pattern is weak: huge corpora, unknown questions, a file indexed in seconds. Three things it gets wrong:</p>
+  <div class="rows">
+    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;The company's revenue grew by 3%.&rdquo; Which company? Which quarter?</div></div>
+    <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div></div>
+    <div class="row"><div class="k">Contradictions</div><div class="v">Both versions reach the prompt. The model must pick one.</div></div>
+  </div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> the canonical-fact row.</span><span class="num">15 / 18</span></div>
+</section>
+
+<!-- 16 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 1 of 3</p>
   <h2>Fallback: Ingest a new source</h2>
@@ -1223,10 +1200,12 @@ svg text { font-family: var(--sans); }
    add       Talaverna Hotels revenue 2025: EUR 1.9 million
    <b>conflict  lead time: S06 says 4 weeks, FACTS.md row 1 says
              6 weeks (S04, owner Head of Operations). No change.</b></pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> the terminal summary of the S06 ingest, shortened.</span><span class="num">18 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> the terminal summary of the S06 ingest, shortened.</span><span class="num">16 / 18</span></div>
 </section>
 
-<!-- 18 -->
+
+
+<!-- 17 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 2 of 3</p>
   <h2>Fallback: Lint finds a contradiction, a duplicate and a stale fact</h2>
@@ -1238,10 +1217,12 @@ svg text { font-family: var(--sans); }
 <b>3. Stale fact (High):</b> Quality Manager Jaume Rius (S08),
    superseded by Irene Casado from 2026-06-01 (S09)
 Orphans 0, missing index entries 0, broken links 0.</pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> docs/fallback/lint-2026-09-21.md, shortened.</span><span class="num">19 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> docs/fallback/lint-2026-09-21.md, shortened.</span><span class="num">17 / 18</span></div>
 </section>
 
-<!-- 19 -->
+
+
+<!-- 18 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 3 of 3</p>
   <h2>Fallback: The fact sheet shows the winning value and its source</h2>
@@ -1252,9 +1233,8 @@ Orphans 0, missing index entries 0, broken links 0.</pre></div>
 
 History of superseded values
 | 9 | Quality Manager | Jaume Rius (S08), valid until 2026-05-31 |</pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> FACTS.md rows 1 and 9 after the resolution.</span><span class="num">20 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> FACTS.md rows 1 and 9 after the resolution.</span><span class="num">18 / 18</span></div>
 </section>
-
 </div>
 <script>
 (function () {
