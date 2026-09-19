@@ -96,7 +96,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Anthropic describes Claude Code as exactly such a hybrid: CLAUDE.md up front, glob and grep just in time.
 
 ## Slide 16: API credits (11:47)
-- "Before the questions: everyone in this room gets 50 dollars in Claude API credits."
+- "Before the questions: 50 dollars in Claude API credits, and the link takes the first 34 of you."
 - Walk the three steps out loud while they scan. Most people miss step 2 and it is the one that fails.
 - **Say it twice:** the Organization ID from `console.anthropic.com`, not the Claude.ai account ID. A wrong ID is rejected, each person can claim only once, and Anthropic's credit team cannot correct a bad submission.
 - API only. If someone asks whether this pays for their Claude.ai subscription: no.
