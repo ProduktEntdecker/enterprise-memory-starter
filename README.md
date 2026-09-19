@@ -113,3 +113,7 @@ bash .claude/hooks/tests/run-tests.sh
 An independent community resource, built for the Claude Community House Barcelona.
 
 Sotarena S.L. is fictional. Any resemblance to real companies or persons is coincidental.
+
+## License
+
+MIT, see [LICENSE](LICENSE). Clone it, fork it, put your own company in it, use it with clients. The example company and the prepared outputs are part of that.
