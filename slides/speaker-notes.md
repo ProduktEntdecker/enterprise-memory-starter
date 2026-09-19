@@ -4,7 +4,7 @@ Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Audi
 
 Timeline: 11:00 map problem (5) · 11:05 the LLM wiki pattern (17) · 11:22 live demo (19) · 11:41 what to take home, credits, repo (5) · 11:46 Q&A (14).
 
-This talk is about the wiki, not about retrieval. The retrieval comparison sits on one backup slide at the end and is only shown if someone asks.
+This talk is about the wiki. Retrieval appears twice in the main flow, as the left half of the pipeline on slide 4 and as the bottom layer on slide 12, each in one line. The detail, what retrieval is good at and where it loses context, sits on backup slide 15 and is only shown if someone asks.
 
 Sources for every claim below are listed in SOURCES.md. "Own observation" marks statements without an external source.
 
@@ -112,6 +112,6 @@ Not part of the talk. Show it when someone asks how this compares to retrieval, 
 ## Slides 16 to 18: Fallback output (only if the live demo breaks)
 - Use instead of slides 9 to 11, same talking points and timing.
 - Each frame holds the real prepared output from `docs/fallback/`, shortened to the decisive lines, not a placeholder.
-- Slide 18: the ingest summary, with the lead-time conflict highlighted. A real screenshot from the rehearsal can replace the text block later.
-- Slide 19: the lint report with the three findings. A real screenshot from the rehearsal can replace the text block later.
-- Slide 20: the fact sheet rows after the resolution, with the superseded value in the history table. A real screenshot from the rehearsal can replace the text block later.
+- Slide 16: the ingest summary, with the lead-time conflict highlighted. A real screenshot from the rehearsal can replace the text block later.
+- Slide 17: the lint report with the three findings. A real screenshot from the rehearsal can replace the text block later.
+- Slide 18: the fact sheet rows after the resolution, with the superseded value in the history table. A real screenshot from the rehearsal can replace the text block later.

@@ -18,9 +18,9 @@ Sources 1 to 8 retrieved and checked on 14 September 2026; source 9 received and
 
 ## Correction applied: RAPTOR
 
-RAPTOR builds its tree with embeddings and clustering, so it is itself a retrieval method. The deck presents it only as evidence that **summarised hierarchy on top of retrieval helps**, never as evidence that hierarchy beats vector search. Wording on slide 6:
+RAPTOR builds its tree with embeddings and clustering, so it is itself a retrieval method. The deck presents it only as evidence that **summarised hierarchy on top of retrieval helps**, never as evidence that hierarchy beats vector search. Wording on backup slide 15:
 
-> RAPTOR builds its tree with embeddings and clustering, then retrieves across summary levels. +20% absolute accuracy on QuALITY with GPT-4, over the previous best result. Evidence that summaries on top of retrieval help. Not evidence that hierarchy beats vector search.
+> RAPTOR: +20 points on QuALITY with GPT-4. Evidence for summaries, not for hierarchy over vector search.
 
 ## Correction applied: Karpathy numbers and quotes
 
@@ -36,13 +36,13 @@ Every Karpathy number and quote in the deck has a working link (sources 1 and 2)
 |---|---|
 | 2 | The ten-minute search that came back empty although the notes existed in a folder the assistant did not know about. |
 | 3 | The framing "not a memory problem, a map problem" (findability). Note 3: the duplicate contact record created in the same session. |
-| 5 | "No canonical fact": similarity ranking does not know which document is authoritative or current (last year's price list ranks as high as this year's). |
-| 8 | The store layout: a root map routing to separate stores, per-project wikis with a canonical fact sheet, meetings and customer status in their own tools (simplified, generic). Note 8: "if the map grows into an essay, it has stopped being a map". |
-| 9 | The canonical fact sheet pattern (one home per fact, other pages link instead of copying, every value with source and date). Example values are fictional. |
-| 10 | Note 10: ingest spends tokens up front instead of at every question. |
-| 11 | Duplicates as a lint check (own addition to Karpathy's list); a wrong fact that is not linted gets filed back and cited again. |
-| 15 | The layering (root map, LLM wiki, RAG over raw sources as fallback) and the two flows (promote recurring answers into the wiki, fall back to retrieval when no page exists). |
-| 12 to 14, 17 to 19 | Demo content runs on Sotarena S.L., a fictional example company with synthetic data. |
+| 5 | The store layout: a root map routing to separate stores, per-project wikis with a canonical fact sheet, meetings and customer status in their own tools (simplified, generic). Note 8: "if the map grows into an essay, it has stopped being a map". |
+| 6 | The canonical fact sheet pattern (one home per fact, other pages link instead of copying, every value with source and date). Example values are fictional. |
+| 7 | Note 7: ingest spends tokens up front instead of at every question. |
+| 8 | Duplicates as a lint check (own addition to Karpathy's list); a wrong fact that is not linted gets filed back and cited again. |
+| 9 to 11, 16 to 18 | Demo content runs on Sotarena S.L., a fictional example company with synthetic data. |
+| 12 | The layering (root map, LLM wiki, retrieval over raw sources as fallback) and the two flows (promote recurring answers into the wiki, fall back to retrieval when no page exists). |
+| 15 | "No canonical fact": similarity ranking does not know which document is authoritative or current (last year's price list ranks as high as this year's). |
 
 ## Claims from the preparation notes that were dropped
 

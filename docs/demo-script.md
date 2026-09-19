@@ -57,14 +57,14 @@ git status
 |---|---|---|---|---|---|
 | 0:00 | Orientation | nothing, show the file tree | "A company wiki in plain markdown. A hook loads the root map at session start. FACTS.md holds one value per fact." | Tree with `root-map.md`, `projects/sotarena/wiki/`, `sources/inbox/` | |
 | 1:30 | Question | `What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.` | "Watch the path: map, index, facts. No search index, no chunks." | 6 weeks from order confirmation; FACTS.md row 1; S04, 2026-08-03; owner Head of Operations | |
-| 3:00 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
-| 6:30 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
-| 7:30 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
-| 11:00 | Walk the report | open the report file | F1: "Newest is not right, the owner decides." F2: "Only an entity check catches this; retrieval returns two separate chunks." F3: "An explicit succession note makes date-based supersession safe." | Report with three findings | |
-| 13:00 | Resolve one | `Resolve the stale Quality Manager finding only.` | "One approval, one change, and it is logged." | FACTS.md row 9 becomes Irene Casado (S09), the old value moves to the history table, log entry added | |
-| 14:00 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same three steps." | Link or QR code on the slide | |
+| 3:30 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
+| 8:00 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
+| 9:30 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
+| 13:00 | Walk the report | open the report file | F1: "Newest is not right, the owner decides." F2: "Only an entity check catches this; retrieval returns two separate chunks." F3: "An explicit succession note makes date-based supersession safe." | Report with three findings | |
+| 16:00 | Resolve one | `Resolve the stale Quality Manager finding only.` | "One approval, one change, and it is logged." | FACTS.md row 9 becomes Irene Casado (S09), the old value moves to the history table, log entry added | |
+| 18:00 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same three steps." | Link or QR code on the slide | |
 
-**Short on time:** skip the question at 1:30 and the resolve step at 13:00. Ingest and lint alone fit into 9 minutes.
+**Short on time:** skip the question at 1:30 and the resolve step at 16:00. Ingest and lint alone fit into 11 minutes, the version to fall back on if the part before the demo has run long.
 
 ## 4. Expected output
 
