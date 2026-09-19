@@ -110,6 +110,6 @@ bash .claude/hooks/tests/run-tests.sh
 
 ## Disclaimer
 
-An independent community resource, built for the Claude Community House Barcelona by a Claude Community Ambassador.
+An independent community resource, built for the Claude Community House Barcelona.
 
 Sotarena S.L. is fictional. Any resemblance to real companies or persons is coincidental.
