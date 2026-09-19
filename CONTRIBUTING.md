@@ -5,7 +5,7 @@ Maintainer rules for this starter kit. They apply when you change the kit itself
 ## Project
 
 - **Purpose:** A starter kit for a plain-markdown LLM wiki that Claude reads like a well-kept filing cabinet: root map, canonical fact sheet, ingest and lint.
-- **Session:** "Second Brain for Claude: LLM Wiki vs RAG", Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium
+- **Session:** "Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder", Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium
 - **Visibility:** private. It becomes public only after Florian explicitly approves it, shortly before the session.
 
 ## Structure

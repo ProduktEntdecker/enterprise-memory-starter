@@ -4,7 +4,7 @@
 
 - **Used in:** both sessions at the Claude Community House Barcelona on Monday 21.09.2026:
   - "Claude Code for SME Owners and CEOs"
-  - "Second Brain for Claude: LLM Wiki vs RAG"
+  - "Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder"
 - **Reference date:** "current" means Monday 21.09.2026.
 - **Web and mail domains:** all use the reserved `.example` top-level domain.
 - **Seed material:** see SEEDS.md. The name check is in NAME-CHECK.md.

@@ -1,6 +1,6 @@
 # Second Brain for Claude: LLM Wiki Starter
 
-Materials for the session **"Second Brain for Claude: LLM Wiki vs RAG"** at the Claude Community House, Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium. Presented by Florian Steiner, Claude Community Ambassador Munich.
+Materials for the session **"Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder"** at the Claude Community House, Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium. Presented by Florian Steiner, Claude Community Ambassador Munich.
 
 ## What this is
 

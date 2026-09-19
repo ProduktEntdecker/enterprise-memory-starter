@@ -1,6 +1,6 @@
 # Demo script: ingest, then lint
 
-Run sheet for the 15-minute live demo in "Second Brain for Claude: LLM Wiki vs RAG", Claude Community House Barcelona, Monday 21 September 2026, 11:00. Goal: the audience watches one document being ingested and a lint run that reports a contradiction, a duplicate and a stale fact, and understands why each one matters.
+Run sheet for the live demo in "Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder", Claude Community House Barcelona, Monday 21 September 2026, 11:00. Goal: the audience watches one document being ingested and a lint run that reports a contradiction, a duplicate and a stale fact, and understands why each one matters.
 
 ## 1. Design: what is pre-seeded, what happens live
 
@@ -51,7 +51,7 @@ git status
 
 `git status` must report a clean working tree.
 
-## 3. Run sheet (15 minutes)
+## 3. Run sheet (19 minutes, 11:22 to 11:41)
 
 | Time | Step | Type exactly | Say | Expected | Rehearsed |
 |---|---|---|---|---|---|
@@ -126,7 +126,7 @@ First sentence, whatever it is: "Good. A linter is a reviewer, not an oracle. Le
 | Claude edits FACTS.md without asking | "Stop. Show me the diff." Then `git checkout -- projects/sotarena/wiki/FACTS.md` |
 | A run takes longer than 4 minutes | Switch to the prepared files in `docs/fallback/` and narrate |
 | The privacy hook shows a warning | Read it out: "That is the second hook. It warns, it does not block." |
-| Network or model outage | Walk through `docs/fallback/` and [the LLM wiki vs RAG page](../wiki/concepts/llm-wiki-vs-rag.md) |
+| Network or model outage | Walk through `docs/fallback/` and the concept pages: [canonical fact](../wiki/concepts/canonical-fact.md), [ingest](../wiki/concepts/ingest.md), [lint](../wiki/concepts/lint.md) |
 
 ## 7. After the demo
 

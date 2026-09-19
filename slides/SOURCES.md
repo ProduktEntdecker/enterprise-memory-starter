@@ -1,4 +1,4 @@
-# Sources: Second Brain for Claude: LLM Wiki vs RAG
+# Sources: Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder
 
 Sources 1 to 8 retrieved and checked on 14 September 2026; source 9 received and checked on 18 September 2026. Slide numbers refer to slides.html and slides.pdf (20 pages).
 
