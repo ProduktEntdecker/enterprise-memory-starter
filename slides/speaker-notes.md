@@ -101,6 +101,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - **Say it twice:** the Organization ID from `console.anthropic.com`, not the Claude.ai account ID. A wrong ID is rejected, each person can claim only once, and Anthropic's credit team cannot correct a bad submission.
 - API only. If someone asks whether this pays for their Claude.ai subscription: no.
 - 34 redemptions available. If the room is fuller than that, say so honestly and take names afterwards so the Community team can adjust the cap.
+- **The number 34 lives in two places:** this section and the badge on slide 16 (`slides/slides.html`, the line ending in "34 available"). If the Community team raises the cap, change both and re-export the PDF, otherwise the room hears one number and reads another.
 - The QR is generated locally before the session and is deliberately not in the repository, so the offer cannot be drained by anyone crawling GitHub. Run:
   `qrencode -t SVG -o slides/qr-credits.svg -l H -s 8 -m 2 "<offer link from the Community team>"`
   In the committed PDF this slide shows a placeholder instead of the code. Present from `slides-with-credits.pdf` or from the HTML.
