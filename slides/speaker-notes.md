@@ -13,7 +13,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 ## Slide 1: Title (11:00)
 - Welcome. Quick show of hands: who has watched Claude miss something that was sitting in their own files?
 - Promise for the hour: when an LLM wiki fits, when RAG fits, how the two work together, and a starter repo to take home.
-- Housekeeping: live demo at 11:30, questions from 11:50.
+- Housekeeping: live demo at 11:22, questions from 11:46.
 
 ## Slide 2: The anecdote (11:01)
 - I asked my assistant to prepare a client meeting. Ten minutes of searches, then: nothing useful found.
@@ -60,19 +60,19 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Introduce Sotarena S.L.: a fictional example company with synthetic data from the starter repo.
 - S06 (the Talaverna call note) already waits in sources/inbox/: run /wiki-ingest on it.
 - Show the diff: which pages changed, the new log entry, how many pages one source touched.
-- If the live demo fails: jump to slide 17.
+- If the live demo fails: jump to slide 16.
 
 ## Slide 10: Live demo, step 2: lint (11:28)
 - Run lint on the Sotarena S.L. wiki.
 - Walk through the three findings: a contradiction, a duplicate, a stale fact.
 - Ask the room which value they would trust before revealing the sources.
-- Fallback: slide 18.
+- Fallback: slide 17.
 
 ## Slide 11: Live demo, step 3: fact sheet (11:35)
 - Open the Sotarena S.L. fact sheet: the winning value, its source file and date, and the value it replaces.
 - Resolved once, in one place; every other page links here.
 - Only if time allows: ask one question and file the answer back.
-- Fallback: slide 19. Hard stop at 11:45.
+- Fallback: slide 18. Hard stop at 11:41.
 
 ## Slide 12: When to use which (11:41)
 - Small corpus first: Anthropic's own guidance says that below about 200K tokens (about 500 pages) you can put the whole knowledge base in the prompt, no RAG needed.
@@ -86,19 +86,19 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - **Say it twice:** the Organization ID from `console.anthropic.com`, not the Claude.ai account ID. A wrong ID is rejected, each person can claim only once, and Anthropic's credit team cannot correct a bad submission.
 - API only. If someone asks whether this pays for their Claude.ai subscription: no.
 - 34 redemptions available. If the room is fuller than that, say so honestly and take names afterwards so the Community team can adjust the cap.
-- **The number 34 lives in two places:** this section and the badge on slide 16 (`slides/slides.html`, the line ending in "34 available"). If the Community team raises the cap, change both and re-export the PDF, otherwise the room hears one number and reads another.
+- **The number 34 lives in two places:** this section and the badge on slide 13 (`slides/slides.html`, the line ending in "34 available"). If the Community team raises the cap, change both and re-export the PDF, otherwise the room hears one number and reads another.
 - The QR is generated locally before the session and is deliberately not in the repository, so the offer cannot be drained by anyone crawling GitHub. Run:
   `qrencode -t SVG -o slides/qr-credits.svg -l H -s 8 -m 2 "<offer link from the Community team>"`
   In the committed PDF this slide shows a placeholder instead of the code. Present from `slides-with-credits.pdf` or from the HTML.
 - Source: Claude Community Team, mail of 18 September 2026.
 
-## Slide 14: Starter repo and Q&A (11:46, Q&A from 11:48)
+## Slide 14: Starter repo and Q&A (11:46, Q&A right after)
 - Scan the QR: the starter repo with the fictional company, root map, fact sheet, ingest and lint.
 - Before 11:00: check that the repository is public, as promised on the slide.
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings.
 - Close: the repository is an independent community resource. Thank the Community House team.
 
-The credit-offer QR on slide 16 loads `qr-credits.svg`, which is not in the repository. Without it the slide falls back to `qr-credits-placeholder.svg`, so presenting from the HTML never shows a broken image. Generate the real code locally before the session.
+The credit-offer QR on slide 13 loads `qr-credits.svg`, which is not in the repository. Without it the slide falls back to `qr-credits-placeholder.svg`, so presenting from the HTML never shows a broken image. Generate the real code locally before the session.
 
 ## Slide 15: Backup, why not just retrieval? (only on request)
 
