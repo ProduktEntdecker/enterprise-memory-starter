@@ -4,7 +4,7 @@ Materials for the session **"Second Brain for Claude: Why It Forgets Your Compan
 
 ## What this is
 
-A working LLM wiki in plain markdown for a fictional company, Sotarena S.L., that you open in Claude Code and use right away. Claude reads a small root map first, keeps one canonical value per fact, and maintains the wiki with skills: ingest turns a raw document into cited pages, lint reports contradictions, duplicates and stale facts without silently fixing them. There is no vector database and no build step, only folders, markdown files, a CLAUDE.md, three skills and two hooks.
+A working LLM wiki in plain markdown for a fictional company, Sotarena S.L., that you open in Claude Code and use right away. Claude reads a small root map first, keeps one canonical value per fact, and maintains the wiki with skills: ingest turns a raw document into cited pages, lint reports contradictions, duplicates and stale facts without silently fixing them. There is no vector database and no build step, only folders, markdown files, a CLAUDE.md, four skills and two hooks.
 
 ## Quickstart (10 minutes)
 
@@ -46,6 +46,22 @@ Expect a report in `projects/sotarena/wiki/outputs/lint-<date>.md` with three fi
 
 **Next steps:** ingest `sources/inbox/S07-kornhagen-complaint.md`, try `/wiki-query who decides on the air freight for the delayed rope?`, or resolve a lint finding ("resolve finding 3").
 
+## Start a wiki of your own
+
+The four skills also cover the cold start. `examples/claude-house/sources/` holds three
+public documents about the event this repository was built for, and no wiki:
+
+```
+/wiki-init examples/claude-house
+```
+
+It ingests the sources oldest first, builds `FACTS.md` from the claims it finds, records
+the two capacity changes the sources declare themselves, and marks one row "needs
+decision" because a source says a number exists without naming it. Then it lints.
+
+The finished result is committed at `docs/fallback/claude-house-wiki/`, so you can compare
+your run against it, or browse it without running anything.
+
 **Start over:** these commands discard your local changes in the wiki folders.
 
 ```bash
@@ -71,7 +87,7 @@ projects/sotarena/wiki/     project wiki
   meetings/                 call notes and meeting minutes
   outputs/                  lint reports and filed answers
   _originals/               ingested raw documents, unchanged
-.claude/skills/             wiki-ingest, wiki-lint, wiki-query
+.claude/skills/             wiki-init, wiki-ingest, wiki-lint, wiki-query
 .claude/hooks/              SessionStart root map, PreToolUse privacy warning, tests
 .claude/settings.json       hook wiring
 scripts/check_links.py      link, node-contract and structure checks

@@ -39,34 +39,84 @@ Run sheet for the live demo in "Second Brain for Claude: Why It Forgets Your Com
 - [ ] Start `claude` in the folder once, trust it, and check that `/wiki-ingest`, `/wiki-lint` and `/wiki-query` appear in the slash menu. Quit and start again, so the demo session begins clean.
 - [ ] Use the model you rehearsed with. Large terminal font, window wide enough for tables.
 - [ ] Switch to accept-edits mode (Shift+Tab) before the ingest, so that page writes do not prompt. Only `python3 scripts/check_links.py` is pre-approved in `.claude/settings.json`; anything else still asks, so the ingest stops once for a permission prompt when it moves the source out of the inbox. Approve it and narrate it: raw sources move, they are never edited.
-- [ ] Open `docs/fallback/S06-talaverna-call-note.md` and `docs/fallback/lint-2026-09-21.md` in an editor tab, ready to switch.
+- [ ] **`examples/claude-house/wiki/` must not exist.** wiki-init refuses to overwrite an existing wiki, so a leftover from the rehearsal kills part A. Check with `ls examples/claude-house`.
+- [ ] Open `docs/fallback/S06-talaverna-call-note.md`, `docs/fallback/lint-2026-09-21.md` and the folder `docs/fallback/claude-house-wiki/` in editor tabs, ready to switch.
 - [ ] Rehearse once end to end and write the real durations into the run sheet.
 - [ ] Reset after the rehearsal:
 
 ```bash
 git restore -- projects sources wiki root-map.md
-git clean -fd -- projects sources wiki
+git clean -fd -- projects sources wiki examples
 git status
 ```
 
-`git status` must report a clean working tree.
+`git status` must report a clean working tree. The cleanup must include
+`examples`, otherwise the wiki created during the rehearsal stays behind and
+part A cannot run again.
 
-## 3. Run sheet (19 minutes, 11:22 to 11:41)
+## 3. Run sheet (18 minutes, 11:28 to 11:46)
+
+Two wikis in one demo. The small one is created from scratch, the large one has been
+running since August. Say that out loud when you switch, or the room will think the
+first wiki grew in four minutes.
+
+### Part A: init, from nothing (11:28 to 11:32)
 
 | Time | Step | Type exactly | Say | Expected | Rehearsed |
 |---|---|---|---|---|---|
-| 0:00 | Orientation | nothing, show the file tree | "A company wiki in plain markdown. A hook loads the root map at session start. FACTS.md holds one value per fact." | Tree with `root-map.md`, `projects/sotarena/wiki/`, `sources/inbox/` | |
-| 1:30 | Question | `What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.` | "Watch the path: map, index, facts. No search index, no chunks." | 6 weeks from order confirmation; FACTS.md row 1; S04, 2026-08-03; owner Head of Operations | |
-| 3:30 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
-| 8:00 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
-| 9:30 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
+| 0:00 | Show the folder | `ls examples/claude-house/sources` | "Three public documents about this event. The programme, the room list, the rules for hosts. No wiki." | Three files, C01 to C03 | |
+| 0:30 | Init | `/wiki-init examples/claude-house` | "One command. It reads oldest first, so the history comes out in the right order." | See 4.0 | |
+| 3:00 | Read the result | open `FACTS.md` | "Two capacities changed and the source says so itself, so both land in the history table. And one row it refuses to fill: the source says a number exists and never names it." | 12 rows, 1 marked needs decision, 3 without an owner | |
+
+**The line to land in part A:** a wiki that admits what it does not know is worth more
+than one that guesses. Then switch.
+
+### Part B: ingest and lint on a wiki that has run for a month (11:32 to 11:46)
+
+| Time | Step | Type exactly | Say | Expected | Rehearsed |
+|---|---|---|---|---|---|
+| 4:00 | Orientation | nothing, show the file tree | "Same structure, one month older. A hook loads the root map at session start." | Tree with `root-map.md`, `projects/sotarena/wiki/`, `sources/inbox/` | |
+| 5:00 | Question | `What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.` | "Watch the path: map, index, facts. No search index, no chunks." | 6 weeks from order confirmation; FACTS.md row 1; S04, 2026-08-03; owner Head of Operations | |
+| 6:30 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
+| 10:00 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
+| 11:00 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
 | 13:00 | Walk the report | open the report file | F1: "Newest is not right, the owner decides." F2: "Only an entity check catches this; retrieval returns two separate chunks." F3: "An explicit succession note makes date-based supersession safe." | Report with three findings | |
 | 16:00 | Resolve one | `Resolve the stale Quality Manager finding only.` | "One approval, one change, and it is logged." | FACTS.md row 9 becomes Irene Casado (S09), the old value moves to the history table, log entry added | |
-| 18:00 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same three steps." | Link or QR code on the slide | |
+| 17:30 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same four steps." | Link or QR code on the slide | |
 
-**Short on time:** skip the question at 1:30 and the resolve step at 16:00. Ingest and lint alone fit into 11 minutes, the version to fall back on if the part before the demo has run long.
+**Short on time, in this order:** drop the question at 5:00, then the resolve step at
+16:00, then part A entirely. Ingest and lint alone fit into 11 minutes.
+
+**A live demo is allowed to fail.** Say so lightly, switch to the fallback slide, keep
+the timing. Slide 20 covers part A, slides 21 to 23 cover part B, and the full init
+result is a folder you can open and browse: `docs/fallback/claude-house-wiki/`.
 
 ## 4. Expected output
+
+### 4.0 Init of examples/claude-house
+
+```
+Wiki for claude-house: 3 sources found, 2026-09-13 to 2026-09-19.
+Proposed structure: entities/, summaries/, meetings/, outputs/, _originals/
+Expected pages: about 9 to 12
+Start?
+```
+
+After confirmation:
+
+```
+Wiki created: examples/claude-house/wiki
+Pages: 3 summaries, 4 entities
+FACTS.md: 12 rows, 1 marked "needs decision", 3 without an owner
+Supersessions recorded: 2
+   Room 4 capacity      20 -> 25 seats
+   Workshops area      120 -> 96 seats
+Needs decision: how many API credit redemptions the link accepts
+Then: lint, 3 findings. Nothing changed.
+```
+
+The exact wording will differ. What must appear: the two supersessions, the row
+marked "needs decision", and the fact that nothing was invented to fill it.
 
 ### 4.1 Ingest of S06
 
