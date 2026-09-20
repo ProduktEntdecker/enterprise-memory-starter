@@ -19,7 +19,7 @@ updated: 2026-09-18
 3. **Owner** is the role that decides the value when sources disagree. The maintainers of the wiki assign it.
 4. **A value changes only when** a newer dated source states a different value, **and** that source is authoritative for the fact (it comes from the owner, or it explicitly replaces the older statement), **and** a human approves the change. Newest alone is not enough.
 5. **Superseded values move to the history table** with the date they stopped being valid. Nothing is silently overwritten.
-6. **Ingest proposes, lint reports, a human decides.** See [canonical fact](../../../wiki/concepts/canonical-fact.md).
+6. **Ingest proposes, lint reports, a human decides.**
 
 ## Facts
 

@@ -1,4 +1,4 @@
-> **PREPARED OUTPUT, not a live result.** This is the page that a correct run of `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` writes to `projects/sotarena/wiki/meetings/S06-talaverna-call-note.md`, prepared as a stage fallback. Paths are shown as code because they are relative to that location. The terminal summary of the same run is in [section 4.1 of the demo script](../demo-script.md).
+> **PREPARED OUTPUT, not a live result.** This is the page that a correct run of `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` writes to `projects/sotarena/wiki/meetings/S06-talaverna-call-note.md`, prepared as a stage fallback. Paths are shown as code because they are relative to that location.
 
 # S06 Call with Talaverna Hotels
 

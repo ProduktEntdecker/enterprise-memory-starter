@@ -79,7 +79,7 @@ Plain language works too, for example "ingest the Talaverna call note".
 - **Links:** relative markdown links only, no wikilinks, so they work on GitHub, in editors and in `scripts/check_links.py`.
 - **Dates:** `YYYY-MM-DD` in wiki pages. Quotes keep the format of the source. A source that carries only a month stays month-only in `source_date` (`YYYY-MM`), and a source without any date uses `unknown`. Never invent a day.
 - **Source IDs:** S01, S02 and so on. The next free ID is the highest one in the source register or the inbox, plus one.
-- **Every index.md follows the node contract:** `> Up:` breadcrumb, `**Purpose:**` sentence, `## Rollup`, `## Links down`, `## Raw stores`. See [node contract](wiki/concepts/node-contract.md).
+- **Every index.md follows the node contract:** `> Up:` breadcrumb, `**Purpose:**` sentence, `## Rollup`, `## Links down`, `## Raw stores`.
 - **log.md** is append-only. Entries start with `## [YYYY-MM-DD] operation | subject`.
 - **Style:** plain English, short sentences, no em-dash character.
 
