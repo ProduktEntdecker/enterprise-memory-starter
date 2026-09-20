@@ -11,50 +11,63 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 ---
 
 ## Slide 1: Title (11:00)
-- Welcome. Quick show of hands: who has watched Claude miss something that was sitting in their own files?
-- Promise for the hour: when an LLM wiki fits, when RAG fits, how the two work together, and a starter repo to take home.
-- Housekeeping: live demo at 11:22, questions from 11:46.
+- Handzeichen: wer hat Claude etwas übersehen sehen, das in den eigenen Dateien lag?
+- Versprechen: warum der Agent das Aufgeschriebene nicht findet, die vier Moves, Starter-Repo zum Mitnehmen
+- Demo 11:22, Fragen ab 11:46
 
 ## Slide 2: The anecdote (11:01)
-- I asked my assistant to prepare a client meeting. Ten minutes of searches, then: nothing useful found.
-- Everything was there: a folder of notes, several recorded meetings, even the answer to the exact point it flagged as unclear.
-- Own observation. No client names on stage.
+- Mein CxO-Agent kannte mein Geburtsdatum nicht
+- Steht als eine Zeile in `identity.md`, founder-Ordner, seit Monaten
+- Er hat nicht schlecht gesucht, er kannte den Ordner nicht
+- Datum selbst nicht nennen, keine Kundennamen
 
 ## Slide 3: Not a memory problem, a map problem (11:03)
-- The reflex is "bigger model" or "better memory feature". The real gap: nothing told the agent where that kind of knowledge lives.
-- Anthropic describes context as a finite resource with an attention budget. So the goal is to curate context, not to pour everything in.
-- Same session, I created a duplicate contact record myself, because I could not see across the silos either. A design failure, not a discipline failure (own observation).
-- Bridge: the industry default answer to "give the agent the right context" is RAG. Let us be fair to it first.
+- Reflex: größeres Modell, mehr Memory. Trifft es nicht
+- Kontext ist endlich, jeder Token kostet Aufmerksamkeit (Anthropic)
+- Also kuratieren, nicht alles reinschütten
+- Ich selbst habe in derselben Session eine Dublette angelegt: Designfehler, nicht Disziplinfehler
+- Brücke: wann passiert die Arbeit, bei jeder Frage oder einmal beim Ingest? Das ist der ganze Unterschied
 
 ## Slide 4: Retrieve every time, or compile once (11:05)
-- Karpathy's gist: with RAG the model rediscovers knowledge on every question and nothing accumulates; the wiki is a persistent, compounding artifact.
-- The real difference is when the work happens: at question time or at ingest time.
-- Two loops make it compound: lint keeps it honest, good answers get filed back as new pages.
-- Next: the four moves. Root map, fact sheet, ingest, lint.
+- Karpathy: bei RAG entdeckt das Modell alles bei jeder Frage neu, nichts wächst
+- Das Wiki ist ein bleibendes Artefakt, das mit jeder Quelle dichter wird
+- Der Unterschied ist das Wann: Fragezeit oder Ingest-Zeit
+- Zwei Schleifen: Lint hält es ehrlich, gute Antworten wandern als neue Seite zurück
+- Ehrlich sagen: RAG habe ich selbst nie produktiv aufgesetzt, nur im Kurs
+- Was für mich zählt: keine Chunking-Strategie, ich kann jede Seite lesen, Obsidian ist die Oberfläche, ein Nachmittag Aufwand
+- Jetzt die vier Moves
 
 ## Slide 5: Move 1, root map (11:09)
-- One short file, loaded at session start. Pointers and one-line summaries, never the content itself.
-- Mirrors Anthropic's just-in-time pattern: keep lightweight identifiers, load details at runtime. Claude Code loads CLAUDE.md files at launch and files in subdirectories on demand.
-- My setup, described generically: the root map routes to separate stores; each project has its own wiki with a canonical fact sheet; meetings and customer status stay in their own tools (own observation).
-- Rule of thumb: if the map grows into an essay, it has stopped being a map.
+- Eine kurze Datei, lädt beim Sessionstart
+- Nur Zeiger und Einzeiler, nie der Inhalt selbst
+- Genau das Just-in-time-Muster von Anthropic, so lädt Claude Code auch CLAUDE.md
+- Mein Setup generisch: Root-Map zeigt auf Stores, je Projekt ein Wiki mit Faktenblatt
+- Meetings und Kundenstatus bleiben bewusst in ihren eigenen Werkzeugen, nicht alles wandert ins Wiki
+- Regel: wird die Karte ein Aufsatz, ist sie keine Karte mehr
 
 ## Slide 6: Move 2, canonical fact sheet (11:13)
-- Decide on purpose where each kind of fact lives. Other pages link to it, they never copy it.
-- Every value carries a source and a date, so a stale value becomes visible.
-- This is the missing piece from slide 5: an explicit answer to "which value is canonical".
-- Own observation. The example values are fictional.
+- Bewusst entscheiden, wo welche Art Fakt wohnt
+- Andere Seiten verlinken hierher, sie kopieren nie
+- Jeder Wert mit Quelle und Datum, damit Veraltetes sichtbar wird
+- Die vier Zeilen sind echt, aus meinem Faktenblatt zu dieser Veranstaltung
+- Die durchgestrichene Zeile ist der Venue-Name aus der frühen Planung, der nicht mehr gilt
+- Deshalb kann ich die Raumnummer noch richtig sagen, während sie sich zweimal geändert hat
 
 ## Slide 7: Move 3, ingest (11:16)
-- A new source goes into sources/inbox/ and is never edited; after ingest the original moves to _originals/. The LLM writes a summary page, updates entity and concept pages, the fact sheet, the index and the log.
-- Karpathy's gist: a single source might touch 10 to 15 wiki pages.
-- His own research wiki (X post, 2 April 2026): about 100 articles and 400K words, navigated through index files and summaries rather than a RAG stack.
-- Trade-off to name: ingest spends tokens up front instead of at every question (own observation).
+- Quelle nach `sources/inbox/`, wird nie editiert, Original danach nach `_originals/`
+- Das LLM schreibt Summary, Entities, Faktenblatt, Index und Log
+- Eine Quelle berührt 10 bis 15 Seiten
+- Karpathys eigenes Wiki: rund 100 Artikel, 400K Wörter, navigiert über Indexseiten
+- S06 liegt noch in der Inbox, genau die Quelle lesen wir gleich live ein
+- Trade-off ehrlich nennen: Tokens einmal vorn statt bei jeder Frage
 
 ## Slide 8: Move 4, lint (11:19)
-- Karpathy's lint list: contradictions between pages, stale claims that newer sources superseded, orphan pages, plus missing concept pages and cross-references.
-- I add duplicates: the same person or thing under two spellings (own addition).
-- The honest risk: LLM-written pages look authoritative. Without lint, a wrong fact gets filed back and cited again (own observation).
-- Next: all four moves, live.
+- Karpathys Liste: Widersprüche, veraltete Behauptungen, Waisen
+- Dubletten habe ich ergänzt: dieselbe Sache in zwei Schreibweisen
+- Ehrliches Risiko: LLM-Seiten sehen autoritativ aus
+- Ohne Lint wird ein falscher Fakt zurückgeschrieben und wieder zitiert
+- Der Lint ist ein Skill im Repo, keine Magie, er darf nichts stillschweigend reparieren
+- Jetzt live
 
 ## Slide 9: Live demo, step 1: ingest (11:22)
 - Introduce Sotarena S.L.: a fictional example company with synthetic data from the starter repo.

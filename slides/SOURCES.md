@@ -37,7 +37,7 @@ Every Karpathy number and quote in the deck has a working link (sources 1 and 2)
 | 2 | The ten-minute search that came back empty although the notes existed in a folder the assistant did not know about. |
 | 3 | The framing "not a memory problem, a map problem" (findability). Note 3: the duplicate contact record created in the same session. |
 | 5 | The store layout: a root map routing to separate stores, per-project wikis with a canonical fact sheet, meetings and customer status in their own tools (simplified, generic). Note 8: "if the map grows into an essay, it has stopped being a map". |
-| 6 | The canonical fact sheet pattern (one home per fact, other pages link instead of copying, every value with source and date). Example values are fictional. |
+| 6 | The canonical fact sheet pattern (one home per fact, other pages link instead of copying, every value with source and date). The four rows shown are real, taken from the speaker's own fact sheet for this event; the struck row is a superseded venue name from early planning. |
 | 7 | Note 7: ingest spends tokens up front instead of at every question. |
 | 8 | Duplicates as a lint check (own addition to Karpathy's list); a wrong fact that is not linted gets filed back and cited again. |
 | 9 to 11, 16 to 18 | Demo content runs on Sotarena S.L., a fictional example company with synthetic data. |

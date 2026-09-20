@@ -39,7 +39,7 @@ html, body { margin: 0; padding: 0; height: 100%; background: #262522; }
 
 /* Type */
 .eyebrow {
-  font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--clay); font-weight: 600; margin: 0 0 18px;
 }
 h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; color: inherit; }
@@ -78,7 +78,7 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 .title .subtitle { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1.15; color: var(--clay); margin: 18px 0 0; max-width: 700px; }
 .title .speaker { margin-top: 44px; font-size: 24px; line-height: 1.45; }
 .title .speaker strong { font-weight: 600; }
-.title .when { font-size: 18px; color: #cfcabf; margin-top: 8px; }
+.title .when { font-size: 20px; color: #cfcabf; margin-top: 8px; }
 .title .motif { position: absolute; right: 90px; top: 150px; }
 
 /* Two statements */
@@ -99,32 +99,33 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 .row .k { font-family: var(--serif); font-size: 31px; line-height: 1.15; }
 .row .v { font-size: 23px; line-height: 1.4; color: #3a3833; }
 .row .t { text-align: right; }
+.rows.wide .row { grid-template-columns: 340px 1fr; padding: 20px 0; }
 
 /* RAPTOR */
 .raptor { display: grid; grid-template-columns: 600px 1fr; gap: 52px; align-items: center; margin-top: 40px; }
 .raptor p { font-size: 23px; line-height: 1.42; margin: 0; color: var(--body); }
 .stat { font-family: var(--serif); font-size: 76px; line-height: 1; color: var(--clay); margin: 26px 0 6px; }
-.stat-sub { font-size: 18px !important; color: var(--muted) !important; line-height: 1.4 !important; }
+.stat-sub { font-size: 20px !important; color: var(--muted) !important; line-height: 1.4 !important; }
 .callout { margin-top: 26px; border-left: 4px solid var(--clay); background: #fff; padding: 14px 18px; font-size: 20px; line-height: 1.4; color: var(--ink); }
 
 /* Diagrams */
 svg text { font-family: var(--sans); }
 .diagram { display: block; margin-top: 34px; }
-.box-text { font-size: 18px; fill: var(--ink); }
-.box-sub { font-size: 14px; fill: var(--muted); }
+.box-text { font-size: 21px; fill: var(--ink); }
+.box-sub { font-size: 19px; fill: var(--muted); }
 
 /* Fact sheet mock */
 .sheet { margin-top: 40px; background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; max-width: 1088px; }
-.sheet .bar { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 16px; padding: 10px 18px; display: flex; justify-content: space-between; }
+.sheet .bar { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 19px; padding: 10px 18px; display: flex; justify-content: space-between; }
 .sheet .bar span.dim { color: #a8a399; }
 .sheet table { width: 100%; border-collapse: collapse; font-size: 21px; }
-.sheet th { text-align: left; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 18px 8px; border-bottom: 1px solid var(--line); }
+.sheet th { text-align: left; font-size: 19px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 18px 8px; border-bottom: 1px solid var(--line); }
 .sheet td { padding: 14px 18px; border-bottom: 1px solid var(--line); }
 .sheet tr:last-child td { border-bottom: none; }
-.sheet td.file { font-family: var(--mono); font-size: 17px; color: #8a4a2c; }
+.sheet td.file { font-family: var(--mono); font-size: 21px; color: #8a4a2c; }
 .sheet td.win { font-weight: 600; }
 .sheet td.old { color: var(--muted); text-decoration: line-through; }
-.sheet .ph { font-family: var(--mono); font-size: 18px; color: #8a4a2c; background: var(--clay-soft); border-radius: 4px; padding: 1px 6px; }
+.sheet .ph { font-family: var(--mono); font-size: 21px; color: #8a4a2c; background: var(--clay-soft); border-radius: 4px; padding: 1px 6px; }
 
 /* Ingest */
 .ingest { display: grid; grid-template-columns: 690px 1fr; gap: 56px; align-items: center; margin-top: 34px; }
@@ -146,7 +147,7 @@ svg text { font-family: var(--sans); }
 /* Demo */
 .demo { border-top: 10px solid var(--clay); }
 .steps { display: flex; gap: 12px; margin: 0 0 30px; }
-.steps span { font-size: 15px; font-weight: 600; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 999px; padding: 6px 16px; }
+.steps span { font-size: 19px; font-weight: 600; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 999px; padding: 6px 16px; }
 .steps span.on { background: var(--clay); border-color: var(--clay); color: #fff; }
 .demo-body { display: grid; grid-template-columns: 170px 1fr; gap: 36px; align-items: start; }
 .demo-body .stepnum { font-family: var(--serif); font-size: 190px; line-height: 0.8; color: var(--clay); }
@@ -179,7 +180,7 @@ svg text { font-family: var(--sans); }
 .closing-grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: center; margin-top: 10px; min-height: 540px; }
 .closing h2 { font-size: 60px; }
 .closing .url { font-family: var(--mono); font-size: 25px; color: var(--ivory); margin-top: 30px; word-break: break-all; }
-.closing .opens { display: inline-block; margin-top: 16px; font-size: 16px; color: var(--ink); background: var(--clay); border-radius: 999px; padding: 5px 14px; font-weight: 600; }
+.closing .opens { display: inline-block; margin-top: 16px; font-size: 20px; color: var(--ink); background: var(--clay); border-radius: 999px; padding: 5px 14px; font-weight: 600; }
 .closing .qa { margin-top: 52px; font-family: var(--serif); font-size: 40px; }
 .closing .qa span { color: #a8a399; font-family: var(--sans); font-size: 20px; margin-left: 14px; }
 .closing .who { margin-top: 12px; font-size: 20px; color: #cfcabf; }
@@ -255,8 +256,8 @@ svg text { font-family: var(--sans); }
 <!-- 2 -->
 <section class="slide" data-minute="11:01">
   <p class="eyebrow">1 &middot; The map problem</p>
-  <h2 class="xl" style="margin-top:90px">My assistant searched for ten minutes and came back with nothing.</h2>
-  <p class="lede">Everything it needed sat in a folder it did not know existed.</p>
+  <h2 class="xl" style="margin-top:90px">My own agent did not know my date of birth.</h2>
+  <p class="lede">It is one line in <span class="mono">identity.md</span>, in the folder I keep about myself. The agent had never been told that folder exists.</p>
   <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 18</span></div>
 </section>
 
@@ -293,10 +294,12 @@ svg text { font-family: var(--sans); }
       <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
     </defs>
     <!-- lane labels -->
-    <text x="0" y="96" style="font-family:var(--serif);font-size:32px;fill:#141413">Retrieval</text>
-    <text x="0" y="122" class="box-sub">work at question time</text>
-    <text x="0" y="286" style="font-family:var(--serif);font-size:32px;fill:#141413">LLM wiki</text>
-    <text x="0" y="312" class="box-sub">work at ingest time</text>
+    <text x="0" y="92" style="font-family:var(--serif);font-size:26px;fill:#141413">Retrieval (RAG)</text>
+    <text x="0" y="120" class="box-sub">work at question time</text>
+    <text x="0" y="146" class="box-sub">chunks, embeddings</text>
+    <text x="0" y="282" style="font-family:var(--serif);font-size:26px;fill:#141413">LLM wiki</text>
+    <text x="0" y="310" class="box-sub">work at ingest time</text>
+    <text x="0" y="336" class="box-sub">files you can read</text>
     <!-- lane 1 -->
     <g fill="#fff" stroke="#141413" stroke-width="1.5">
       <rect x="200" y="60" width="140" height="76" rx="8"/><rect x="378" y="60" width="140" height="76" rx="8"/>
@@ -304,10 +307,10 @@ svg text { font-family: var(--sans); }
       <rect x="912" y="60" width="140" height="76" rx="8"/>
     </g>
     <text x="270" y="104" text-anchor="middle" class="box-text">Documents</text>
-    <text x="448" y="104" text-anchor="middle" class="box-text" style="font-size:16px">Chunk + embed</text>
+    <text x="448" y="104" text-anchor="middle" class="box-text" style="font-size:19px">Chunk + embed</text>
     <text x="626" y="104" text-anchor="middle" class="box-text">Vector index</text>
-    <text x="804" y="96" text-anchor="middle" class="box-text">Top-k chunks</text>
-    <text x="804" y="118" text-anchor="middle" class="box-sub">per question</text>
+    <text x="804" y="91" text-anchor="middle" class="box-text">Top-k chunks</text>
+    <text x="804" y="117" text-anchor="middle" class="box-sub">per question</text>
     <text x="982" y="104" text-anchor="middle" class="box-text">Answer</text>
     <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
       <line x1="344" y1="98" x2="374" y2="98"/><line x1="522" y1="98" x2="552" y2="98"/>
@@ -321,8 +324,8 @@ svg text { font-family: var(--sans); }
     </g>
     <text x="270" y="294" text-anchor="middle" class="box-text">Sources</text>
     <text x="448" y="294" text-anchor="middle" class="box-text">Ingest</text>
-    <text x="626" y="284" text-anchor="middle" class="box-text">Wiki pages</text>
-    <text x="626" y="306" text-anchor="middle" class="box-text">+ fact sheet</text>
+    <text x="626" y="281" text-anchor="middle" class="box-text">Wiki pages</text>
+    <text x="626" y="307" text-anchor="middle" class="box-text">+ fact sheet</text>
     <text x="804" y="294" text-anchor="middle" class="box-text">Root map</text>
     <text x="982" y="294" text-anchor="middle" class="box-text">Answer</text>
     <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
@@ -331,13 +334,13 @@ svg text { font-family: var(--sans); }
     </g>
     <!-- lint loop -->
     <path d="M596 248 C 596 200, 656 200, 656 244" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
-    <text x="626" y="196" text-anchor="middle" style="font-size:17px;font-style:italic;fill:#b85c3e">lint</text>
+    <text x="626" y="196" text-anchor="middle" style="font-size:19px;font-style:italic;fill:#b85c3e">lint</text>
     <!-- filed back loop -->
     <path d="M982 328 C 982 404, 626 404, 626 332" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
-    <text x="804" y="422" text-anchor="middle" style="font-size:17px;font-style:italic;fill:#b85c3e">good answers filed back</text>
+    <text x="804" y="422" text-anchor="middle" style="font-size:19px;font-style:italic;fill:#b85c3e">good answers filed back</text>
     <!-- quote -->
     <text x="0" y="392" style="font-family:var(--serif);font-style:italic;font-size:21px;fill:#141413">&ldquo;A persistent, compounding artifact.&rdquo;</text>
-    <text x="0" y="416" class="box-sub">Karpathy, on the wiki</text>
+    <text x="0" y="418" class="box-sub">Karpathy, on the wiki</text>
   </svg>
   <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">4 / 18</span></div>
 </section>
@@ -354,8 +357,8 @@ svg text { font-family: var(--sans); }
     </defs>
     <rect x="384" y="0" width="320" height="88" rx="10" fill="#141413"/>
     <text x="544" y="38" text-anchor="middle" style="font-family:var(--mono);font-size:22px;fill:#FAF9F5">root-map.md</text>
-    <text x="544" y="66" text-anchor="middle" style="font-size:16px;fill:#cfcabf">pointers + one-line summaries</text>
-    <text x="364" y="50" text-anchor="end" style="font-size:17px;font-style:italic;fill:#b85c3e">loaded at session start</text>
+    <text x="544" y="66" text-anchor="middle" style="font-size:19px;fill:#cfcabf">pointers + one-line summaries</text>
+    <text x="364" y="50" text-anchor="end" style="font-size:19px;font-style:italic;fill:#b85c3e">loaded at session start</text>
     <g stroke="#6b675f" stroke-width="2" fill="none">
       <path d="M544 88 V144"/><path d="M118 144 H970"/>
     </g>
@@ -363,7 +366,7 @@ svg text { font-family: var(--sans); }
       <line x1="118" y1="144" x2="118" y2="196"/><line x1="402" y1="144" x2="402" y2="196"/>
       <line x1="686" y1="144" x2="686" y2="196"/><line x1="970" y1="144" x2="970" y2="196"/>
     </g>
-    <text x="1088" y="132" text-anchor="end" style="font-size:17px;font-style:italic;fill:#b85c3e">read on demand</text>
+    <text x="1088" y="132" text-anchor="end" style="font-size:19px;font-style:italic;fill:#b85c3e">read on demand</text>
     <g fill="#fff" stroke="#141413" stroke-width="1.5">
       <rect x="0" y="200" width="236" height="116" rx="10"/><rect x="284" y="200" width="236" height="116" rx="10"/>
       <rect x="568" y="200" width="236" height="116" rx="10"/><rect x="852" y="200" width="236" height="116" rx="10"/>
@@ -375,10 +378,10 @@ svg text { font-family: var(--sans); }
     <g fill="#f1ded4" stroke="#D97757" stroke-width="1.2">
       <rect x="54" y="262" width="128" height="34" rx="17"/><rect x="338" y="262" width="128" height="34" rx="17"/>
     </g>
-    <text x="118" y="285" text-anchor="middle" style="font-size:15px;fill:#8a4a2c">fact sheet</text>
-    <text x="402" y="285" text-anchor="middle" style="font-size:15px;fill:#8a4a2c">fact sheet</text>
-    <text x="686" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">summaries by date</text>
-    <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">status per account</text>
+    <text x="118" y="285" text-anchor="middle" style="font-size:19px;fill:#8a4a2c">fact sheet</text>
+    <text x="402" y="285" text-anchor="middle" style="font-size:19px;fill:#8a4a2c">fact sheet</text>
+    <text x="686" y="284" text-anchor="middle" class="box-sub" style="font-size:19px">summaries by date</text>
+    <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:19px">status per account</text>
   </svg>
   <p class="lede" style="margin-top:26px">The agent reads the map first, then descends only where the question leads.</p>
   <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">5 / 18</span></div>
@@ -391,18 +394,19 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 2 of 4</p>
   <h2>Canonical fact sheet: one home per fact</h2>
   <div class="sheet">
-    <div class="bar"><span>FACTS.md</span><span class="dim">example</span></div>
+    <div class="bar"><span>FACTS.md</span><span class="dim">this event, my own wiki</span></div>
     <table>
       <thead><tr><th>Fact</th><th>Value</th><th>Source</th><th>As of</th></tr></thead>
       <tbody>
-        <tr><td>Support hours</td><td class="win">9:00 to 18:00</td><td class="file">ops-handbook.md</td><td>2026-05</td></tr>
-        <tr><td>Standard warranty</td><td class="win">3 years</td><td class="file">policy-2026.md</td><td>2026-03</td></tr>
-        <tr><td>Current price list</td><td class="win">v4</td><td class="file">pricing-v4.md</td><td>2026-08</td></tr>
+        <tr><td>Venue</td><td class="win">Carrer de Bilbao 128</td><td class="file">luma + venue team</td><td>2026-09-13</td></tr>
+        <tr><td>Room 4 capacity</td><td class="win">25 seats</td><td class="file">backoffice, read myself</td><td>2026-09-19</td></tr>
+        <tr><td>Ticket cap</td><td class="win">room capacity + 20%</td><td class="file">house organisers</td><td>2026-09-13</td></tr>
+        <tr><td class="old">Venue</td><td class="old">Two Parc Central</td><td class="file">earlier planning chat</td><td class="old">2026-08-08</td></tr>
       </tbody>
     </table>
   </div>
-  <p class="lede" style="margin-top:28px">Other pages link here instead of copying. Every value carries its source.</p>
-  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">6 / 18</span></div>
+  <p class="lede" style="margin-top:28px">Other pages link here instead of copying. This is why I can still tell you the right room number.</p>
+  <div class="foot"><span class="src"><b>Own wiki:</b> four rows from the fact sheet for this event, verbatim. The struck row is how a superseded value stays visible.</span><span class="num">6 / 18</span></div>
 </section>
 
 
@@ -417,8 +421,9 @@ svg text { font-family: var(--sans); }
         <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
       </defs>
       <rect x="0" y="136" width="200" height="108" rx="10" fill="#fff" stroke="#141413" stroke-width="1.5"/>
-      <text x="100" y="184" text-anchor="middle" style="font-size:22px;fill:#141413">New source</text>
-      <text x="100" y="212" text-anchor="middle" class="box-sub" style="font-size:15px">inbox/, never edited</text>
+      <text x="100" y="170" text-anchor="middle" style="font-size:22px;fill:#141413">New source</text>
+      <text x="100" y="196" text-anchor="middle" class="box-sub" style="font-size:19px">inbox/, never edited</text>
+      <text x="100" y="222" text-anchor="middle" style="font-size:19px;fill:#b85c3e">S06, a call note</text>
       <g fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ah3)">
         <path d="M204 190 C 270 190, 270 38, 326 38"/>
         <path d="M204 190 C 270 190, 270 142, 326 142"/>
@@ -438,6 +443,7 @@ svg text { font-family: var(--sans); }
       <div class="big">10 to 15</div>
       <p>wiki pages a single source might touch.</p>
       <p class="aside-small">Karpathy's own research wiki: about 100 articles and 400K words, navigated through index files and summaries.</p>
+      <p class="aside-small" style="color:#b85c3e;margin-top:14px;padding-top:0;border-top:none">S06 is still sitting in the inbox. We run it live in a moment.</p>
     </div>
   </div>
   <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">7 / 18</span></div>
@@ -1180,10 +1186,11 @@ svg text { font-family: var(--sans); }
   <p class="eyebrow">Backup &middot; only if the question comes up</p>
   <h2>Why not just retrieval?</h2>
   <p class="lede">Strong where this pattern is weak: huge corpora, unknown questions, a file indexed in seconds. Three things it gets wrong:</p>
-  <div class="rows">
-    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;The company's revenue grew by 3%.&rdquo; Which company? Which quarter?</div></div>
+  <div class="rows wide">
+    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;Revenue grew by 3%.&rdquo; Which company? Which quarter?</div></div>
     <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div></div>
-    <div class="row"><div class="k">Contradictions</div><div class="v">Both versions reach the prompt. The model must pick one.</div></div>
+    <div class="row"><div class="k">Contradictions</div><div class="v">Both versions reach the prompt. The model picks one.</div></div>
+    <div class="row"><div class="k">And on my side</div><div class="v">No chunking to tune, files I can read, Obsidian as the UI, running in an afternoon.</div></div>
   </div>
   <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> the canonical-fact row.</span><span class="num">15 / 18</span></div>
 </section>
