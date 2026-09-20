@@ -122,7 +122,8 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 ## Slide 17: API credits (11:49)
 - "Before the questions: 50 dollars in Claude API credits, and the link takes the first 34 of you."
 - Walk the three steps out loud while they scan. Most people miss step 2 and it is the one that fails.
-- **Say it twice:** the Organization ID from `console.anthropic.com`, not the Claude.ai account ID. A wrong ID is rejected, one claim per person, and a bad submission cannot be corrected.
+- **Say it twice:** the Organization ID from `platform.claude.com`, not the Claude.ai account ID. A wrong ID is rejected, one claim per person, and a bad submission cannot be corrected.
+- The console was renamed: `console.anthropic.com` now redirects to `platform.claude.com` with a 301. Anyone who typed the old address still lands in the right place, so do not let that question derail the slide.
 - API only. If someone asks whether this pays for their Claude.ai subscription: no.
 - 34 redemptions. If the room is fuller than that, say so honestly and take names afterwards so the cap can be raised.
 - **The number 34 lives in two places:** this note and the badge on slide 17 in `slides/slides.html`, the line ending in "34 available". Change both and re-export, or the room hears one number and reads another.
