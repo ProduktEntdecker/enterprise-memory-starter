@@ -9,7 +9,8 @@ the answers in the terminal too. This repository is public and is demonstrated l
 to an international audience, so a reply in any other language is a reply nobody in
 the room can read.
 
-This rule overrides any global or personal instruction to answer in another language.
+If a personal or global setting asks for another language, treat this repository
+as the exception and answer in English here.
 
 ## Start of every session
 
