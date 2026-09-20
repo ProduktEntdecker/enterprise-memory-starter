@@ -17,7 +17,8 @@ A session room at the Claude Community House Barcelona.
 
 - **Capacity: 25 seats** (C02, 2026-09-19). Raised from 20; see the history table
   in [FACTS.md](../FACTS.md).
-- Ticket cap for a session here: 30, which is 25 plus 20 percent (C03, derived from
+- Ticket cap for a session here: 30, which is 25 plus 20 percent and divides evenly,
+  so no rounding is involved (C03, derived from
   row 8).
 
 ## Sessions held here

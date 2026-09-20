@@ -18,8 +18,10 @@ also called the cafeteria. Used for drop-in sessions.
 
 - **Capacity: 96 seats** (C02, 2026-09-19). Reduced from 120; see the history table
   in [FACTS.md](../FACTS.md).
-- Ticket cap for a session here: 115, which is 96 plus 20 percent (derived from
-  [FACTS.md](../FACTS.md) row 8).
+- Ticket cap for a session here: **not settled.** 96 plus 20 percent is 115.2
+  ([FACTS.md](../FACTS.md) row 8). The sources give no rounding rule, so 115 and 116
+  are both defensible. Listed under "Needs decision" in [FACTS.md](../FACTS.md)
+  until an organiser says which one applies.
 
 ## Sessions held here
 

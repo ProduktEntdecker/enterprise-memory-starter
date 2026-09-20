@@ -35,6 +35,7 @@ table wins until a lint finding is resolved.
 
 | # | Fact | Question |
 |---|---|---|
+| 8 | Rounding of derived ticket caps | C03 gives "room capacity plus 20 percent" and no rounding rule. It divides evenly for the auditorium (100 to 120) and Room 4 (25 to 30), but not for the workshops area: 96 plus 20 percent is 115.2. Whether that becomes 115 or 116 is not decided in any source here. |
 | 11 | API credit redemptions | C03 says the link accepts "a fixed number" without naming it. The number is not in any source here. |
 
 ## History of superseded values

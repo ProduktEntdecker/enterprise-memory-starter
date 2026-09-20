@@ -6,6 +6,8 @@ source_id: C01
 source_type: programme page
 author: "House organisers"
 source_date: 2026-09-13
+source_url: https://claudebcn.com/planning
+retrieved: 2026-09-20
 created: 2026-09-20
 updated: 2026-09-20
 ---

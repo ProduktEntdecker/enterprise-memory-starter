@@ -4,6 +4,8 @@ title: "Claude Community House Barcelona: public programme, extract"
 type: programme page
 author: "House organisers"
 date: 2026-09-13
+source_url: https://claudebcn.com/planning
+retrieved: 2026-09-20
 ---
 
 # Claude Community House Barcelona, programme extract
@@ -34,5 +36,8 @@ community ambassadors from across Europe run the programme.
 - Every session is registered through its own event page. Entry is by QR code.
 - The house is an independent community initiative. It is not an official
   Anthropic event.
+- Sessions are run by community ambassadors. Where a session title names a
+  vendor programme, it describes what the session is about, not who runs it.
+  Each session has its own public event page, linked from the programme page.
 - The rooftop programme from 18:00 is run by a separate organiser and is not
   part of the house programme.

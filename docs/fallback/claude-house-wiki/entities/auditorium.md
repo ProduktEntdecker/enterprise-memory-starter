@@ -17,7 +17,8 @@ on level minus one.
 ## Facts
 
 - **Capacity: 100 seats**, seated (C02, 2026-09-19). Unchanged since the August list.
-- Ticket cap for a session here: 120, which is 100 plus 20 percent (derived from
+- Ticket cap for a session here: 120, which is 100 plus 20 percent and divides
+  evenly, so no rounding is involved (derived from
   [FACTS.md](../FACTS.md) row 8).
 
 ## Sessions held here
