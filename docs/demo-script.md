@@ -66,7 +66,7 @@ first wiki grew in four minutes.
 |---|---|---|---|---|---|
 | 11:28 | Show the folder | `ls examples/claude-house/sources` | "Three public documents about this event. The programme, the room list, the rules for hosts. No wiki." | Three files, C01 to C03 | |
 | 11:29 | Init | `/wiki-init examples/claude-house` | "One command. It reads oldest first, so the history comes out in the right order." | See 4.0 | |
-| 11:31 | Read the result | open `FACTS.md` | "Two capacities changed and the source says so itself, so both land in the history table. And one row it refuses to fill: the source says a number exists and never names it." | 12 rows, 1 marked needs decision, 3 without an owner | |
+| 11:31 | Read the result | open `FACTS.md` | "Two capacities changed and the source says so itself, so both land in the history table. And two rows it refuses to fill. The second one is the interesting one: 96 seats plus 20 percent is 115.2, and no source says how to round it. So it does not round." | 12 rows, 2 marked needs decision, 3 without an owner | |
 
 **The line to land in part A:** a wiki that admits what it does not know is worth more
 than one that guesses. Then switch.
@@ -112,16 +112,19 @@ After confirmation:
 ```
 Wiki created: examples/claude-house/wiki
 Pages: 3 summaries, 4 entities
-FACTS.md: 12 rows, 1 marked "needs decision", 3 without an owner
+FACTS.md: 12 rows, 2 marked "needs decision", 3 without an owner
 Supersessions recorded: 2
    Room 4 capacity      20 -> 25 seats
    Workshops area      120 -> 96 seats
-Needs decision: how many API credit redemptions the link accepts
+Needs decision: how to round a derived ticket cap (96 plus 20 percent is 115.2)
+                how many API credit redemptions the link accepts
 Then: lint, 3 findings. Nothing changed.
 ```
 
-The exact wording will differ. What must appear: the two supersessions, the row
-marked "needs decision", and the fact that nothing was invented to fill it.
+The exact wording will differ. What must appear: the two supersessions, the two rows
+marked "needs decision", and the fact that nothing was invented to fill them.
+The rounding row is the one to point at: two of the three rooms divide evenly,
+so only the third one reveals that somebody would have had to decide.
 
 ### 4.1 Ingest of S06
 
