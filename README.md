@@ -106,14 +106,11 @@ docs/                       agenda, demo script, prepared fallback outputs
 | Main risk | Error compounding: a wrong page gets cited and looks confirmed | Confident but wrong answers from outdated or badly split chunks |
 | How they combine | The compiled layer and router for recurring questions | The fallback for the long tail; good results get ingested into the wiki |
 
-More detail: [wiki/concepts/llm-wiki-vs-rag.md](wiki/concepts/llm-wiki-vs-rag.md).
+More detail is in the talk deck, which is not part of this repository.
 
-## Session material
+## Prepared outputs
 
-- [docs/agenda.html](docs/agenda.html): agenda with timeline. Open it in a browser and print to PDF, or use [docs/agenda.pdf](docs/agenda.pdf).
-- [`slides/`](slides/): the talk deck (HTML and PDF) with speaker notes and sources.
-- [docs/demo-script.md](docs/demo-script.md): run sheet of the live demo, with prompts, expected output and timing.
-- [docs/fallback/](docs/fallback/): prepared outputs of a correct ingest and lint run.
+- [docs/fallback/](docs/fallback/): what a correct ingest and lint run produces, so the result can be read without running anything.
 
 ## For maintainers
 

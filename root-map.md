@@ -16,7 +16,6 @@ updated: 2026-09-14
 |---|---|---|---|
 | Sotarena project wiki | [projects/sotarena/wiki/index.md](projects/sotarena/wiki/index.md) | Compiled knowledge about Sotarena S.L. (fictional): people, suppliers, products, documents | Any question about the company |
 | Canonical facts | [projects/sotarena/wiki/FACTS.md](projects/sotarena/wiki/FACTS.md) | One value per fact, with winning source, date and owner | Numbers, dates, prices, names in roles; read before answering |
-| Global wiki | [wiki/index.md](wiki/index.md) | Method: canonical facts, ingest, lint, progressive loading, LLM wiki vs RAG | Questions about how this wiki works |
 | Inbox | [sources/inbox/](sources/inbox/) | Raw documents not yet ingested | Input for `/wiki-ingest` |
 | Originals | [projects/sotarena/wiki/_originals/](projects/sotarena/wiki/_originals/) | Ingested documents, unchanged | Verifying a quote, nothing else |
 
