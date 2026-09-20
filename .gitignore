@@ -27,7 +27,3 @@ dist/
 
 *.log
 
-# Credits offer link and QR: local only, never committed (34 redemptions, no support for abuse)
-slides/qr-credits.svg
-slides/credits-link.txt
-slides-with-credits.pdf
