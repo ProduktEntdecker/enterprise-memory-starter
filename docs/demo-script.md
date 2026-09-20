@@ -66,6 +66,7 @@ first wiki grew in four minutes.
 |---|---|---|---|---|---|
 | 11:28 | Show the folder | `ls examples/claude-house/sources` | "Three public documents about this event. The programme, the room list, the rules for hosts. No wiki." | Three files, C01 to C03 | |
 | 11:29 | Init | `/wiki-init examples/claude-house` | "One command. It reads oldest first, so the history comes out in the right order." | See 4.0 | |
+| 11:30 | Confirm | `yes` | "It asks before it writes. Three sources, nine to twelve pages, and nothing on disk yet. The pause is the point: I approve the run, not each page." | Skeleton created, then the pages appear one by one | |
 | 11:31 | Read the result | open `FACTS.md` | "Two capacities changed and the source says so itself, so both land in the history table. And two rows it refuses to fill. The second one is the interesting one: 96 seats plus 20 percent is 115.2, and no source says how to round it. So it does not round." | 12 rows, 2 marked needs decision, 3 without an owner | |
 
 **The line to land in part A:** a wiki that admits what it does not know is worth more
