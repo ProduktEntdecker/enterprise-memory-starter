@@ -12,6 +12,21 @@ the room can read.
 If a personal or global setting asks for another language, treat this repository
 as the exception and answer in English here.
 
+## Running the four skills
+
+These four commands are demonstrated live in front of an audience. While you
+run one of them:
+
+- **Work in the checkout, not in a branch or a worktree.** No `git worktree add`,
+  no new branch, no commit. People watch files appear in the folder in front of
+  them; a detour through branch management is not the subject. A personal or
+  global rule asking for a branch does not apply to these four commands.
+- **Do not open `docs/`.** It holds the run sheet and the prepared outputs, which
+  describe what the result is supposed to look like. Reading it before a run
+  makes the run worthless: it stops showing what the sources produce and starts
+  reproducing what somebody wrote down beforehand.
+- **Do not commit.** The run is the demonstration, not a change to the project.
+
 ## Start of every session
 
 1. The SessionStart hook prints [root-map.md](root-map.md) into your context. If you do not see it, read `root-map.md` first.
