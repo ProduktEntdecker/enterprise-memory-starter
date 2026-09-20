@@ -71,6 +71,7 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 /* Dark slides */
 .dark { background: var(--ink); color: var(--ivory); }
 .dark .foot { border-top-color: #3a3833; color: #a8a399; }
+.dark .note { color: var(--ivory); }
 .dark .foot .num { color: var(--ivory); }
 
 /* Title slide */
@@ -1251,11 +1252,12 @@ svg text { font-family: var(--sans); }
         <li>Copy your <b>Organization ID</b> from <span class="mono">platform.claude.com</span></li>
         <li>Submit it. Credits land within a few minutes</li>
       </ol>
-      <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong ID is rejected, and it cannot be corrected afterwards.</p>
+      <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong submission cannot be corrected afterwards.</p>
       <span class="opens">API only &middot; not Claude.ai &middot; one claim per person &middot; 34 available</span>
     </div>
     <div class="qr" role="img" aria-label="QR code for the Claude API credit offer">
       <img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer">
+
     </div>
   </div>
   <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">17 / 23</span></div>
