@@ -88,7 +88,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Switch to the terminal. Show the folder first: three documents about **this event**, no wiki.
 - Run `/wiki-init examples/claude-house`.
 - Narrate while it runs: sources oldest first, the fact sheet built from the claims found, two supersessions recorded because the source declares them.
-- The point to land: it finds what it does not know. One row comes back marked "needs decision", because the source says a number exists and never names it.
+- The point to land: it finds what it does not know. Two rows come back marked "needs decision". The second one is the one to read out: 96 seats plus 20 percent is 115.2, and no source says how to round it, so it does not round. Two of the three rooms divide evenly. Only the third one reveals that somebody would have had to decide.
 - If it fails or runs long: jump to slide 20. The full result is also a folder, `docs/fallback/claude-house-wiki/`, openable in the editor.
 - Hard stop at 11:32.
 
