@@ -94,7 +94,7 @@ which a review caught. One value per fact applies to this run sheet too.
 11:42, then part A entirely. Ingest and lint alone fit into eleven minutes.
 
 **A live demo is allowed to fail.** Say so lightly, switch to the fallback slide, keep
-the timing. Slide 20 covers part A, slides 21 to 23 cover part B, and the full init
+the timing. Slide 19 covers part A, slides 20 to 22 cover part B, and the full init
 result is a folder you can open and browse: `docs/fallback/claude-house-wiki/`.
 
 ## 4. Expected output

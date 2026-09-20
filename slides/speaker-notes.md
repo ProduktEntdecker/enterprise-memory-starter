@@ -4,7 +4,7 @@ Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Audi
 
 Timeline: 11:00 opening and the map problem (8) · 11:08 the pattern and the four moves (14) · 11:22 what we built on top (6) · 11:28 live demo (18) · 11:46 what to take home and links (6) · 11:52 Q&A (8).
 
-This talk is about the wiki. RAG is named on slide 5 and compared in one line on slide 16. The detail, what retrieval is good at and where it loses context, sits on backup slide 19 and is only shown if someone asks.
+This talk is about the wiki. RAG is named on slide 5 and compared in one line on slide 16. The detail, what retrieval is good at and where it loses context, sits on backup slide 18 and is only shown if someone asks.
 
 Sources for every claim below are listed in SOURCES.md. "Own observation" marks statements without an external source.
 
@@ -90,7 +90,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - **It stops and asks.** First comes a block with the source count, the date range and the expected number of pages, then `Start?`. Nothing is written until you answer. Say `yes` and narrate the pause: it approves the whole run, not each page. Do not stand there waiting for it to write by itself.
 - Narrate while it runs: sources oldest first, the fact sheet built from the claims found, two supersessions recorded because the source declares them.
 - The point to land: it finds what it does not know. Two rows come back marked "needs decision". The second one is the one to read out: 96 seats plus 20 percent is 115.2, and no source says how to round it, so it does not round. Two of the three rooms divide evenly. Only the third one reveals that somebody would have had to decide.
-- If it fails or runs long: jump to slide 20. The full result is also a folder, `docs/fallback/claude-house-wiki/`, openable in the editor.
+- If it fails or runs long: jump to slide 19. The full result is also a folder, `docs/fallback/claude-house-wiki/`, openable in the editor.
 - Hard stop at 11:32.
 
 ## Slide 13: Live demo, step 1: ingest (11:32)
@@ -99,20 +99,20 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Show the diff: which pages changed, the new log entry, how many pages one source touched.
 - The conflict is the moment: S06 says four weeks, the fact sheet says six. Ingest proposes, it does not decide.
 - Approve the two Talaverna rows only. Leave the lead time alone.
-- Fallback: slide 21.
+- Fallback: slide 20.
 
 ## Slide 14: Live demo, step 2: lint (11:37)
 - Run `/wiki-lint` on the Sotarena wiki.
 - Walk the three findings: a contradiction, a duplicate, a stale fact.
 - Ask the room which value they would trust, before revealing the sources. Most will say the newer one. That is the trap.
 - The newer source is a sales call, not the operations owner, and it does not replace anything. Six weeks stands.
-- Fallback: slide 22.
+- Fallback: slide 21.
 
 ## Slide 15: Live demo, step 3: fact sheet (11:42)
 - Resolve the stale Quality Manager finding only. One approval, one change, one log entry.
 - Open the fact sheet: the winning value, its source and date, and the value it replaces in the history table.
 - Resolved once, in one place. Every other page links here.
-- Fallback: slide 23. Hard stop at 11:46.
+- Fallback: slide 22. Hard stop at 11:46.
 
 ## Slide 16: When to use which (11:46)
 - Small corpus first: Anthropic's guidance says below about 200K tokens (roughly 500 pages) the whole knowledge base fits in the prompt, no RAG needed.
@@ -129,7 +129,7 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Likely questions: several people editing one wiki and merge conflicts; permissions; ingest cost at scale; when to add embeddings; how this differs from a plain Obsidian vault.
 - Close: an independent community resource. Thank the house team.
 
-## Slide 19: Backup, why not just retrieval? (only on request)
+## Slide 18: Why not just retrieval? (only on request)
 
 Not part of the talk. Show it when someone asks how this compares to retrieval, then go back.
 
@@ -142,8 +142,8 @@ Not part of the talk. Show it when someone asks how this compares to retrieval, 
 ## Slides 20 to 23: Fallback output (only if the live demo breaks)
 - Use instead of slides 12 to 15, same talking points and timing.
 - Each frame holds real prepared output from `docs/fallback/`, shortened to the decisive lines. Not a placeholder.
-- Slide 20: the init result. The full wiki is also a folder, `docs/fallback/claude-house-wiki/`, so it can be opened in the editor and browsed page by page.
-- Slide 21: the ingest summary, with the lead-time conflict highlighted.
-- Slide 22: the lint report with the three findings.
-- Slide 23: the fact sheet rows after the resolution, with the superseded value in the history table.
+- Slide 19: the init result. The full wiki is also a folder, `docs/fallback/claude-house-wiki/`, so it can be opened in the editor and browsed page by page.
+- Slide 20: the ingest summary, with the lead-time conflict highlighted.
+- Slide 21: the lint report with the three findings.
+- Slide 22: the fact sheet rows after the resolution, with the superseded value in the history table.
 - A live demo is allowed to fail. Say so lightly, switch, and keep the timing.
