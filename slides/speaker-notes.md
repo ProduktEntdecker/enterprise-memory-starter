@@ -2,7 +2,7 @@
 
 Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium. Intermediate level. Speaker: Florian Steiner, Claude Community Ambassador Munich.
 
-Timeline: 11:00 opening and the map problem (8) · 11:08 the pattern and the four moves (14) · 11:22 what we built on top (6) · 11:28 live demo (18) · 11:46 what to take home, credits, links (5) · 11:52 Q&A (8).
+Timeline: 11:00 opening and the map problem (8) · 11:08 the pattern and the four moves (14) · 11:22 what we built on top (6) · 11:28 live demo (18) · 11:46 what to take home and links (6) · 11:52 Q&A (8).
 
 This talk is about the wiki. RAG is named on slide 5 and compared in one line on slide 16. The detail, what retrieval is good at and where it loses context, sits on backup slide 19 and is only shown if someone asks.
 
@@ -120,20 +120,8 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - They complement each other: root map on top, wiki in the middle, retrieval over raw sources as the fallback. Recurring answers move up into the wiki.
 - Anthropic describes Claude Code as exactly such a hybrid: CLAUDE.md up front, glob and grep just in time.
 
-## Slide 17: API credits (11:49)
-- "Before the questions: 50 dollars in Claude API credits, and the link takes the first 34 of you."
-- Walk the three steps out loud while they scan. Most people miss step 2 and it is the one that fails.
-- **Say it twice:** the Organization ID from `platform.claude.com`, not the Claude.ai account ID. One claim per person, and a wrong submission cannot be corrected afterwards.
-- **Do not promise that a wrong ID gets rejected.** The mail does not say that. It says there is no support capacity for wrong submissions. If a wrong ID goes through quietly, the credits are gone, and someone who was told the system catches it will not have checked.
-- The console was renamed: `console.anthropic.com` now redirects to `platform.claude.com` with a 301. Anyone who typed the old address still lands in the right place, so do not let that question derail the slide.
-- API only. If someone asks whether this pays for their Claude.ai subscription: no.
-- 34 redemptions. If the room is fuller than that, say so honestly and take names afterwards so the cap can be raised.
-- **The number 34 lives in two places:** this note and the badge on slide 17 in `slides/slides.html`, the line ending in "34 available". Change both and re-export, or the room hears one number and reads another.
-- The QR is generated locally before the session and deliberately not in the repository, so the offer cannot be drained by anyone crawling GitHub:
-  `qrencode -t SVG -o slides/qr-credits.svg -l H -s 8 -m 2 "<offer link>"`
-  The committed PDF shows a placeholder. Present from `slides-with-credits.pdf` or from the HTML.
 
-## Slide 18: Take it with you (11:51)
+## Slide 17: Take it with you (11:51)
 - Three codes: the repo, what I do, and where to say hello.
 - The repo is the one that matters. The other two are for whoever wants to continue the conversation.
 - Before 11:00: check that the repository is public, as the slide claims.
