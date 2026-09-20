@@ -63,3 +63,23 @@ Plain language works too, for example "ingest the Talaverna call note".
 - `python3 scripts/check_links.py`: links, node contract, index coverage, orphans, em-dash.
 - `python3 scripts/check_links.py --lint projects/sotarena/wiki`: structural candidates for lint.
 - `bash .claude/hooks/tests/run-tests.sh`: hook tests.
+
+## Slide typography
+
+The deck is 1280 by 720 px and prints to a 960 by 540 pt page, so **pt = px times 0.75**.
+
+| Role | Point size | Pixel size in `slides.html` |
+|---|---|---|
+| Target for body text, labels, table cells | 18 pt and up | 24 px and up |
+| Hard floor for anything the audience must read | 14 pt | 19 px |
+| Footnotes only: source lines, tags, slide numbers | 8 to 10.5 pt | 11 to 14 px |
+
+Nothing between 11 and 18 px unless it is a footnote. Check before every export:
+
+```bash
+grep -n "font-size:\s*1[0-8]px" slides/slides.html
+```
+
+Only `.foot` and `.tag` may appear in that output. When raising a size inside an
+SVG, check the y coordinates of stacked labels too: a pair less than 26 px apart
+will collide once the text grows.

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Second Brain for Claude: LLM Wiki vs RAG</title>
+<title>Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder</title>
 <style>
 :root {
   --ink: #141413;
@@ -39,7 +39,7 @@ html, body { margin: 0; padding: 0; height: 100%; background: #262522; }
 
 /* Type */
 .eyebrow {
-  font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
+  font-size: 20px; letter-spacing: 0.14em; text-transform: uppercase;
   color: var(--clay); font-weight: 600; margin: 0 0 18px;
 }
 h1, h2, h3 { font-family: var(--serif); font-weight: 400; margin: 0; color: inherit; }
@@ -71,14 +71,15 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 /* Dark slides */
 .dark { background: var(--ink); color: var(--ivory); }
 .dark .foot { border-top-color: #3a3833; color: #a8a399; }
+.dark .note { color: var(--ivory); }
 .dark .foot .num { color: var(--ivory); }
 
 /* Title slide */
 .title h1 { font-size: 104px; line-height: 1.02; margin-top: 84px; max-width: 760px; }
-.title .subtitle { font-family: var(--serif); font-style: italic; font-size: 52px; color: var(--clay); margin: 18px 0 0; }
+.title .subtitle { font-family: var(--serif); font-style: italic; font-size: 40px; line-height: 1.15; color: var(--clay); margin: 18px 0 0; max-width: 700px; }
 .title .speaker { margin-top: 44px; font-size: 24px; line-height: 1.45; }
 .title .speaker strong { font-weight: 600; }
-.title .when { font-size: 18px; color: #cfcabf; margin-top: 8px; }
+.title .when { font-size: 20px; color: #cfcabf; margin-top: 8px; }
 .title .motif { position: absolute; right: 90px; top: 150px; }
 
 /* Two statements */
@@ -99,32 +100,60 @@ h2.xl { font-size: 64px; line-height: 1.1; max-width: 1040px; }
 .row .k { font-family: var(--serif); font-size: 31px; line-height: 1.15; }
 .row .v { font-size: 23px; line-height: 1.4; color: #3a3833; }
 .row .t { text-align: right; }
+.rows.wide .row { grid-template-columns: 340px 1fr; padding: 20px 0; }
+
+/* Intro slide */
+.intro-grid { display: grid; grid-template-columns: 1fr 300px; gap: 56px; align-items: center; margin-top: 30px; }
+.intro-list { list-style: none; margin: 26px 0 0; padding: 0; }
+.intro-list li { position: relative; padding-left: 26px; margin-bottom: 12px; font-size: 23px; line-height: 1.38; color: var(--body); }
+.intro-list li::before { content: ""; position: absolute; left: 0; top: 11px; width: 10px; height: 10px; border-radius: 2px; background: var(--clay); }
+.qr.light { width: 300px; height: 300px; border: 1px solid var(--line); }
+.qr-caption { margin-top: 12px; font-size: 20px; color: var(--muted); text-align: center; }
+
+/* Skill cards */
+.skills { display: grid; grid-template-columns: 1fr 1fr; gap: 20px 32px; margin-top: 34px; }
+.skill { border-top: 3px solid var(--clay); padding-top: 14px; }
+.skill b { display: block; font-family: var(--mono); font-size: 25px; color: #8a4a2c; margin-bottom: 7px; }
+.skill span { display: block; font-size: 21px; line-height: 1.38; color: var(--body); }
+
+/* Lint rules */
+.lint-rules { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 40px; margin-top: 34px; }
+.lint-rule { border-left: 3px solid var(--clay); padding: 4px 0 4px 20px; }
+.lint-rule b { display: block; font-size: 24px; margin-bottom: 6px; }
+.lint-rule span { display: block; font-size: 21px; line-height: 1.4; color: var(--muted); }
+
+/* Three links on the closing slide */
+.links3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 36px; }
+.link3 { text-align: center; }
+.link3 .qrbox { background: #fff; border-radius: 10px; padding: 10px; width: 210px; height: 210px; margin: 0 auto; }
+.link3 .lbl { display: block; margin-top: 14px; font-size: 23px; font-weight: 600; color: var(--ivory); }
+.link3 .sub { display: block; margin-top: 4px; font-family: var(--mono); font-size: 19px; line-height: 1.35; color: #a8a399; }
 
 /* RAPTOR */
 .raptor { display: grid; grid-template-columns: 600px 1fr; gap: 52px; align-items: center; margin-top: 40px; }
 .raptor p { font-size: 23px; line-height: 1.42; margin: 0; color: var(--body); }
 .stat { font-family: var(--serif); font-size: 76px; line-height: 1; color: var(--clay); margin: 26px 0 6px; }
-.stat-sub { font-size: 18px !important; color: var(--muted) !important; line-height: 1.4 !important; }
+.stat-sub { font-size: 20px !important; color: var(--muted) !important; line-height: 1.4 !important; }
 .callout { margin-top: 26px; border-left: 4px solid var(--clay); background: #fff; padding: 14px 18px; font-size: 20px; line-height: 1.4; color: var(--ink); }
 
 /* Diagrams */
 svg text { font-family: var(--sans); }
 .diagram { display: block; margin-top: 34px; }
-.box-text { font-size: 18px; fill: var(--ink); }
-.box-sub { font-size: 14px; fill: var(--muted); }
+.box-text { font-size: 21px; fill: var(--ink); }
+.box-sub { font-size: 19px; fill: var(--muted); }
 
 /* Fact sheet mock */
 .sheet { margin-top: 40px; background: #fff; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; max-width: 1088px; }
-.sheet .bar { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 16px; padding: 10px 18px; display: flex; justify-content: space-between; }
+.sheet .bar { background: var(--ink); color: var(--ivory); font-family: var(--mono); font-size: 19px; padding: 10px 18px; display: flex; justify-content: space-between; }
 .sheet .bar span.dim { color: #a8a399; }
 .sheet table { width: 100%; border-collapse: collapse; font-size: 21px; }
-.sheet th { text-align: left; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 18px 8px; border-bottom: 1px solid var(--line); }
+.sheet th { text-align: left; font-size: 19px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; padding: 14px 18px 8px; border-bottom: 1px solid var(--line); }
 .sheet td { padding: 14px 18px; border-bottom: 1px solid var(--line); }
 .sheet tr:last-child td { border-bottom: none; }
-.sheet td.file { font-family: var(--mono); font-size: 17px; color: #8a4a2c; }
+.sheet td.file { font-family: var(--mono); font-size: 21px; color: #8a4a2c; }
 .sheet td.win { font-weight: 600; }
 .sheet td.old { color: var(--muted); text-decoration: line-through; }
-.sheet .ph { font-family: var(--mono); font-size: 18px; color: #8a4a2c; background: var(--clay-soft); border-radius: 4px; padding: 1px 6px; }
+.sheet .ph { font-family: var(--mono); font-size: 21px; color: #8a4a2c; background: var(--clay-soft); border-radius: 4px; padding: 1px 6px; }
 
 /* Ingest */
 .ingest { display: grid; grid-template-columns: 690px 1fr; gap: 56px; align-items: center; margin-top: 34px; }
@@ -146,7 +175,7 @@ svg text { font-family: var(--sans); }
 /* Demo */
 .demo { border-top: 10px solid var(--clay); }
 .steps { display: flex; gap: 12px; margin: 0 0 30px; }
-.steps span { font-size: 15px; font-weight: 600; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 999px; padding: 6px 16px; }
+.steps span { font-size: 19px; font-weight: 600; border: 1px solid var(--line); background: #fff; color: var(--muted); border-radius: 999px; padding: 6px 16px; }
 .steps span.on { background: var(--clay); border-color: var(--clay); color: #fff; }
 .demo-body { display: grid; grid-template-columns: 170px 1fr; gap: 36px; align-items: start; }
 .demo-body .stepnum { font-family: var(--serif); font-size: 190px; line-height: 0.8; color: var(--clay); }
@@ -179,7 +208,7 @@ svg text { font-family: var(--sans); }
 .closing-grid { display: grid; grid-template-columns: 1fr 380px; gap: 64px; align-items: center; margin-top: 10px; min-height: 540px; }
 .closing h2 { font-size: 60px; }
 .closing .url { font-family: var(--mono); font-size: 25px; color: var(--ivory); margin-top: 30px; word-break: break-all; }
-.closing .opens { display: inline-block; margin-top: 16px; font-size: 16px; color: var(--ink); background: var(--clay); border-radius: 999px; padding: 5px 14px; font-weight: 600; }
+.closing .opens { display: inline-block; margin-top: 16px; font-size: 20px; color: var(--ink); background: var(--clay); border-radius: 999px; padding: 5px 14px; font-weight: 600; }
 .closing .qa { margin-top: 52px; font-family: var(--serif); font-size: 40px; }
 .closing .qa span { color: #a8a399; font-family: var(--sans); font-size: 20px; margin-left: 14px; }
 .closing .who { margin-top: 12px; font-size: 20px; color: #cfcabf; }
@@ -187,6 +216,7 @@ svg text { font-family: var(--sans); }
 .qr svg { display: block; width: 100%; height: 100%; }
 .qr img { display: block; width: 100%; height: 100%; }
 .credits-steps { margin-top: 26px; font-size: 23px; line-height: 1.55; padding-left: 22px; color: var(--ivory); }
+.mono { font-family: var(--mono); font-size: 0.92em; }
 .credits-steps .mono { font-family: var(--mono); font-size: 20px; }
 .credits-warn { font-size: 19px; margin-top: 18px; }
 
@@ -227,7 +257,7 @@ svg text { font-family: var(--sans); }
 <section class="slide dark title" data-minute="11:00">
   <p class="eyebrow">Claude Community House &middot; Barcelona</p>
   <h1>Second Brain for Claude</h1>
-  <p class="subtitle">LLM Wiki vs RAG</p>
+  <p class="subtitle">Why it forgets your company, and how to fix it in a folder</p>
   <div class="speaker"><strong>Florian Steiner</strong><br>Claude Community Ambassador Munich</div>
   <div class="when">Monday, 21 September 2026 &middot; 11:00 to 12:00 &middot; Auditorium</div>
   <svg class="motif" width="360" height="380" viewBox="0 0 360 380" aria-hidden="true">
@@ -247,376 +277,27 @@ svg text { font-family: var(--sans); }
       <circle cx="210" cy="344" r="6"/><circle cx="290" cy="344" r="6"/><circle cx="350" cy="344" r="6"/>
     </g>
   </svg>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 20</span></div>
+  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">1 / 23</span></div>
 </section>
+
+
 
 <!-- 2 -->
 <section class="slide" data-minute="11:01">
-  <p class="eyebrow">1 &middot; The map problem</p>
-  <h2 class="xl" style="margin-top:90px">My assistant searched for ten minutes and came back with nothing.</h2>
-  <p class="lede">Everything it needed sat in a folder it did not know existed.</p>
-  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">2 / 20</span></div>
-</section>
-
-<!-- 3 -->
-<section class="slide" data-minute="11:03">
-  <p class="eyebrow">1 &middot; The map problem</p>
-  <h2 class="xl" style="margin-top:40px">Not a memory problem.<br>A map problem.</h2>
-  <div class="split">
+  <p class="eyebrow">Who is talking</p>
+  <h2>Florian Steiner</h2>
+  <div class="intro-grid">
     <div>
-      <div class="n">Context is finite</div>
-      <h3>Every token spends attention.</h3>
-      <p>Loading everything is not an option.</p>
+      <p class="lede" style="margin-top:14px">Claude Community Ambassador in Munich. I build with Claude Code for small and mid-sized companies, and I teach it.</p>
+      <ul class="intro-list">
+        <li>Claude Certified Architect: Professional, plus Architect Foundations and Associate</li>
+        <li>Two more sessions this week: Claude Code for SME owners and CEOs, and the certification programme</li>
+        <li><b>Everything here is in one public repository:</b> these slides, the four skills, the example wiki, the demo script, and prepared results in case the demo breaks</li>
+      </ul>
+      <div class="url" style="color:var(--ink);font-size:22px;margin-top:20px">github.com/ProduktEntdecker/enterprise-memory-starter</div>
     </div>
     <div>
-      <div class="n">So give the agent a map</div>
-      <h3>Know where to look.</h3>
-      <p>Then load only what the question needs.</p>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">3 / 20</span></div>
-</section>
-
-<!-- 4 -->
-<section class="slide" data-minute="11:05">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>What RAG does well</h2>
-  <div class="cards">
-    <div class="card"><h3>Large corpora</h3><p>Scales far past what fits in any context window.</p></div>
-    <div class="card"><h3>Unknown questions</h3><p>Retrieves at question time, including the long tail.</p></div>
-    <div class="card"><h3>Fresh documents</h3><p>Add a file to the index. No retraining.</p></div>
-  </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024).</span><span class="num">4 / 20</span></div>
-</section>
-
-<!-- 5 -->
-<section class="slide" data-minute="11:08">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>Where RAG loses context</h2>
-  <div class="rows">
-    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;The company's revenue grew by 3%.&rdquo; Which company? Which quarter?</div><div class="t"><span class="tag src">Anthropic 2024</span></div></div>
-    <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div><div class="t"><span class="tag">Own observation</span></div></div>
-    <div class="row"><div class="k">Contradictions side by side</div><div class="v">Both versions reach the prompt. The model must pick one.</div><div class="t"><span class="tag src">Wang et al. 2025</span></div></div>
-  </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> row 2.</span><span class="num">5 / 20</span></div>
-</section>
-
-<!-- 6 -->
-<section class="slide" data-minute="11:11">
-  <p class="eyebrow">2 &middot; RAG, the good part</p>
-  <h2>Summaries on top of retrieval help</h2>
-  <div class="raptor">
-    <svg width="600" height="360" viewBox="0 0 600 360" role="img" aria-label="RAPTOR tree: chunks are embedded and clustered, clusters are summarised, summaries are summarised again">
-      <g stroke="#b9b4a9" stroke-width="2">
-        <line x1="152" y1="300" x2="235" y2="214"/><line x1="235" y1="300" x2="235" y2="214"/><line x1="318" y1="300" x2="235" y2="214"/>
-        <line x1="402" y1="300" x2="485" y2="214"/><line x1="485" y1="300" x2="485" y2="214"/><line x1="568" y1="300" x2="485" y2="214"/>
-        <line x1="235" y1="170" x2="360" y2="94"/><line x1="485" y1="170" x2="360" y2="94"/>
-      </g>
-      <g fill="#fff" stroke="#141413" stroke-width="1.5">
-        <rect x="120" y="300" width="64" height="40" rx="5"/><rect x="203" y="300" width="64" height="40" rx="5"/><rect x="286" y="300" width="64" height="40" rx="5"/>
-        <rect x="370" y="300" width="64" height="40" rx="5"/><rect x="453" y="300" width="64" height="40" rx="5"/><rect x="536" y="300" width="64" height="40" rx="5"/>
-      </g>
-      <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
-        <rect x="135" y="170" width="200" height="44" rx="6"/><rect x="385" y="170" width="200" height="44" rx="6"/>
-        <rect x="230" y="50" width="260" height="44" rx="6"/>
-      </g>
-      <text x="235" y="198" text-anchor="middle" class="box-text" style="font-size:16px">summary</text>
-      <text x="485" y="198" text-anchor="middle" class="box-text" style="font-size:16px">summary</text>
-      <text x="360" y="78" text-anchor="middle" class="box-text" style="font-size:16px">summary of summaries</text>
-      <text x="0" y="326" class="box-sub" style="font-size:15px;fill:#141413">chunks</text>
-      <text x="0" y="262" class="box-sub" style="fill:#b85c3e">embed +</text>
-      <text x="0" y="280" class="box-sub" style="fill:#b85c3e">cluster</text>
-      <text x="0" y="142" class="box-sub" style="fill:#b85c3e">summarise,</text>
-      <text x="0" y="160" class="box-sub" style="fill:#b85c3e">repeat</text>
-      <text x="0" y="30" class="box-sub">retrieval searches</text>
-      <text x="0" y="48" class="box-sub">all levels</text>
-    </svg>
-    <div>
-      <p>RAPTOR builds its tree with embeddings and clustering, then retrieves across summary levels.</p>
-      <div class="stat">+20%</div>
-      <p class="stat-sub">absolute accuracy on QuALITY with GPT-4, over the previous best result</p>
-      <div class="callout">Evidence that summaries on top of retrieval help. Not evidence that hierarchy beats vector search.</div>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Source:</b> Sarthi et al., RAPTOR: Recursive Abstractive Processing for Tree-Organized Retrieval (arXiv 2401.18059, 2024).</span><span class="num">6 / 20</span></div>
-</section>
-
-<!-- 7 -->
-<section class="slide" data-minute="11:15">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern</p>
-  <h2>Retrieve every time, or compile once</h2>
-  <svg class="diagram" width="1088" height="430" viewBox="0 0 1088 430" role="img" aria-label="Two pipelines. RAG: documents, chunk and embed, vector index, top-k chunks per question, answer. LLM wiki: sources, ingest, wiki pages and fact sheet, root map, answer; lint loop and answers filed back.">
-    <defs>
-      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b675f"/></marker>
-      <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
-    </defs>
-    <!-- lane labels -->
-    <text x="0" y="96" style="font-family:var(--serif);font-size:32px;fill:#141413">RAG</text>
-    <text x="0" y="122" class="box-sub">work at question time</text>
-    <text x="0" y="286" style="font-family:var(--serif);font-size:32px;fill:#141413">LLM wiki</text>
-    <text x="0" y="312" class="box-sub">work at ingest time</text>
-    <!-- lane 1 -->
-    <g fill="#fff" stroke="#141413" stroke-width="1.5">
-      <rect x="200" y="60" width="140" height="76" rx="8"/><rect x="378" y="60" width="140" height="76" rx="8"/>
-      <rect x="556" y="60" width="140" height="76" rx="8"/><rect x="734" y="60" width="140" height="76" rx="8"/>
-      <rect x="912" y="60" width="140" height="76" rx="8"/>
-    </g>
-    <text x="270" y="104" text-anchor="middle" class="box-text">Documents</text>
-    <text x="448" y="104" text-anchor="middle" class="box-text" style="font-size:16px">Chunk + embed</text>
-    <text x="626" y="104" text-anchor="middle" class="box-text">Vector index</text>
-    <text x="804" y="96" text-anchor="middle" class="box-text">Top-k chunks</text>
-    <text x="804" y="118" text-anchor="middle" class="box-sub">per question</text>
-    <text x="982" y="104" text-anchor="middle" class="box-text">Answer</text>
-    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
-      <line x1="344" y1="98" x2="374" y2="98"/><line x1="522" y1="98" x2="552" y2="98"/>
-      <line x1="700" y1="98" x2="730" y2="98"/><line x1="878" y1="98" x2="908" y2="98"/>
-    </g>
-    <!-- lane 2 -->
-    <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
-      <rect x="200" y="250" width="140" height="76" rx="8"/><rect x="378" y="250" width="140" height="76" rx="8"/>
-      <rect x="556" y="250" width="140" height="76" rx="8"/><rect x="734" y="250" width="140" height="76" rx="8"/>
-      <rect x="912" y="250" width="140" height="76" rx="8"/>
-    </g>
-    <text x="270" y="294" text-anchor="middle" class="box-text">Sources</text>
-    <text x="448" y="294" text-anchor="middle" class="box-text">Ingest</text>
-    <text x="626" y="284" text-anchor="middle" class="box-text">Wiki pages</text>
-    <text x="626" y="306" text-anchor="middle" class="box-text">+ fact sheet</text>
-    <text x="804" y="294" text-anchor="middle" class="box-text">Root map</text>
-    <text x="982" y="294" text-anchor="middle" class="box-text">Answer</text>
-    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
-      <line x1="344" y1="288" x2="374" y2="288"/><line x1="522" y1="288" x2="552" y2="288"/>
-      <line x1="700" y1="288" x2="730" y2="288"/><line x1="878" y1="288" x2="908" y2="288"/>
-    </g>
-    <!-- lint loop -->
-    <path d="M596 248 C 596 200, 656 200, 656 244" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
-    <text x="626" y="196" text-anchor="middle" style="font-size:17px;font-style:italic;fill:#b85c3e">lint</text>
-    <!-- filed back loop -->
-    <path d="M982 328 C 982 404, 626 404, 626 332" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
-    <text x="804" y="422" text-anchor="middle" style="font-size:17px;font-style:italic;fill:#b85c3e">good answers filed back</text>
-    <!-- quote -->
-    <text x="0" y="392" style="font-family:var(--serif);font-style:italic;font-size:21px;fill:#141413">&ldquo;A persistent, compounding artifact.&rdquo;</text>
-    <text x="0" y="416" class="box-sub">Karpathy, on the wiki</text>
-  </svg>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">7 / 20</span></div>
-</section>
-
-<!-- 8 -->
-<section class="slide" data-minute="11:18">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 1 of 4</p>
-  <h2>Root map: one small file, always loaded</h2>
-  <svg class="diagram" width="1088" height="320" viewBox="0 0 1088 320" role="img" aria-label="A root map file routes to four separate stores: two project wikis with fact sheets, meeting notes, and the customer system.">
-    <defs>
-      <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b675f"/></marker>
-    </defs>
-    <rect x="384" y="0" width="320" height="88" rx="10" fill="#141413"/>
-    <text x="544" y="38" text-anchor="middle" style="font-family:var(--mono);font-size:22px;fill:#FAF9F5">root-map.md</text>
-    <text x="544" y="66" text-anchor="middle" style="font-size:16px;fill:#cfcabf">pointers + one-line summaries</text>
-    <text x="364" y="50" text-anchor="end" style="font-size:17px;font-style:italic;fill:#b85c3e">loaded at session start</text>
-    <g stroke="#6b675f" stroke-width="2" fill="none">
-      <path d="M544 88 V144"/><path d="M118 144 H970"/>
-    </g>
-    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah2)">
-      <line x1="118" y1="144" x2="118" y2="196"/><line x1="402" y1="144" x2="402" y2="196"/>
-      <line x1="686" y1="144" x2="686" y2="196"/><line x1="970" y1="144" x2="970" y2="196"/>
-    </g>
-    <text x="1088" y="132" text-anchor="end" style="font-size:17px;font-style:italic;fill:#b85c3e">read on demand</text>
-    <g fill="#fff" stroke="#141413" stroke-width="1.5">
-      <rect x="0" y="200" width="236" height="116" rx="10"/><rect x="284" y="200" width="236" height="116" rx="10"/>
-      <rect x="568" y="200" width="236" height="116" rx="10"/><rect x="852" y="200" width="236" height="116" rx="10"/>
-    </g>
-    <text x="118" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Project wiki A</text>
-    <text x="402" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Project wiki B</text>
-    <text x="686" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Meeting notes</text>
-    <text x="970" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Customer system</text>
-    <g fill="#f1ded4" stroke="#D97757" stroke-width="1.2">
-      <rect x="54" y="262" width="128" height="34" rx="17"/><rect x="338" y="262" width="128" height="34" rx="17"/>
-    </g>
-    <text x="118" y="285" text-anchor="middle" style="font-size:15px;fill:#8a4a2c">fact sheet</text>
-    <text x="402" y="285" text-anchor="middle" style="font-size:15px;fill:#8a4a2c">fact sheet</text>
-    <text x="686" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">summaries by date</text>
-    <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:16px">status per account</text>
-  </svg>
-  <p class="lede" style="margin-top:26px">The agent reads the map first, then descends only where the question leads.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">8 / 20</span></div>
-</section>
-
-<!-- 9 -->
-<section class="slide" data-minute="11:21">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 2 of 4</p>
-  <h2>Canonical fact sheet: one home per fact</h2>
-  <div class="sheet">
-    <div class="bar"><span>FACTS.md</span><span class="dim">example</span></div>
-    <table>
-      <thead><tr><th>Fact</th><th>Value</th><th>Source</th><th>As of</th></tr></thead>
-      <tbody>
-        <tr><td>Support hours</td><td class="win">9:00 to 18:00</td><td class="file">ops-handbook.md</td><td>2026-05</td></tr>
-        <tr><td>Standard warranty</td><td class="win">3 years</td><td class="file">policy-2026.md</td><td>2026-03</td></tr>
-        <tr><td>Current price list</td><td class="win">v4</td><td class="file">pricing-v4.md</td><td>2026-08</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p class="lede" style="margin-top:28px">Other pages link here instead of copying. Every value carries its source.</p>
-  <div class="foot"><span class="src"><b>Own observation:</b> pattern from own per-project wikis. Example values are fictional.</span><span class="num">9 / 20</span></div>
-</section>
-
-<!-- 10 -->
-<section class="slide" data-minute="11:24">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 3 of 4</p>
-  <h2>Ingest: read once, update many pages</h2>
-  <div class="ingest">
-    <svg width="690" height="380" viewBox="0 0 690 380" role="img" aria-label="A new source fans out into a summary page, entity and concept pages, the fact sheet, and the index and log.">
-      <defs>
-        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
-      </defs>
-      <rect x="0" y="136" width="200" height="108" rx="10" fill="#fff" stroke="#141413" stroke-width="1.5"/>
-      <text x="100" y="184" text-anchor="middle" style="font-size:22px;fill:#141413">New source</text>
-      <text x="100" y="212" text-anchor="middle" class="box-sub" style="font-size:15px">inbox/, never edited</text>
-      <g fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ah3)">
-        <path d="M204 190 C 270 190, 270 38, 326 38"/>
-        <path d="M204 190 C 270 190, 270 142, 326 142"/>
-        <path d="M204 190 C 270 190, 270 246, 326 246"/>
-        <path d="M204 190 C 270 190, 270 346, 326 346"/>
-      </g>
-      <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
-        <rect x="330" y="6" width="360" height="64" rx="8"/><rect x="330" y="110" width="360" height="64" rx="8"/>
-        <rect x="330" y="214" width="360" height="64" rx="8"/><rect x="330" y="314" width="360" height="64" rx="8"/>
-      </g>
-      <text x="352" y="45" style="font-size:21px;fill:#141413">Summary page</text>
-      <text x="352" y="149" style="font-size:21px;fill:#141413">Entity and concept pages</text>
-      <text x="352" y="253" style="font-size:21px;fill:#141413">Fact sheet</text>
-      <text x="352" y="353" style="font-size:21px;fill:#141413">Index and log</text>
-    </svg>
-    <div>
-      <div class="big">10 to 15</div>
-      <p>wiki pages a single source might touch.</p>
-      <p class="aside-small">Karpathy's own research wiki: about 100 articles and 400K words, navigated through index files and summaries.</p>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">10 / 20</span></div>
-</section>
-
-<!-- 11 -->
-<section class="slide" data-minute="11:27">
-  <p class="eyebrow">3 &middot; The LLM wiki pattern &middot; move 4 of 4</p>
-  <h2>Lint: a health check for the wiki</h2>
-  <div class="lint">
-    <ul class="checks">
-      <li><span class="box"></span>Contradictions between pages</li>
-      <li><span class="box"></span>Stale claims a newer source superseded</li>
-      <li><span class="box"></span>Duplicates: one thing, two pages<span class="tag">Own addition</span></li>
-      <li><span class="box"></span>Orphans: pages nothing links to</li>
-    </ul>
-    <div class="aside"><span class="tag">Own observation</span><br>Skip lint, and a wrong fact gets filed back, then cited again.</div>
-  </div>
-  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">11 / 20</span></div>
-</section>
-
-<!-- 12 -->
-<section class="slide demo" data-minute="11:30">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
-  <div class="steps"><span class="on">1 Ingest</span><span>2 Lint</span><span>3 Fact sheet</span></div>
-  <div class="demo-body">
-    <div class="stepnum">1</div>
-    <div>
-      <h2>Ingest a new source</h2>
-      <p class="lede">A new document for <span class="company">Sotarena S.L.</span> lands in sources/inbox/. Watch which wiki pages change.</p>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">12 / 20</span></div>
-</section>
-
-<!-- 13 -->
-<section class="slide demo" data-minute="11:35">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
-  <div class="steps"><span>1 Ingest</span><span class="on">2 Lint</span><span>3 Fact sheet</span></div>
-  <div class="demo-body">
-    <div class="stepnum">2</div>
-    <div>
-      <h2>Lint finds a contradiction, a duplicate and a stale fact</h2>
-      <div class="finds">
-        <div><b>Contradiction</b><span>Two values for one fact</span></div>
-        <div><b>Duplicate</b><span>One entity, two pages</span></div>
-        <div><b>Stale fact</b><span>Superseded by a newer source</span></div>
-      </div>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">13 / 20</span></div>
-</section>
-
-<!-- 14 -->
-<section class="slide demo" data-minute="11:40">
-  <p class="eyebrow">4 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
-  <div class="steps"><span>1 Ingest</span><span>2 Lint</span><span class="on">3 Fact sheet</span></div>
-  <div class="demo-body">
-    <div class="stepnum">3</div>
-    <div>
-      <h2>The fact sheet shows the winning value, with its source</h2>
-      <div class="sheet" style="margin-top:30px">
-        <div class="bar"><span>sotarena / FACTS.md</span><span class="dim">after lint</span></div>
-        <table>
-          <thead><tr><th>Fact</th><th>Winning value</th><th>Source</th><th>Replaces</th></tr></thead>
-          <tbody>
-            <tr><td><span class="ph">[fact]</span></td><td class="win"><span class="ph">[value]</span></td><td class="file"><span class="ph">[file, date]</span></td><td class="old"><span class="ph">[old value]</span></td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">14 / 20</span></div>
-</section>
-
-<!-- 15 -->
-<section class="slide" data-minute="11:45">
-  <p class="eyebrow">5 &middot; When to use which</p>
-  <h2>Compile what matters. Retrieve the rest.</h2>
-  <div class="layers-wrap">
-    <div class="layers">
-      <div class="band b1"><span class="bn">Root map</span><span class="bd">always loaded</span></div>
-      <div class="band b2"><span class="bn">LLM wiki</span><span class="bd">curated, recurring, canonical</span></div>
-      <div class="band b3"><span class="bn">RAG over raw sources</span><span class="bd">large, unforeseen, fresh</span></div>
-    </div>
-    <div class="flows">
-      <div class="flow"><span class="arr">&uarr;</span><span>Promote recurring answers into the wiki</span></div>
-      <div class="flow"><span class="arr">&darr;</span><span>Fall back to retrieval when no page exists</span></div>
-    </div>
-  </div>
-  <p class="note"><b>Under about 200K tokens?</b> Load it all. No retrieval needed.</p>
-  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">15 / 20</span></div>
-</section>
-
-<!-- 16 -->
-<section class="slide dark closing" data-minute="11:47">
-  <p class="eyebrow">Before you go</p>
-  <div class="closing-grid">
-    <div>
-      <h2>$50 in API credits, first come, first served</h2>
-      <ol class="credits-steps">
-        <li>Scan the code and open the offer page</li>
-        <li>Copy your <b>Organization ID</b> from <span class="mono">console.anthropic.com</span></li>
-        <li>Submit it. Credits land within a few minutes</li>
-      </ol>
-      <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong ID is rejected, and it cannot be corrected afterwards.</p>
-      <span class="opens">API only &middot; not Claude.ai &middot; one claim per person &middot; 34 available</span>
-    </div>
-    <div class="qr" role="img" aria-label="QR code for the Claude API credit offer">
-      <img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer">
-    </div>
-  </div>
-  <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">16 / 20</span></div>
-</section>
-
-<!-- 17 -->
-<section class="slide dark closing" data-minute="11:48">
-  <p class="eyebrow">Take it home</p>
-  <div class="closing-grid">
-    <div>
-      <h2>The starter repo</h2>
-      <div class="url">github.com/ProduktEntdecker/<br>enterprise-memory-starter</div>
-      <span class="opens">Repository opens before the session</span>
-      <div class="qa">Questions?<span>11:50 to 12:00</span></div>
-      <div class="who">Florian Steiner &middot; Claude Community Ambassador Munich</div>
-    </div>
-    <div class="qr"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" version="1.1" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for https://github.com/ProduktEntdecker/enterprise-memory-starter">
+      <div class="qr light"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for the starter repository on GitHub">
 	<g id="QRcode">
 		<rect x="0" y="0" width="41" height="41" fill="#ffffff"/>
 		<g id="Pattern" transform="translate(4,4)">
@@ -1205,13 +886,1918 @@ svg text { font-family: var(--sans); }
 			<rect x="30" y="32" width="1" height="1" fill="#000000"/>
 		</g>
 	</g>
-</svg>
-</div>
+</svg></div>
+      <p class="qr-caption">Scan now, follow along</p>
+    </div>
   </div>
-  <div class="foot"><span class="src">An independent community resource, built for the Claude Community House Barcelona.</span><span class="num">17 / 20</span></div>
+  <div class="foot"><span class="src">No setup needed to follow this talk. The repository is public and open already.</span><span class="num">2 / 23</span></div>
 </section>
 
+
+
+<!-- 3 -->
+<section class="slide" data-minute="11:03">
+  <p class="eyebrow">1 &middot; The map problem</p>
+  <h2 class="xl" style="margin-top:90px">My own agent did not know my date of birth.</h2>
+  <p class="lede">It is one line in <span class="mono">identity.md</span>, in the folder I keep about myself. The agent had never been told that folder exists.</p>
+  <div class="foot"><span class="src"><b>Own observation</b></span><span class="num">3 / 23</span></div>
+</section>
+
+
+
+<!-- 4 -->
+<section class="slide" data-minute="11:05">
+  <p class="eyebrow">1 &middot; The map problem</p>
+  <h2 class="xl" style="margin-top:40px">Not a memory problem.<br>A map problem.</h2>
+  <div class="split">
+    <div>
+      <div class="n">Context is finite</div>
+      <h3>Every token spends attention.</h3>
+      <p>Loading everything is not an option.</p>
+    </div>
+    <div>
+      <div class="n">So give the agent a map</div>
+      <h3>Know where to look.</h3>
+      <p>Then load only what the question needs.</p>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Source:</b> Anthropic, Effective context engineering for AI agents (2025). <b>Own observation:</b> the map framing.</span><span class="num">4 / 23</span></div>
+</section>
+
+
+
+<!-- 5 -->
+<section class="slide" data-minute="11:08">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern</p>
+  <h2>Retrieve every time, or compile once</h2>
+  <svg class="diagram" width="1088" height="430" viewBox="0 0 1088 430" role="img" aria-label="Two pipelines. Retrieval: documents, chunk and embed, vector index, top-k chunks per question, answer. LLM wiki: sources, ingest, wiki pages and fact sheet, root map, answer; lint loop and answers filed back.">
+    <defs>
+      <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b675f"/></marker>
+      <marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
+    </defs>
+    <!-- lane labels -->
+    <text x="0" y="92" style="font-family:var(--serif);font-size:26px;fill:#141413">Retrieval (RAG)</text>
+    <text x="0" y="120" class="box-sub">work at question time</text>
+    <text x="0" y="146" class="box-sub">chunks, embeddings</text>
+    <text x="0" y="282" style="font-family:var(--serif);font-size:26px;fill:#141413">LLM wiki</text>
+    <text x="0" y="310" class="box-sub">work at ingest time</text>
+    <text x="0" y="336" class="box-sub">files you can read</text>
+    <!-- lane 1 -->
+    <g fill="#fff" stroke="#141413" stroke-width="1.5">
+      <rect x="200" y="60" width="140" height="76" rx="8"/><rect x="378" y="60" width="140" height="76" rx="8"/>
+      <rect x="556" y="60" width="140" height="76" rx="8"/><rect x="734" y="60" width="140" height="76" rx="8"/>
+      <rect x="912" y="60" width="140" height="76" rx="8"/>
+    </g>
+    <text x="270" y="104" text-anchor="middle" class="box-text">Documents</text>
+    <text x="448" y="104" text-anchor="middle" class="box-text" style="font-size:19px">Chunk + embed</text>
+    <text x="626" y="104" text-anchor="middle" class="box-text">Vector index</text>
+    <text x="804" y="91" text-anchor="middle" class="box-text">Top-k chunks</text>
+    <text x="804" y="117" text-anchor="middle" class="box-sub">per question</text>
+    <text x="982" y="104" text-anchor="middle" class="box-text">Answer</text>
+    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
+      <line x1="344" y1="98" x2="374" y2="98"/><line x1="522" y1="98" x2="552" y2="98"/>
+      <line x1="700" y1="98" x2="730" y2="98"/><line x1="878" y1="98" x2="908" y2="98"/>
+    </g>
+    <!-- lane 2 -->
+    <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
+      <rect x="200" y="250" width="140" height="76" rx="8"/><rect x="378" y="250" width="140" height="76" rx="8"/>
+      <rect x="556" y="250" width="140" height="76" rx="8"/><rect x="734" y="250" width="140" height="76" rx="8"/>
+      <rect x="912" y="250" width="140" height="76" rx="8"/>
+    </g>
+    <text x="270" y="294" text-anchor="middle" class="box-text">Sources</text>
+    <text x="448" y="294" text-anchor="middle" class="box-text">Ingest</text>
+    <text x="626" y="281" text-anchor="middle" class="box-text">Wiki pages</text>
+    <text x="626" y="307" text-anchor="middle" class="box-text">+ fact sheet</text>
+    <text x="804" y="294" text-anchor="middle" class="box-text">Root map</text>
+    <text x="982" y="294" text-anchor="middle" class="box-text">Answer</text>
+    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah)">
+      <line x1="344" y1="288" x2="374" y2="288"/><line x1="522" y1="288" x2="552" y2="288"/>
+      <line x1="700" y1="288" x2="730" y2="288"/><line x1="878" y1="288" x2="908" y2="288"/>
+    </g>
+    <!-- lint loop -->
+    <path d="M596 248 C 596 200, 656 200, 656 244" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
+    <text x="626" y="196" text-anchor="middle" style="font-size:19px;font-style:italic;fill:#b85c3e">lint</text>
+    <!-- filed back loop -->
+    <path d="M982 328 C 982 404, 626 404, 626 332" fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ahc)"/>
+    <text x="804" y="422" text-anchor="middle" style="font-size:19px;font-style:italic;fill:#b85c3e">good answers filed back</text>
+    <!-- quote -->
+    <text x="0" y="392" style="font-family:var(--serif);font-style:italic;font-size:21px;fill:#141413">&ldquo;A persistent, compounding artifact.&rdquo;</text>
+    <text x="0" y="418" class="box-sub">Karpathy, on the wiki</text>
+  </svg>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">5 / 23</span></div>
+</section>
+
+
+
+<!-- 6 -->
+<section class="slide" data-minute="11:11">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 1 of 4</p>
+  <h2>Root map: one small file, always loaded</h2>
+  <svg class="diagram" width="1088" height="320" viewBox="0 0 1088 320" role="img" aria-label="A root map file routes to four separate stores: two project wikis with fact sheets, meeting notes, and the customer system.">
+    <defs>
+      <marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6b675f"/></marker>
+    </defs>
+    <rect x="384" y="0" width="320" height="88" rx="10" fill="#141413"/>
+    <text x="544" y="38" text-anchor="middle" style="font-family:var(--mono);font-size:22px;fill:#FAF9F5">root-map.md</text>
+    <text x="544" y="66" text-anchor="middle" style="font-size:19px;fill:#cfcabf">pointers + one-line summaries</text>
+    <text x="364" y="50" text-anchor="end" style="font-size:19px;font-style:italic;fill:#b85c3e">loaded at session start</text>
+    <g stroke="#6b675f" stroke-width="2" fill="none">
+      <path d="M544 88 V144"/><path d="M118 144 H970"/>
+    </g>
+    <g stroke="#6b675f" stroke-width="2" marker-end="url(#ah2)">
+      <line x1="118" y1="144" x2="118" y2="196"/><line x1="402" y1="144" x2="402" y2="196"/>
+      <line x1="686" y1="144" x2="686" y2="196"/><line x1="970" y1="144" x2="970" y2="196"/>
+    </g>
+    <text x="1088" y="132" text-anchor="end" style="font-size:19px;font-style:italic;fill:#b85c3e">read on demand</text>
+    <g fill="#fff" stroke="#141413" stroke-width="1.5">
+      <rect x="0" y="200" width="236" height="116" rx="10"/><rect x="284" y="200" width="236" height="116" rx="10"/>
+      <rect x="568" y="200" width="236" height="116" rx="10"/><rect x="852" y="200" width="236" height="116" rx="10"/>
+    </g>
+    <text x="118" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Project wiki A</text>
+    <text x="402" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Project wiki B</text>
+    <text x="686" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Meeting notes</text>
+    <text x="970" y="240" text-anchor="middle" style="font-size:21px;fill:#141413">Customer system</text>
+    <g fill="#f1ded4" stroke="#D97757" stroke-width="1.2">
+      <rect x="54" y="262" width="128" height="34" rx="17"/><rect x="338" y="262" width="128" height="34" rx="17"/>
+    </g>
+    <text x="118" y="285" text-anchor="middle" style="font-size:19px;fill:#8a4a2c">fact sheet</text>
+    <text x="402" y="285" text-anchor="middle" style="font-size:19px;fill:#8a4a2c">fact sheet</text>
+    <text x="686" y="284" text-anchor="middle" class="box-sub" style="font-size:19px">summaries by date</text>
+    <text x="970" y="284" text-anchor="middle" class="box-sub" style="font-size:19px">status per account</text>
+  </svg>
+  <p class="lede" style="margin-top:26px">The agent reads the map first, then descends only where the question leads.</p>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Effective context engineering (2025); Claude Code docs, memory. <b>Own observation:</b> store layout, simplified.</span><span class="num">6 / 23</span></div>
+</section>
+
+
+
+<!-- 7 -->
+<section class="slide" data-minute="11:14">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 2 of 4</p>
+  <h2>Canonical fact sheet: one home per fact</h2>
+  <div class="sheet">
+    <div class="bar"><span>FACTS.md</span><span class="dim">this event, my own wiki</span></div>
+    <table>
+      <thead><tr><th>Fact</th><th>Value</th><th>Source</th><th>As of</th></tr></thead>
+      <tbody>
+        <tr><td>Venue</td><td class="win">Carrer de Bilbao 128</td><td class="file">luma + venue team</td><td>2026-09-13</td></tr>
+        <tr><td>Room 4 capacity</td><td class="win">25 seats</td><td class="file">backoffice, read myself</td><td>2026-09-19</td></tr>
+        <tr><td>Ticket cap</td><td class="win">room capacity + 20%</td><td class="file">house organisers</td><td>2026-09-13</td></tr>
+        <tr><td class="old">Venue</td><td class="old">Two Parc Central</td><td class="file">earlier planning chat</td><td class="old">2026-08-08</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="lede" style="margin-top:28px">Other pages link here instead of copying. This is why I can still tell you the right room number.</p>
+  <div class="foot"><span class="src"><b>Own wiki:</b> four rows from the fact sheet for this event, verbatim. The struck row is how a superseded value stays visible.</span><span class="num">7 / 23</span></div>
+</section>
+
+
+
+<!-- 8 -->
+<section class="slide" data-minute="11:17">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 3 of 4</p>
+  <h2>Ingest: read once, update many pages</h2>
+  <div class="ingest">
+    <svg width="690" height="380" viewBox="0 0 690 380" role="img" aria-label="A new source fans out into a summary page, entity and concept pages, the fact sheet, and the index and log.">
+      <defs>
+        <marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#D97757"/></marker>
+      </defs>
+      <rect x="0" y="136" width="200" height="108" rx="10" fill="#fff" stroke="#141413" stroke-width="1.5"/>
+      <text x="100" y="170" text-anchor="middle" style="font-size:22px;fill:#141413">New source</text>
+      <text x="100" y="196" text-anchor="middle" class="box-sub" style="font-size:19px">inbox/, never edited</text>
+      <text x="100" y="222" text-anchor="middle" style="font-size:19px;fill:#b85c3e">S06, a call note</text>
+      <g fill="none" stroke="#D97757" stroke-width="2" marker-end="url(#ah3)">
+        <path d="M204 190 C 270 190, 270 38, 326 38"/>
+        <path d="M204 190 C 270 190, 270 142, 326 142"/>
+        <path d="M204 190 C 270 190, 270 246, 326 246"/>
+        <path d="M204 190 C 270 190, 270 346, 326 346"/>
+      </g>
+      <g fill="#f1ded4" stroke="#D97757" stroke-width="1.5">
+        <rect x="330" y="6" width="360" height="64" rx="8"/><rect x="330" y="110" width="360" height="64" rx="8"/>
+        <rect x="330" y="214" width="360" height="64" rx="8"/><rect x="330" y="314" width="360" height="64" rx="8"/>
+      </g>
+      <text x="352" y="45" style="font-size:21px;fill:#141413">Summary page</text>
+      <text x="352" y="149" style="font-size:21px;fill:#141413">Entity and concept pages</text>
+      <text x="352" y="253" style="font-size:21px;fill:#141413">Fact sheet</text>
+      <text x="352" y="353" style="font-size:21px;fill:#141413">Index and log</text>
+    </svg>
+    <div>
+      <div class="big">10 to 15</div>
+      <p>wiki pages a single source might touch.</p>
+      <p class="aside-small">Karpathy's own research wiki: about 100 articles and 400K words, navigated through index files and summaries.</p>
+      <p class="aside-small" style="color:#b85c3e;margin-top:14px;padding-top:0;border-top:none">S06 is still sitting in the inbox. We run it live in a moment.</p>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Sources:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026); Karpathy, LLM Knowledge Bases (post on X, 2 April 2026).</span><span class="num">8 / 23</span></div>
+</section>
+
+
+
+<!-- 9 -->
+<section class="slide" data-minute="11:20">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; move 4 of 4</p>
+  <h2>Lint: a health check for the wiki</h2>
+  <div class="lint">
+    <ul class="checks">
+      <li><span class="box"></span>Contradictions between pages</li>
+      <li><span class="box"></span>Stale claims a newer source superseded</li>
+      <li><span class="box"></span>Duplicates: one thing, two pages<span class="tag">Own addition</span></li>
+      <li><span class="box"></span>Orphans: pages nothing links to</li>
+    </ul>
+    <div class="aside"><span class="tag">Own observation</span><br>Skip lint, and a wrong fact gets filed back, then cited again.</div>
+  </div>
+  <div class="foot"><span class="src"><b>Source:</b> Karpathy, llm-wiki.md (2026) for contradictions, stale claims, orphans. <b>Own observation:</b> duplicates, errors filed back.</span><span class="num">9 / 23</span></div>
+</section>
+
+
+
+<!-- 10 -->
+<section class="slide" data-minute="11:22">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; what we added</p>
+  <h2>Karpathy described it. We turned it into four commands.</h2>
+  <div class="skills">
+    <div class="skill"><b>/wiki-init</b><span>A folder of documents becomes a wiki. Ingests every source oldest first, builds the fact sheet from the claims it finds, registers the wiki in the root map. Runs once per project.</span></div>
+    <div class="skill"><b>/wiki-ingest</b><span>One source in, many pages out. Writes the summary, updates entities, proposes fact sheet changes and waits. The original is never edited, only moved.</span></div>
+    <div class="skill"><b>/wiki-lint</b><span>The health check. Finds contradictions, duplicates, stale facts, orphans. Writes a dated report and changes nothing until you name a finding.</span></div>
+    <div class="skill"><b>/wiki-query</b><span>Answers from the wiki, not from memory, and shows the path it took. Offers to file a good answer back as a new page.</span></div>
+  </div>
+  <p class="note">Four markdown files in <span class="mono">.claude/skills/</span>. Clone the repo, and they are in your slash menu. <b>No install, no service, no key.</b></p>
+  <div class="foot"><span class="src"><b>Own work:</b> the four skills. <b>Source of the pattern:</b> Karpathy, llm-wiki.md (GitHub gist, April 2026).</span><span class="num">10 / 23</span></div>
+</section>
+
+
+
+<!-- 11 -->
+<section class="slide" data-minute="11:25">
+  <p class="eyebrow">2 &middot; The LLM wiki pattern &middot; the lint up close</p>
+  <h2>The lint reports. It does not repair.</h2>
+  <div class="lint-rules">
+    <div class="lint-rule"><b>Never silently fix</b><span>The report comes first. A finding is resolved when a human names its number, and the resolution is logged.</span></div>
+    <div class="lint-rule"><b>Newest is not automatically right</b><span>A newer source wins only if it owns the fact or says explicitly that it replaces the old one. Never resolve a contradiction by date alone.</span></div>
+    <div class="lint-rule"><b>Report only what you verified</b><span>A script proposes candidates. Every one is checked by reading the pages before it reaches the report.</span></div>
+    <div class="lint-rule"><b>Every finding has an owner</b><span>The fact sheet names the role that decides. A finding without an owner is itself a finding.</span></div>
+  </div>
+  <p class="note">Two parts: <span class="mono">.claude/skills/wiki-lint/SKILL.md</span> is the procedure, <span class="mono">scripts/check_links.py</span> does the mechanical pass. Both in the repo.</p>
+  <div class="foot"><span class="src"><b>Own work:</b> the four rules, quoted from the skill. <b>Source of the check list:</b> Karpathy, llm-wiki.md (2026).</span><span class="num">11 / 23</span></div>
+</section>
+
+
+
+<!-- 12 -->
+<section class="slide demo" data-minute="11:28">
+  <p class="eyebrow">3 &middot; Live demo &middot; step 0, from nothing</p>
+  <div class="steps"><span class="on">0 Init</span><span>1 Ingest</span><span>2 Lint</span><span>3 Fact sheet</span></div>
+  <div class="demo-body">
+    <div class="stepnum">0</div>
+    <div>
+      <h2>A folder of documents becomes a wiki</h2>
+      <p class="lede">Three public documents about <b>this event</b>: the programme, the room list, the rules for hosts. No wiki yet. One command.</p>
+      <p class="note"><span class="mono">/wiki-init examples/claude-house</span> &nbsp; Expect nine to twelve pages and a fact sheet with about a dozen rows.</p>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Demo data:</b> three extracts from the public programme and the planning backoffice of this event.</span><span class="num">12 / 23</span></div>
+</section>
+
+
+
+<!-- 13 -->
+<section class="slide demo" data-minute="11:32">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+  <div class="steps"><span>0 Init</span><span class="on">1 Ingest</span><span>2 Lint</span><span>3 Fact sheet</span></div>
+  <div class="demo-body">
+    <div class="stepnum">1</div>
+    <div>
+      <h2>Ingest a new source</h2>
+      <p class="lede">A new document for <span class="company">Sotarena S.L.</span> lands in sources/inbox/. Watch which wiki pages change.</p>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">13 / 23</span></div>
+</section>
+
+
+
+<!-- 14 -->
+<section class="slide demo" data-minute="11:37">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+  <div class="steps"><span>0 Init</span><span>1 Ingest</span><span class="on">2 Lint</span><span>3 Fact sheet</span></div>
+  <div class="demo-body">
+    <div class="stepnum">2</div>
+    <div>
+      <h2>Lint finds a contradiction, a duplicate and a stale fact</h2>
+      <div class="finds">
+        <div><b>Contradiction</b><span>Two values for one fact</span></div>
+        <div><b>Duplicate</b><span>One entity, two pages</span></div>
+        <div><b>Stale fact</b><span>Superseded by a newer source</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">14 / 23</span></div>
+</section>
+
+
+
+<!-- 15 -->
+<section class="slide demo" data-minute="11:42">
+  <p class="eyebrow">3 &middot; Live demo &middot; <span class="company">Sotarena S.L.</span></p>
+  <div class="steps"><span>0 Init</span><span>1 Ingest</span><span>2 Lint</span><span class="on">3 Fact sheet</span></div>
+  <div class="demo-body">
+    <div class="stepnum">3</div>
+    <div>
+      <h2>The fact sheet shows the winning value, with its source</h2>
+      <div class="sheet" style="margin-top:30px">
+        <div class="bar"><span>sotarena / FACTS.md</span><span class="dim">after lint</span></div>
+        <table>
+          <thead><tr><th>Fact</th><th>Winning value</th><th>Source</th><th>Replaces</th></tr></thead>
+          <tbody>
+            <tr><td><span class="ph">[fact]</span></td><td class="win"><span class="ph">[value]</span></td><td class="file"><span class="ph">[file, date]</span></td><td class="old"><span class="ph">[old value]</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Demo data:</b> <span class="company">Sotarena S.L.</span> is a fictional example company. No real data.</span><span class="num">15 / 23</span></div>
+</section>
+
+
+
+<!-- 16 -->
+<section class="slide" data-minute="11:46">
+  <p class="eyebrow">4 &middot; When to use which</p>
+  <h2>Compile what matters. Retrieve the rest.</h2>
+  <div class="layers-wrap">
+    <div class="layers">
+      <div class="band b1"><span class="bn">Root map</span><span class="bd">always loaded</span></div>
+      <div class="band b2"><span class="bn">LLM wiki</span><span class="bd">curated, recurring, canonical</span></div>
+      <div class="band b3"><span class="bn">Retrieval over raw sources</span><span class="bd">large, unforeseen, fresh</span></div>
+    </div>
+    <div class="flows">
+      <div class="flow"><span class="arr">&uarr;</span><span>Promote recurring answers into the wiki</span></div>
+      <div class="flow"><span class="arr">&darr;</span><span>Fall back to retrieval when no page exists</span></div>
+    </div>
+  </div>
+  <p class="note"><b>Under about 200K tokens?</b> Load it all. No retrieval needed.</p>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Anthropic, Effective context engineering (2025). <b>Own observation:</b> the layering.</span><span class="num">16 / 23</span></div>
+</section>
+
+
+
 <!-- 17 -->
+<section class="slide dark closing" data-minute="11:49">
+  <p class="eyebrow">Before you go</p>
+  <div class="closing-grid">
+    <div>
+      <h2>$50 in API credits, first come, first served</h2>
+      <ol class="credits-steps">
+        <li>Scan the code and open the offer page</li>
+        <li>Copy your <b>Organization ID</b> from <span class="mono">platform.claude.com</span></li>
+        <li>Submit it. Credits land within a few minutes</li>
+      </ol>
+      <p class="note credits-warn"><b>Submit the Organization ID, not your Claude.ai account ID.</b> A wrong submission cannot be corrected afterwards.</p>
+      <span class="opens">API only &middot; not Claude.ai &middot; one claim per person &middot; 34 available</span>
+    </div>
+    <div class="qr" role="img" aria-label="QR code for the Claude API credit offer">
+      <img src="qr-credits.svg" onerror="this.onerror=null;this.src='qr-credits-placeholder.svg';this.alt='Placeholder: generate qr-credits.svg locally before the session'" alt="QR code for the Claude API credit offer">
+
+    </div>
+  </div>
+  <div class="foot"><span class="src"><b>Source:</b> Claude Community Team, 18 September 2026.</span><span class="num">17 / 23</span></div>
+</section>
+
+
+
+<!-- 18 -->
+<section class="slide dark closing" data-minute="11:51">
+  <p class="eyebrow">Take it with you</p>
+  <h2>Clone it, run the same four steps</h2>
+  <div class="links3">
+    <div class="link3">
+      <div class="qrbox"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 41 41" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for the starter repository on GitHub">
+	<g id="QRcode">
+		<rect x="0" y="0" width="41" height="41" fill="#ffffff"/>
+		<g id="Pattern" transform="translate(4,4)">
+			<rect x="0" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="31" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="29" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="29" y="30" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="32" y="31" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="32" width="1" height="1" fill="#000000"/>
+			<rect x="30" y="32" width="1" height="1" fill="#000000"/>
+		</g>
+	</g>
+</svg></div>
+      <span class="lbl">The starter repo</span>
+      <span class="sub">github.com/ProduktEntdecker/<br>enterprise-memory-starter</span>
+    </div>
+    <div class="link3">
+      <div class="qrbox"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 33 33" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for produktentdecker.com">
+	<g id="QRcode">
+		<rect x="0" y="0" width="33" height="33" fill="#ffffff"/>
+		<g id="Pattern" transform="translate(2,2)">
+			<rect x="0" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="28" width="1" height="1" fill="#000000"/>
+		</g>
+	</g>
+</svg></div>
+      <span class="lbl">What I do</span>
+      <span class="sub">produktentdecker.com<br>&nbsp;</span>
+    </div>
+    <div class="link3">
+      <div class="qrbox"><svg shape-rendering="crispEdges" width="100%" height="100%" viewBox="0 0 33 33" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="QR code for the speaker on LinkedIn">
+	<g id="QRcode">
+		<rect x="0" y="0" width="33" height="33" fill="#ffffff"/>
+		<g id="Pattern" transform="translate(2,2)">
+			<rect x="0" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="0" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="1" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="2" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="3" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="4" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="5" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="6" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="7" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="8" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="9" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="10" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="11" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="12" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="13" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="14" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="15" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="16" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="17" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="18" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="19" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="7" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="20" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="21" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="19" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="22" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="23" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="17" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="24" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="13" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="16" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="21" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="25" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="12" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="23" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="26" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="28" y="26" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="11" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="15" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="25" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="27" width="1" height="1" fill="#000000"/>
+			<rect x="0" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="1" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="2" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="3" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="4" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="5" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="6" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="8" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="9" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="10" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="14" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="18" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="20" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="22" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="24" y="28" width="1" height="1" fill="#000000"/>
+			<rect x="27" y="28" width="1" height="1" fill="#000000"/>
+		</g>
+	</g>
+</svg></div>
+      <span class="lbl">Say hello</span>
+      <span class="sub">linkedin.com/in/<br>floriansteiner</span>
+    </div>
+  </div>
+  <div class="qa" style="margin-top:34px">Questions?<span>11:52 to 12:00</span></div>
+  <div class="foot"><span class="src">Slides, the four skills, the example wiki, the demo script and the prepared fallback results are all in the repository.</span><span class="num">18 / 23</span></div>
+</section>
+
+
+
+<!-- 19 -->
+<section class="slide fallback" data-minute="backup">
+  <p class="eyebrow">Backup &middot; only if the question comes up</p>
+  <h2>Why not just retrieval?</h2>
+  <p class="lede">Strong where this pattern is weak: huge corpora, unknown questions, a file indexed in seconds. Three things it gets wrong:</p>
+  <div class="rows wide">
+    <div class="row"><div class="k">Chunk boundaries</div><div class="v">&ldquo;Revenue grew by 3%.&rdquo; Which company? Which quarter?</div></div>
+    <div class="row"><div class="k">No canonical fact</div><div class="v">Last year's price list ranks as high as this year's.</div></div>
+    <div class="row"><div class="k">Contradictions</div><div class="v">Both versions reach the prompt. The model picks one.</div></div>
+    <div class="row"><div class="k">And on my side</div><div class="v">No chunking to tune, files I can read, Obsidian as the UI, running in an afternoon.</div></div>
+  </div>
+  <div class="foot"><span class="src"><b>Sources:</b> Anthropic, Contextual Retrieval (2024); Lewis et al., RAG, NeurIPS 2020; Sarthi et al., RAPTOR (2024); Wang et al., RAG with Conflicting Evidence, COLM 2025. <b>Own observation:</b> the canonical-fact row.</span><span class="num">19 / 23</span></div>
+</section>
+
+<!-- 20 -->
+<section class="slide fallback" data-minute="fallback">
+  <p class="eyebrow">Fallback &middot; live demo step 0 of 3</p>
+  <h2>Fallback: A folder becomes a wiki</h2>
+  <div class="frame output"><pre>Wiki created: examples/claude-house/wiki
+Pages: 3 summaries, 4 entities
+FACTS.md: 12 rows, <b>2 marked "needs decision"</b>, 3 without an owner
+Supersessions recorded: 2 (both declared by the source itself)
+   Room 4 capacity     20 -> 25 seats   (backoffice, 19 Sep)
+   Workshops area     120 -> 96 seats   (backoffice, 19 Sep)
+<b>Needs decision:</b> how to round a ticket cap of 115.2 seats
+<b>Needs decision:</b> how many API credit redemptions the link accepts
+Then: lint, 3 findings. Nothing changed.</pre></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> the full result is a folder in the repo, <span class="mono">docs/fallback/claude-house-wiki/</span>.</span><span class="num">20 / 23</span></div>
+</section>
+
+
+
+<!-- 21 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 1 of 3</p>
   <h2>Fallback: Ingest a new source</h2>
@@ -1223,10 +2809,12 @@ svg text { font-family: var(--sans); }
    add       Talaverna Hotels revenue 2025: EUR 1.9 million
    <b>conflict  lead time: S06 says 4 weeks, FACTS.md row 1 says
              6 weeks (S04, owner Head of Operations). No change.</b></pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> the terminal summary of the S06 ingest, shortened.</span><span class="num">18 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> the terminal summary of the S06 ingest, shortened.</span><span class="num">21 / 23</span></div>
 </section>
 
-<!-- 18 -->
+
+
+<!-- 22 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 2 of 3</p>
   <h2>Fallback: Lint finds a contradiction, a duplicate and a stale fact</h2>
@@ -1238,10 +2826,12 @@ svg text { font-family: var(--sans); }
 <b>3. Stale fact (High):</b> Quality Manager Jaume Rius (S08),
    superseded by Irene Casado from 2026-06-01 (S09)
 Orphans 0, missing index entries 0, broken links 0.</pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> docs/fallback/lint-2026-09-21.md, shortened.</span><span class="num">19 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> docs/fallback/lint-2026-09-21.md, shortened.</span><span class="num">22 / 23</span></div>
 </section>
 
-<!-- 19 -->
+
+
+<!-- 23 -->
 <section class="slide fallback" data-minute="fallback">
   <p class="eyebrow">Fallback &middot; live demo step 3 of 3</p>
   <h2>Fallback: The fact sheet shows the winning value and its source</h2>
@@ -1252,9 +2842,8 @@ Orphans 0, missing index entries 0, broken links 0.</pre></div>
 
 History of superseded values
 | 9 | Quality Manager | Jaume Rius (S08), valid until 2026-05-31 |</pre></div>
-  <div class="foot"><span class="src"><b>Prepared output:</b> FACTS.md rows 1 and 9 after the resolution.</span><span class="num">20 / 20</span></div>
+  <div class="foot"><span class="src"><b>Prepared output:</b> FACTS.md rows 1 and 9 after the resolution.</span><span class="num">23 / 23</span></div>
 </section>
-
 </div>
 <script>
 (function () {

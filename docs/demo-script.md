@@ -1,6 +1,6 @@
 # Demo script: ingest, then lint
 
-Run sheet for the 15-minute live demo in "Second Brain for Claude: LLM Wiki vs RAG", Claude Community House Barcelona, Monday 21 September 2026, 11:00. Goal: the audience watches one document being ingested and a lint run that reports a contradiction, a duplicate and a stale fact, and understands why each one matters.
+Run sheet for the live demo in "Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder", Claude Community House Barcelona, Monday 21 September 2026, 11:00. Goal: the audience watches one document being ingested and a lint run that reports a contradiction, a duplicate and a stale fact, and understands why each one matters.
 
 ## 1. Design: what is pre-seeded, what happens live
 
@@ -39,34 +39,93 @@ Run sheet for the 15-minute live demo in "Second Brain for Claude: LLM Wiki vs R
 - [ ] Start `claude` in the folder once, trust it, and check that `/wiki-ingest`, `/wiki-lint` and `/wiki-query` appear in the slash menu. Quit and start again, so the demo session begins clean.
 - [ ] Use the model you rehearsed with. Large terminal font, window wide enough for tables.
 - [ ] Switch to accept-edits mode (Shift+Tab) before the ingest, so that page writes do not prompt. Only `python3 scripts/check_links.py` is pre-approved in `.claude/settings.json`; anything else still asks, so the ingest stops once for a permission prompt when it moves the source out of the inbox. Approve it and narrate it: raw sources move, they are never edited.
-- [ ] Open `docs/fallback/S06-talaverna-call-note.md` and `docs/fallback/lint-2026-09-21.md` in an editor tab, ready to switch.
+- [ ] **`examples/claude-house/wiki/` must not exist.** wiki-init refuses to overwrite an existing wiki, so a leftover from the rehearsal kills part A. Check with `ls examples/claude-house`.
+- [ ] Open `docs/fallback/S06-talaverna-call-note.md`, `docs/fallback/lint-2026-09-21.md` and the folder `docs/fallback/claude-house-wiki/` in editor tabs, ready to switch.
 - [ ] Rehearse once end to end and write the real durations into the run sheet.
 - [ ] Reset after the rehearsal:
 
 ```bash
 git restore -- projects sources wiki root-map.md
-git clean -fd -- projects sources wiki
+git clean -fd -- projects sources wiki examples
 git status
 ```
 
-`git status` must report a clean working tree.
+`git status` must report a clean working tree. The cleanup must include
+`examples`, otherwise the wiki created during the rehearsal stays behind and
+part A cannot run again.
 
-## 3. Run sheet (15 minutes)
+## 3. Run sheet (18 minutes, 11:28 to 11:46)
 
-| Time | Step | Type exactly | Say | Expected | Rehearsed |
+Two wikis in one demo. The small one is created from scratch, the large one has been
+running since August. Say that out loud when you switch, or the room will think the
+first wiki grew in four minutes.
+
+### Part A: init, from nothing (slide 12, from 11:28)
+
+| Clock | Step | Type exactly | Say | Expected | Rehearsed |
 |---|---|---|---|---|---|
-| 0:00 | Orientation | nothing, show the file tree | "A company wiki in plain markdown. A hook loads the root map at session start. FACTS.md holds one value per fact." | Tree with `root-map.md`, `projects/sotarena/wiki/`, `sources/inbox/` | |
-| 1:30 | Question | `What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.` | "Watch the path: map, index, facts. No search index, no chunks." | 6 weeks from order confirmation; FACTS.md row 1; S04, 2026-08-03; owner Head of Operations | |
-| 3:00 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
-| 6:30 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
-| 7:30 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
-| 11:00 | Walk the report | open the report file | F1: "Newest is not right, the owner decides." F2: "Only an entity check catches this; retrieval returns two separate chunks." F3: "An explicit succession note makes date-based supersession safe." | Report with three findings | |
-| 13:00 | Resolve one | `Resolve the stale Quality Manager finding only.` | "One approval, one change, and it is logged." | FACTS.md row 9 becomes Irene Casado (S09), the old value moves to the history table, log entry added | |
-| 14:00 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same three steps." | Link or QR code on the slide | |
+| 11:28 | Show the folder | `ls examples/claude-house/sources` | "Three public documents about this event. The programme, the room list, the rules for hosts. No wiki." | Three files, C01 to C03 | |
+| 11:29 | Init | `/wiki-init examples/claude-house` | "One command. It reads oldest first, so the history comes out in the right order." | See 4.0 | |
+| 11:30 | Confirm | `yes` | "It asks before it writes. Three sources, nine to twelve pages, and nothing on disk yet. The pause is the point: I approve the run, not each page." | Skeleton created, then the pages appear one by one | |
+| 11:31 | Read the result | open `FACTS.md` | "Two capacities changed and the source says so itself, so both land in the history table. And two rows it refuses to fill. The second one is the interesting one: 96 seats plus 20 percent is 115.2, and no source says how to round it. So it does not round." | 12 rows, 2 marked needs decision, 3 without an owner | |
 
-**Short on time:** skip the question at 1:30 and the resolve step at 13:00. Ingest and lint alone fit into 9 minutes.
+**The line to land in part A:** a wiki that admits what it does not know is worth more
+than one that guesses. Then switch.
+
+### Part B: a wiki that has run for a month (slides 13 to 15, from 11:32)
+
+| Clock | Slide | Step | Type exactly | Say | Expected | Rehearsed |
+|---|---|---|---|---|---|---|
+| 11:32 | 13 | Orientation | nothing, show the file tree | "Same structure, one month older. A hook loads the root map at session start." | Tree with `root-map.md`, `projects/sotarena/wiki/`, `sources/inbox/` | |
+| 11:33 | 13 | Question | `What is Sotarena's standard lead time for stock colours, and who owns that number? Cite the pages you used.` | "Watch the path: map, index, facts. No search index, no chunks." | 6 weeks from order confirmation; FACTS.md row 1; S04, 2026-08-03; owner Head of Operations | |
+| 11:34 | 13 | Ingest | `/wiki-ingest sources/inbox/S06-talaverna-call-note.md` | "A sales call note from last week, newer than the operations memo. What does the wiki do with it?" | See 4.1 | |
+| 11:36 | 13 | Approve | `Apply the two Talaverna rows only. Do not change the lead time.` | "Ingest proposes, I decide. The lead time stays until its owner decides." | FACTS.md rows 27 and 28 added, row 1 unchanged | |
+| 11:37 | 14 | Lint | `/wiki-lint` | "The health check. Lint reports; it never fixes silently." | See 4.2 | |
+| 11:39 | 14 | Walk the report | open the report file | F1: "Newest is not right, the owner decides." F2: "Only an entity check catches this; retrieval returns two separate chunks." F3: "An explicit succession note makes date-based supersession safe." | Report with three findings | |
+| 11:42 | 15 | Resolve one | `Resolve the stale Quality Manager finding only.` | "One approval, one change, and it is logged." | FACTS.md row 9 becomes Irene Casado (S09), the old value moves to the history table, log entry added | |
+| 11:44 | 15 | Fact sheet | open `FACTS.md` | "Resolved once, in one place. Every other page links here." | Winning value with source and date, old value in the history table | |
+| 11:45 | 15 | Close | nothing | "Everything you saw is in the repo. Clone it and run the same four steps." | Hand over to slide 16 at 11:46 | |
+
+**Why clock times and not offsets:** the slides carry `data-minute` and the speaker
+notes carry the same times. A second system of offsets meant the two drifted apart,
+which a review caught. One value per fact applies to this run sheet too.
+
+**Short on time, in this order:** drop the question at 11:33, then the resolve step at
+11:42, then part A entirely. Ingest and lint alone fit into eleven minutes.
+
+**A live demo is allowed to fail.** Say so lightly, switch to the fallback slide, keep
+the timing. Slide 20 covers part A, slides 21 to 23 cover part B, and the full init
+result is a folder you can open and browse: `docs/fallback/claude-house-wiki/`.
 
 ## 4. Expected output
+
+### 4.0 Init of examples/claude-house
+
+```
+Wiki for claude-house: 3 sources found, 2026-09-13 to 2026-09-19.
+Proposed structure: entities/, summaries/, meetings/, outputs/, _originals/
+Expected pages: about 9 to 12
+Start?
+```
+
+After confirmation:
+
+```
+Wiki created: examples/claude-house/wiki
+Pages: 3 summaries, 4 entities
+FACTS.md: 12 rows, 2 marked "needs decision", 3 without an owner
+Supersessions recorded: 2
+   Room 4 capacity      20 -> 25 seats
+   Workshops area      120 -> 96 seats
+Needs decision: how to round a derived ticket cap (96 plus 20 percent is 115.2)
+                how many API credit redemptions the link accepts
+Then: lint, 3 findings. Nothing changed.
+```
+
+The exact wording will differ. What must appear: the two supersessions, the two rows
+marked "needs decision", and the fact that nothing was invented to fill them.
+The rounding row is the one to point at: two of the three rooms divide evenly,
+so only the third one reveals that somebody would have had to decide.
 
 ### 4.1 Ingest of S06
 
@@ -126,7 +185,7 @@ First sentence, whatever it is: "Good. A linter is a reviewer, not an oracle. Le
 | Claude edits FACTS.md without asking | "Stop. Show me the diff." Then `git checkout -- projects/sotarena/wiki/FACTS.md` |
 | A run takes longer than 4 minutes | Switch to the prepared files in `docs/fallback/` and narrate |
 | The privacy hook shows a warning | Read it out: "That is the second hook. It warns, it does not block." |
-| Network or model outage | Walk through `docs/fallback/` and [the LLM wiki vs RAG page](../wiki/concepts/llm-wiki-vs-rag.md) |
+| Network or model outage | Walk through `docs/fallback/` and the concept pages: [canonical fact](../wiki/concepts/canonical-fact.md), [ingest](../wiki/concepts/ingest.md), [lint](../wiki/concepts/lint.md) |
 
 ## 7. After the demo
 
