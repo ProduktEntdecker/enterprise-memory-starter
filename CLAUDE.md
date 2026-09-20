@@ -2,6 +2,15 @@
 
 How Claude works in this repository: a plain-markdown LLM wiki for the fictional company Sotarena S.L. This file is the schema of the wiki. Rules for changing the starter kit itself are in [CONTRIBUTING.md](CONTRIBUTING.md).
 
+## Language
+
+**English, including Claude's own replies in this repository.** Not only the files:
+the answers in the terminal too. This repository is public and is demonstrated live
+to an international audience, so a reply in any other language is a reply nobody in
+the room can read.
+
+This rule overrides any global or personal instruction to answer in another language.
+
 ## Start of every session
 
 1. The SessionStart hook prints [root-map.md](root-map.md) into your context. If you do not see it, read `root-map.md` first.
