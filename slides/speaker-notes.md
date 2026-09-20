@@ -121,7 +121,8 @@ Sources for every claim below are listed in SOURCES.md. "Own observation" marks 
 - Anthropic describes Claude Code as exactly such a hybrid: CLAUDE.md up front, glob and grep just in time.
 
 
-## Slide 17: Take it with you (11:51)
+## Slide 17: Take it with you (11:50)
+
 - Three codes: the repo, what I do, and where to say hello.
 - The repo is the one that matters. The other two are for whoever wants to continue the conversation.
 - Before 11:00: check that the repository is public, as the slide claims.
