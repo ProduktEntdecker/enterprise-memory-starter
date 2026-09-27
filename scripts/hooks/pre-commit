@@ -4,7 +4,6 @@
 # Created by the init-repo skill.
 #
 # Install: cp scripts/hooks/pre-commit .git/hooks/pre-commit && chmod +x .git/hooks/pre-commit
-# Or run: bash scripts/install-hooks.sh
 # Regression test: bash scripts/hooks/test-pre-commit.sh
 #
 # How it scans (hardened first in the workshop repos, back here with #280):
