@@ -6,11 +6,14 @@ name: Claude
 # und Issues. Das ist die Voraussetzung der Review-Fallback-Kette
 # (flos-claude-skills/references/review-fallbacks.yaml, Stufe "claude"):
 # Ohne diese Datei auf dem DEFAULT-Branch ist die Claude-App auf Mentions
-# taub — issue_comment-Events laden den Workflow immer von main, die Datei
-# wirkt also erst NACH dem Merge.
+# taub: issue_comment-Events laden den Workflow immer vom Default-Branch,
+# die Datei wirkt also erst NACH dem Merge.
 #
-# Die claude-code-action prüft selbst, ob der mentionende Account
-# Schreibrechte im Repo hat — fremde Mentions starten keinen Lauf.
+# Das Repo ist öffentlich, jeder kann @claude kommentieren. Die Action prüft
+# die Schreibrechte des Accounts zwar selbst, aber erst NACH dem
+# Token-Austausch (OIDC, App-Token, OAuth-Token). Deshalb lässt das `if:`
+# unten nur Mentions von OWNER, MEMBER und COLLABORATOR durch; fremde
+# Mentions starten gar keinen Job.
 
 on:
   issue_comment:
@@ -20,15 +23,17 @@ on:
   pull_request_review:
     types: [submitted]
   issues:
-    types: [opened, assigned]
+    # Ohne assigned: Bei diesem Event wertet die Action nur ihren
+    # assignee_trigger aus, nicht @claude in Titel oder Body.
+    types: [opened]
 
 jobs:
   claude:
     if: >
-      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude')) ||
-      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude')) ||
-      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')))
+      (github.event_name == 'issue_comment' && contains(github.event.comment.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
+      (github.event_name == 'pull_request_review_comment' && contains(github.event.comment.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.comment.author_association)) ||
+      (github.event_name == 'pull_request_review' && contains(github.event.review.body, '@claude') && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.review.author_association)) ||
+      (github.event_name == 'issues' && (contains(github.event.issue.body, '@claude') || contains(github.event.issue.title, '@claude')) && contains(fromJSON('["OWNER","MEMBER","COLLABORATOR"]'), github.event.issue.author_association))
 
     runs-on: ubuntu-latest
     permissions:
@@ -56,7 +61,7 @@ jobs:
           #   git fetch origin --depth=20 <branch>
           # Gemessen an flos-claude-skills#157 (28.08.2026): Der einzige bis
           # dahin grüne Lauf war ein pull_request_review-Event, bei dem der
-          # Head schon ausgecheckt ist und kein Fetch nötig wird — der
+          # Head schon ausgecheckt ist und kein Fetch nötig wird. Der
           # Mention-Pfad der Fallback-Kette war also nie erprobt.
           #
           # Nachtrag zum Action-Bump in #232: Der Auth-Pfad dahinter hat sich
