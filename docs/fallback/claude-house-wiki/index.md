@@ -19,7 +19,7 @@ September 2026: programme, rooms, and the rules that apply to session hosts.
   (C02), rules for session hosts (C03).
 - **4 entities.** The house itself, plus the three rooms that appear in more than
   one source.
-- **FACTS.md: 12 rows**, 1 marked "needs decision", 3 without an owner.
+- **FACTS.md: 12 rows**, 2 marked "needs decision", 3 without an owner.
 - **1 lint report.** First run on the day the wiki was created.
 
 ## Links down
@@ -49,6 +49,6 @@ September 2026: programme, rooms, and the rules that apply to session hosts.
 | C02 | Rooms and capacity | 2026-09-19 | 2026-09-20 |
 | C03 | Rules for session hosts | 2026-09-13 | 2026-09-20 |
 
-## Stores
+## Raw stores
 
 Raw sources after ingest: [`_originals/`](_originals/). Nothing in there is ever edited.
