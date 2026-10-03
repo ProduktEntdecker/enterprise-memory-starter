@@ -1,19 +1,28 @@
 name: Claude
 
-# @claude-Mention-Responder (Review-Fallback-Stufe "claude")
+# @claude mention responder (review fallback stage "claude")
 # ----------------------------------------------------------
-# Reagiert auf @claude-Mentions in PR-/Issue-Kommentaren, Review-Kommentaren
-# und Issues. Das ist die Voraussetzung der Review-Fallback-Kette
-# (flos-claude-skills/references/review-fallbacks.yaml, Stufe "claude"):
-# Ohne diese Datei auf dem DEFAULT-Branch ist die Claude-App auf Mentions
-# taub: issue_comment-Events laden den Workflow immer vom Default-Branch,
-# die Datei wirkt also erst NACH dem Merge.
+# Responds to @claude mentions in PR and issue comments, review comments and
+# issues. It is the prerequisite for the review fallback chain
+# (flos-claude-skills/references/review-fallbacks.yaml, stage "claude"):
+# Without this file on the DEFAULT branch the Claude app ignores mentions,
+# because issue_comment events always load the workflow from the default
+# branch. The file only takes effect AFTER it is merged.
 #
-# Das Repo ist öffentlich, jeder kann @claude kommentieren. Die Action prüft
-# die Schreibrechte des Accounts zwar selbst, aber erst NACH dem
-# Token-Austausch (OIDC, App-Token, OAuth-Token). Deshalb lässt das `if:`
-# unten nur Mentions von OWNER, MEMBER und COLLABORATOR durch; fremde
-# Mentions starten gar keinen Job.
+# The action checks the mentioning account's write permission itself, but
+# only AFTER the token exchange (OIDC, write-scoped app token,
+# CLAUDE_CODE_OAUTH_TOKEN). That is why the `if:` below only lets mentions
+# from OWNER, MEMBER and COLLABORATOR through; everyone else does not start
+# a job at all. This matters most in public repositories, where anyone can
+# comment @claude. The action's own check still applies behind it, because
+# in organisation repositories a COLLABORATOR does not necessarily have
+# write access.
+#
+# Deliberately without allowed_bots: in the fallback chain the @claude
+# mention comes from the repository owner's account (session or PAT), not
+# from a bot. An allowed bot such as coderabbitai would carry third-party
+# text into a Claude run, which in a public repository is a prompt
+# injection chain.
 
 on:
   issue_comment:
@@ -23,8 +32,8 @@ on:
   pull_request_review:
     types: [submitted]
   issues:
-    # Ohne assigned: Bei diesem Event wertet die Action nur ihren
-    # assignee_trigger aus, nicht @claude in Titel oder Body.
+    # Without assigned: for that event the action only evaluates its
+    # assignee_trigger, not @claude in the title or body.
     types: [opened]
 
 jobs:
@@ -38,58 +47,61 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      # write (nicht read): sonst läuft der Job grün durch, kann aber keine
-      # Review-/Inline-Kommentare auf den PR schreiben (stiller No-op).
+      # write (not read): otherwise the job finishes green but cannot post
+      # review or inline comments on the PR (a silent no-op).
       pull-requests: write
       issues: write
       id-token: write
-      actions: read # Claude darf CI-Ergebnisse des PR lesen.
+      actions: read # Claude may read the PR's CI results.
 
     steps:
-      # Actions auf Commit-SHA gepinnt (Supply-Chain-Härtung).
+      # Actions pinned to commit SHAs (supply-chain hardening).
       - name: Checkout repository
         uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
         with:
           fetch-depth: 1
-          # persist-credentials MUSS true bleiben (Default). Die Annahme, die
-          # Action bringe ihre eigene Auth mit, gilt für issue_comment-Events
-          # NICHT: Dort checkt der Workflow den Default-Branch aus, und die
-          # Action holt den PR-Head selbst per `git fetch origin --depth=20
-          # <branch>` nach. Ohne Credentials in .git/config scheitert das in
-          # einem PRIVATEN Repo, und der Lauf endet mit
+          # persist-credentials MUST stay true (the default). The assumption
+          # that the action brings its own auth does NOT hold for
+          # issue_comment events: there the workflow checks out the default
+          # branch, and the action fetches the PR head itself with
+          # `git fetch origin --depth=20 <branch>`. Without credentials in
+          # .git/config that fails in a PRIVATE repository, and the run ends
+          # with
           #   Action failed with error: Command failed:
           #   git fetch origin --depth=20 <branch>
-          # Gemessen an flos-claude-skills#157 (28.08.2026): Der einzige bis
-          # dahin grüne Lauf war ein pull_request_review-Event, bei dem der
-          # Head schon ausgecheckt ist und kein Fetch nötig wird. Der
-          # Mention-Pfad der Fallback-Kette war also nie erprobt.
+          # Measured in flos-claude-skills#157 (2026-08-28): the only green
+          # run up to then was a pull_request_review event, where the head is
+          # already checked out and no fetch is needed. The mention path of
+          # the fallback chain had never been exercised.
           #
-          # Nachtrag zum Action-Bump in #232: Der Auth-Pfad dahinter hat sich
-          # geändert. Seit actions/checkout v4.3.1 (Backport aus v6.0.0) steht
-          # der Auth-Header nicht mehr in .git/config, sondern in einer Datei
-          # unter RUNNER_TEMP, eingebunden per include.path. Das
-          # `git config --unset-all ...extraheader` der Action lief dadurch ins
-          # Leere, die Checkout-Credential blieb liegen, und der Fetch nutzte
-          # sie. claude-code-action#1526 entfernt sie jetzt wirklich und ersetzt
-          # sie durch die eigene Credential der Action.
+          # Note on the action bump in flos-claude-skills#232: the auth path
+          # behind it has changed. Since actions/checkout v4.3.1 (backported
+          # from v6.0.0) the auth header no longer lives in .git/config but in
+          # a file under RUNNER_TEMP, included via include.path. The action's
+          # `git config --unset-all ...extraheader` therefore did nothing, the
+          # checkout credential stayed in place, and the fetch used it.
+          # claude-code-action#1526 now really removes it and replaces it with
+          # the action's own credential.
           #
-          # Das ändert aber NICHTS an der Notwendigkeit dieser Zeile, im
-          # Gegenteil, der Quelltext am gepinnten Stand belegt sie (#238).
-          # Entscheidend ist die Reihenfolge im Tag-Mode, also im Mention-Pfad:
+          # That changes NOTHING about the need for this line; on the
+          # contrary, the source at the pinned revision confirms it
+          # (flos-claude-skills#238). What matters is the order in tag mode,
+          # i.e. on the mention path:
           #   src/modes/tag/index.ts:67     setupBranch(...)
           #   src/modes/tag/index.ts:84/97  configureGitAuth(...)
-          # setupBranch läuft VOR configureGitAuth, und setupBranch ist der
-          # Fetch aus dem Absatz oben:
+          # setupBranch runs BEFORE configureGitAuth, and setupBranch is the
+          # fetch from the paragraph above:
           #   src/github/operations/branch.ts:185  Math.max(commitCount, 20)
           #   src/github/operations/branch.ts:214  execGit(["fetch","origin",...])
-          # Davor steht nur fetchGitHubData (Zeile 53), das per Octokit gegen
-          # die API geht, nicht per git. Zum Fetch-Zeitpunkt hat git also nur
-          # die von actions/checkout persistierte Credential; die eigene der
-          # Action (Credential-Helper bzw. Token in remote.origin.url, siehe
-          # src/github/operations/git-config.ts) kommt erst danach.
-          # Mit persist-credentials: false hätte git hier im privaten Repo gar
-          # keine Credential, und der Lauf scheiterte wie in #157.
-          # Beim nächsten Action-Bump prüfen, ob diese Reihenfolge noch gilt.
+          # Before it there is only fetchGitHubData (line 53), which calls the
+          # API via Octokit, not git. At fetch time git therefore only has the
+          # credential persisted by actions/checkout; the action's own
+          # (credential helper or token in remote.origin.url, see
+          # src/github/operations/git-config.ts) comes later.
+          # With persist-credentials: false git would have no credential at
+          # all in a private repository, and the run would fail as in
+          # flos-claude-skills#157.
+          # On the next action bump, check whether this order still holds.
           persist-credentials: true
 
       - name: Run Claude Code
@@ -97,7 +109,7 @@ jobs:
         uses: anthropics/claude-code-action@d75b94d5ad426cb8546e6628b6f5f19b84e5cce1 # v1 (Claude Code 2.1.261)
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # Workflow-Permissions allein reichen nicht: Auch der App-Token der
-          # Action braucht actions: read, damit Claude CI-Ergebnisse lesen kann.
+          # Workflow permissions alone are not enough: the action's app token
+          # also needs actions: read so Claude can read CI results.
           additional_permissions: |
             actions: read
