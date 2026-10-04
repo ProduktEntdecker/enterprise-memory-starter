@@ -275,12 +275,19 @@ expect_silent "Malformed hook input exits 0 without output" \
 corpus_trees=(wiki projects docs/fallback root-map.md)
 false_positives=""
 empty_trees=""
+failed_finds=""
 missing_trees=""
 checked=0
 for tree in "${corpus_trees[@]}"; do
   if [ ! -e "$root/$tree" ]; then
     missing_trees="$missing_trees $tree"
     continue
+  fi
+  # The page list goes to a file first, so find's exit status survives. Inside a
+  # heredoc expansion it was lost: find can print the pages it reached and still
+  # fail on an unreadable subtree, and those pages would pass unnoticed.
+  if ! find "$root/$tree" -name '*.md' -type f >"$tmp_dir/pages.txt"; then
+    failed_finds="$failed_finds $tree"
   fi
   tree_pages=0
   while IFS= read -r page; do
@@ -306,9 +313,7 @@ print(json.dumps({"hook_event_name": "PreToolUse", "cwd": sys.argv[2], "tool_nam
     if [ -n "$out" ] || [ "$code" -ne 0 ]; then
       false_positives="$false_positives ${page#"$root"/}"
     fi
-  done <<EOF
-$(find "$root/$tree" -name '*.md' -type f | sort)
-EOF
+  done < <(sort "$tmp_dir/pages.txt")
   if [ "$tree_pages" -eq 0 ]; then
     empty_trees="$empty_trees $tree"
   fi
@@ -316,11 +321,11 @@ done
 if [ -n "$missing_trees" ]; then
   printf 'note: corpus trees absent in this checkout, skipped:%s\n' "$missing_trees"
 fi
-if [ -z "$false_positives" ] && [ -z "$empty_trees" ] && [ "$checked" -gt 0 ]; then
+if [ -z "$false_positives" ] && [ -z "$empty_trees" ] && [ -z "$failed_finds" ] && [ "$checked" -gt 0 ]; then
   ok "No false positives on $checked existing wiki pages and prepared outputs"
 else
   not_ok "No false positives on existing wiki pages" \
-    "warnings for:$false_positives; present but no pages:$empty_trees (checked $checked)"
+    "warnings for:$false_positives; present but no pages:$empty_trees; search failed:$failed_finds (checked $checked)"
 fi
 
 echo
