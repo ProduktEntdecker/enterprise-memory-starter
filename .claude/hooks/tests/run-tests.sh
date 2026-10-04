@@ -263,17 +263,42 @@ expect_silent "Malformed hook input exits 0 without output" \
   warn-private-data.sh malformed-input.txt
 
 # 5. No false positives on the real wiki pages and the prepared outputs
+#
+# The corpus is walked tree by tree instead of in one find call over a fixed path
+# list, because that call hid a shrinking corpus (#28). find exits 1 and prints to
+# stderr for a path that no longer exists, while the assertion below only looked at
+# the total count: with the remaining trees still returning pages the case reported
+# a pass and the suite kept exiting 0, so a whole tree could drop out unnoticed.
+# The page total does not catch it either, since a growing tree masks a vanished one.
+# Now a tree that is absent is named and skipped, and a tree that is present has to
+# contribute at least one page.
+corpus_trees=(wiki projects docs/fallback root-map.md)
 false_positives=""
+empty_trees=""
+failed_finds=""
+missing_trees=""
 checked=0
-while IFS= read -r page; do
-  [ -n "$page" ] || continue
-  target="$root/projects/sotarena/wiki/summaries/fp-check.md"
-  if [ "$json_tool" = "jq" ]; then
-    jq -n --arg path "$target" --arg cwd "$root" --rawfile body "$page" \
-      '{hook_event_name: "PreToolUse", cwd: $cwd, tool_name: "Write", tool_input: {file_path: $path, content: $body}}' \
-      >"$tmp_dir/fp.txt"
-  else
-    python3 -c '
+for tree in "${corpus_trees[@]}"; do
+  if [ ! -e "$root/$tree" ]; then
+    missing_trees="$missing_trees $tree"
+    continue
+  fi
+  # The page list goes to a file first, so find's exit status survives. Inside a
+  # heredoc expansion it was lost: find can print the pages it reached and still
+  # fail on an unreadable subtree, and those pages would pass unnoticed.
+  if ! find "$root/$tree" -name '*.md' -type f >"$tmp_dir/pages.txt"; then
+    failed_finds="$failed_finds $tree"
+  fi
+  tree_pages=0
+  while IFS= read -r page; do
+    [ -n "$page" ] || continue
+    target="$root/projects/sotarena/wiki/summaries/fp-check.md"
+    if [ "$json_tool" = "jq" ]; then
+      jq -n --arg path "$target" --arg cwd "$root" --rawfile body "$page" \
+        '{hook_event_name: "PreToolUse", cwd: $cwd, tool_name: "Write", tool_input: {file_path: $path, content: $body}}' \
+        >"$tmp_dir/fp.txt"
+    else
+      python3 -c '
 import json
 import sys
 
@@ -281,19 +306,26 @@ body = open(sys.argv[3], encoding="utf-8").read()
 print(json.dumps({"hook_event_name": "PreToolUse", "cwd": sys.argv[2], "tool_name": "Write",
                   "tool_input": {"file_path": sys.argv[1], "content": body}}))
 ' "$target" "$root" "$page" >"$tmp_dir/fp.txt"
+    fi
+    run_hook warn-private-data.sh "$tmp_dir/fp.txt" "$root" ""
+    checked=$((checked + 1))
+    tree_pages=$((tree_pages + 1))
+    if [ -n "$out" ] || [ "$code" -ne 0 ]; then
+      false_positives="$false_positives ${page#"$root"/}"
+    fi
+  done < <(sort "$tmp_dir/pages.txt")
+  if [ "$tree_pages" -eq 0 ]; then
+    empty_trees="$empty_trees $tree"
   fi
-  run_hook warn-private-data.sh "$tmp_dir/fp.txt" "$root" ""
-  checked=$((checked + 1))
-  if [ -n "$out" ] || [ "$code" -ne 0 ]; then
-    false_positives="$false_positives ${page#"$root"/}"
-  fi
-done <<EOF
-$(find "$root/wiki" "$root/projects" "$root/docs/fallback" "$root/root-map.md" -name '*.md' -type f | sort)
-EOF
-if [ -z "$false_positives" ] && [ "$checked" -gt 0 ]; then
+done
+if [ -n "$missing_trees" ]; then
+  printf 'note: corpus trees absent in this checkout, skipped:%s\n' "$missing_trees"
+fi
+if [ -z "$false_positives" ] && [ -z "$empty_trees" ] && [ -z "$failed_finds" ] && [ "$checked" -gt 0 ]; then
   ok "No false positives on $checked existing wiki pages and prepared outputs"
 else
-  not_ok "No false positives on existing wiki pages" "warnings for:$false_positives (checked $checked)"
+  not_ok "No false positives on existing wiki pages" \
+    "warnings for:$false_positives; present but no pages:$empty_trees; search failed:$failed_finds (checked $checked)"
 fi
 
 echo
