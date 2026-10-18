@@ -280,7 +280,17 @@ missing_trees=""
 checked=0
 for tree in "${corpus_trees[@]}"; do
   if [ ! -e "$root/$tree" ]; then
-    missing_trees="$missing_trees $tree"
+    # "not there" and "cannot look" are two different answers, and [ -e ] returns
+    # false for both: stat needs search permission on every parent directory. An
+    # unreadable parent counted as absent, so the tree was skipped with a note and
+    # the run still passed. Measured with docs/ at mode 000: docs/fallback came out
+    # as absent, 16 of 53 pages went unchecked, 23 passed, exit 0.
+    tree_parent=$(dirname "$root/$tree")
+    if [ -d "$tree_parent" ] && [ ! -x "$tree_parent" ]; then
+      failed_finds="$failed_finds $tree"
+    else
+      missing_trees="$missing_trees $tree"
+    fi
     continue
   fi
   # The page list goes to a file first, so find's exit status survives. Inside a
