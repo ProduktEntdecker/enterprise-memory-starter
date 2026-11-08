@@ -1,34 +1,32 @@
 ---
 title: "Workshops area"
 type: entity
-status: living
+kind: place
+status: draft
 aliases: ["cafeteria"]
+sources: [C01, C02]
 created: 2026-09-20
 updated: 2026-09-20
 ---
 
 # Workshops area
 
-> Up: [wiki index](../index.md)
+> Up: [Claude House wiki index](../index.md)
 
-The ground-floor space at the [Claude Community House Barcelona](claude-community-house.md),
-also called the cafeteria. Used for drop-in sessions.
+The ground floor cafeteria, used for workshops and open drop-in sessions.
 
 ## Facts
 
-- **Capacity: 96 seats** (C02, 2026-09-19). Reduced from 120; see the history table
-  in [FACTS.md](../FACTS.md).
-- Ticket cap for a session here: **not settled.** 96 plus 20 percent is 115.2
-  ([FACTS.md](../FACTS.md) row 8). The sources give no rounding rule, so 115 and 116
-  are both defensible. Listed under "Needs decision" in [FACTS.md](../FACTS.md)
-  until an organiser says which one applies.
+- Capacity: 96 seats, ground floor, also used for drop-in sessions (C02, 2026-09-19).
+- Capacity fell from 120 to 96 against the superseded list of 2026-08-22 (C02, 2026-09-19).
+- Monday 21 September, 10:00 to 12:00: Claude Clinic, open drop-in (C01, 2026-09-13).
+- Monday 21 September, 16:00 to 18:00: Claude Conversation (C01, 2026-09-13).
 
-## Sessions held here
+## Related facts
 
-- Monday 21 September, 10:00 to 12:00: Claude Clinic, open drop-in (C01)
-- Monday 21 September, 16:00 to 18:00: Claude Conversation (C01)
+- [FACTS.md](../FACTS.md) row 9 (capacity), history row 9 (old value 120), row 15 (maximum tickets).
 
 ## Sources
 
-- [C01 Public programme, extract](../summaries/C01-programme-extract.md)
+- [C01 Programme extract](../summaries/C01-programme-extract.md)
 - [C02 Rooms and capacity](../summaries/C02-rooms-and-capacity.md)

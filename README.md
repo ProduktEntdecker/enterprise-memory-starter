@@ -51,23 +51,36 @@ Expect a report in `projects/sotarena/wiki/outputs/lint-<date>.md` with three fi
 The four skills also cover the cold start. `examples/claude-house/sources/` holds three
 public documents about the event this repository was built for, and no wiki:
 
-```
+```text
 /wiki-init examples/claude-house
 ```
 
-It ingests the sources oldest first, builds `FACTS.md` from the claims it finds, records
-the two capacity changes the sources declare themselves, and marks one row "needs
-decision" because a source says a number exists without naming it. Then it lints.
+It ingests the sources oldest first, builds `FACTS.md` from the claims it finds, moves
+the seat counts that a newer source declares outdated into a history table, and flags
+what the sources leave open or contradict. Then it lints.
 
-The finished result is committed at `docs/fallback/claude-house-wiki/`, so you can compare
-your run against it, or browse it without running anything.
+One finished run is committed at `docs/fallback/claude-house-wiki/`, so you can compare
+your run against it, or browse it without running anything. It is one possible result,
+not the answer key. Two runs on the same three sources differ in the number of fact rows,
+in row numbers and wording, and sometimes in judgement. The committed run marks the
+rooftop hours "needs decision", because the programme and the room list name two
+different windows. Another run read the same two lines as house use until 18:00 and a
+separate programme after it, and found no contradiction. Compare what holds in every
+good run instead: each value cites its source, outdated values sit in the history table,
+and each judgement call is written down where you can check it.
 
-**Start over:** these commands discard your local changes in the wiki folders.
+**Start over:** these commands discard your local changes in the wiki folders and remove
+a cold-start wiki, so `/wiki-init` can run again.
 
 ```bash
-git restore -- projects sources wiki root-map.md
-git clean -fd -- projects sources wiki
+git restore -- projects sources examples root-map.md
+git clean -fd -- projects sources
+git clean -fdx -- examples
 ```
+
+The `x` in the last line also removes files git ignores, such as the `.DS_Store` a file
+browser leaves behind. Without it the emptied wiki folder stays, and `/wiki-init` refuses
+to overwrite an existing wiki.
 
 ## Folder map
 
@@ -77,7 +90,6 @@ CLAUDE.md                   schema: how Claude works in this wiki
 CONTRIBUTING.md             rules for changing the kit
 company/COMPANY.md          the fictional company (scenario for humans, not a wiki source)
 sources/inbox/              raw documents waiting for ingest
-wiki/                       global wiki: canonical fact, ingest, lint, LLM wiki vs RAG, ...
 projects/sotarena/wiki/     project wiki
   index.md                  node: rollup, links down, source register
   FACTS.md                  canonical facts: fact, value, winning source, date, owner
@@ -91,7 +103,8 @@ projects/sotarena/wiki/     project wiki
 .claude/hooks/              SessionStart root map, PreToolUse privacy warning, tests
 .claude/settings.json       hook wiring
 scripts/check_links.py      link, node-contract and structure checks
-docs/                       agenda, demo script, prepared fallback outputs
+examples/claude-house/      three sources for the cold start, no wiki
+docs/fallback/              outputs of earlier runs, to compare yours against
 ```
 
 ## LLM wiki vs RAG in one table
@@ -110,7 +123,7 @@ More detail is in the talk deck, which is not part of this repository.
 
 ## Prepared outputs
 
-- [docs/fallback/](docs/fallback/): what a correct ingest and lint run produces, so the result can be read without running anything.
+- [docs/fallback/](docs/fallback/): what earlier ingest, lint and init runs produced, so the result can be read without running anything. A run of your own will differ in detail.
 
 ## For maintainers
 

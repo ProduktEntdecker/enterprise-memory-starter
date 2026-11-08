@@ -1,0 +1,16 @@
+// markdownlint settings for this repository.
+// Only rules that contradict the page conventions in CLAUDE.md are changed.
+// Everything else stays at the default.
+{
+  // Wiki pages keep one paragraph or list item per line, as the skills write
+  // them. Wrapping at 80 columns would make every generated page fail.
+  "MD013": false,
+
+  // Every page carries a `title` in its frontmatter and an H1 with the same
+  // text. Without this setting the frontmatter title counts as a second H1.
+  "MD025": { "front_matter_title": "" },
+
+  // Tables use `|---|---|` delimiter rows under padded cells, in the seeded
+  // wiki and in everything the skills generate from it.
+  "MD060": false
+}
