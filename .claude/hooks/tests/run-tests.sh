@@ -222,13 +222,13 @@ expect_warning "Write to project wiki with an e-mail address warns" \
   warn-private-data.sh pretool-write-project-wiki-email.json "" "E-mail address"
 expect_warning "Edit in project wiki with an IBAN warns" \
   warn-private-data.sh pretool-edit-project-wiki-iban.json "" "IBAN"
-expect_warning "Write to global wiki with an international phone number warns" \
+expect_warning "Write to a top-level wiki with an international phone number warns" \
   warn-private-data.sh pretool-write-wiki-phone.json "" "Phone number"
-expect_warning "Write to global wiki with a labelled phone number warns" \
+expect_warning "Write to a top-level wiki with a labelled phone number warns" \
   warn-private-data.sh pretool-write-wiki-phone-labelled.json "" "Phone number after a label"
-expect_warning "Write to global wiki with an API key warns" \
+expect_warning "Write to a top-level wiki with an API key warns" \
   warn-private-data.sh pretool-write-wiki-apikey.json "" "API key or token"
-expect_warning "Write to global wiki with a secret assignment warns" \
+expect_warning "Write to a top-level wiki with a secret assignment warns" \
   warn-private-data.sh pretool-write-wiki-secret-assignment.json "" "Secret assignment"
 expect_warning "MultiEdit with e-mail and API key warns about both" \
   warn-private-data.sh pretool-multiedit-wiki-mixed.json "" "E-mail address" "API key or token"
@@ -272,7 +272,12 @@ expect_silent "Malformed hook input exits 0 without output" \
 # The page total does not catch it either, since a growing tree masks a vanished one.
 # Now a tree that is absent is named and skipped, and a tree that is present has to
 # contribute at least one page.
-corpus_trees=(wiki projects docs/fallback root-map.md)
+#
+# Every entry below ships with the kit: the top-level wiki/ went in #25 and left
+# this list in #34. A note about an absent tree therefore means that one was moved
+# or deleted, and the list needs the same change. As agreed in #28 the note does
+# not fail the case.
+corpus_trees=(projects docs/fallback root-map.md)
 false_positives=""
 empty_trees=""
 failed_finds=""

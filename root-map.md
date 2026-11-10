@@ -3,7 +3,7 @@ title: "Root map"
 type: root-map
 status: living
 created: 2026-09-14
-updated: 2026-09-14
+updated: 2026-11-10
 ---
 
 # Root map
@@ -22,7 +22,7 @@ updated: 2026-09-14
 ## Out of scope for answers
 
 - [company/COMPANY.md](company/COMPANY.md) describes the fictional scenario for humans. Do not use it to answer questions, to ingest or to lint.
-- [docs/](docs/) holds the agenda, the demo script and prepared fallback outputs. It is not knowledge.
+- [docs/](docs/) holds prepared outputs of earlier runs, to compare a run against. It is not knowledge.
 
 ## Routes
 
