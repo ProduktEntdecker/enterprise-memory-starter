@@ -6,7 +6,7 @@ Maintainer rules for this starter kit. They apply when you change the kit itself
 
 - **Purpose:** A starter kit for a plain-markdown LLM wiki that Claude reads like a well-kept filing cabinet: root map, canonical fact sheet, ingest and lint.
 - **Session:** "Second Brain for Claude: Why It Forgets Your Company, and How to Fix It in a Folder", Claude Community House Barcelona, Monday 21 September 2026, 11:00 to 12:00, Auditorium
-- **Visibility:** private. It becomes public only after Florian explicitly approves it, shortly before the session.
+- **Visibility:** public. Every commit, issue and pull request can be read by anyone, so the content rules below apply to all of them.
 
 ## Structure
 
@@ -14,20 +14,21 @@ Maintainer rules for this starter kit. They apply when you change the kit itself
 README.md                 overview, quickstart, LLM wiki vs RAG
 CLAUDE.md                 schema: how Claude works in the wiki
 CONTRIBUTING.md           maintainer rules (this file)
+LICENSE                   MIT license
 root-map.md               router over all stores, printed at session start
 company/COMPANY.md        fictional company profile (scenario, not a wiki source)
 sources/inbox/            raw documents waiting for ingest
-wiki/                     global wiki: concepts, index, log
 projects/sotarena/wiki/   project wiki: FACTS.md, index, log, entities, meetings, summaries, outputs, _originals
-docs/agenda.html          session agenda with timeline (print to PDF)
-docs/agenda.pdf           exported agenda
-docs/demo-script.md       run sheet for the live demo
-docs/fallback/            prepared outputs for the stage
+examples/claude-house/    three sources for the /wiki-init cold start, no wiki
+docs/fallback/            outputs of earlier runs, to compare a run against
 .claude/settings.json     hook wiring and one permission rule
-.claude/skills/           wiki-ingest, wiki-lint, wiki-query
+.claude/skills/           wiki-init, wiki-ingest, wiki-lint, wiki-query
 .claude/hooks/            SessionStart root map, PreToolUse privacy warning, tests
 scripts/check_links.py    link, node-contract and structure checks
-scripts/hooks/            pre-commit secret scan
+scripts/hooks/            pre-commit secret scan and its test
+.github/workflows/        claude.yml: mention responder, a stage of the review fallback
+.coderabbit.yaml          CodeRabbit review configuration
+.gitignore                secrets, editor files, .claude/worktrees/
 ```
 
 ## Content rules
