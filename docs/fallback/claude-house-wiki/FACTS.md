@@ -8,39 +8,52 @@ updated: 2026-09-20
 
 # Canonical facts: Claude Community House Barcelona
 
-> Up: [wiki index](index.md)
+> Up: [Claude House wiki index](index.md)
 
-**Purpose:** One canonical value per fact. Every answer, message or slide takes its
-numbers, dates and rules from this table. If a page and this table disagree, this
-table wins until a lint finding is resolved.
+**Purpose:** One canonical value per fact. Every answer, event page, ticket cap or slide takes its dates, capacities and rules from this table. If a page and this table disagree, this table wins until a lint finding is resolved.
+
+## Rules
+
+1. **One value per fact.** A fact appears once. Other pages may repeat it but must cite the row.
+2. **Every row has a winning source, a source date and an owner.** Without them a value is unverified and does not belong here.
+3. **Owner** is the role that decides the value when sources disagree. The maintainers of the wiki assign it.
+4. **A value changes only when** a newer dated source states a different value, **and** that source is authoritative for the fact, **and** a human approves the change. Newest alone is not enough.
+5. **Superseded values move to the history table** with the date they stopped being valid. Nothing is silently overwritten.
+6. **Ingest proposes, lint reports, a human decides.**
 
 ## Facts
 
 | # | Fact | Value | Winning source | Source date | Owner |
 |---|---|---|---|---|---|
-| 1 | Dates | 21 to 24 September 2026 | C01 | 2026-09-13 | organisers |
-| 2 | Venue | Carrer de Bilbao 128, Poblenou, Barcelona | C01 | 2026-09-13 | organisers |
-| 3 | Floors in use | Lower two floors plus rooftop | C01 | 2026-09-13 | organisers |
-| 4 | Ambassadors running the programme | 16, from across Europe | C01 | 2026-09-13 | organisers |
-| 5 | Auditorium capacity | 100 seats | C02 | 2026-09-19 | organisers |
-| 6 | Room 4 capacity | 25 seats | C02 | 2026-09-19 | organisers |
-| 7 | Workshops area capacity | 96 seats | C02 | 2026-09-19 | organisers |
-| 8 | Ticket cap per session | Room capacity plus 20 percent | C03 | 2026-09-13 | organisers |
-| 9 | Entry method | QR code from the event page | C01 | 2026-09-13 | organisers |
-| 10 | Sessions per ambassador | At least 1, up to 3 slots | C03 | 2026-09-13 | unassigned |
-| 11 | API credit value | 50 US dollars per person, API only | C03 | 2026-09-13 | unassigned |
-| 12 | Official status | Independent community initiative, not an official Anthropic event | C01 | 2026-09-13 | unassigned |
-
-## Needs decision
-
-| # | Fact | Question |
-|---|---|---|
-| 8 | Rounding of derived ticket caps | C03 gives "room capacity plus 20 percent" and no rounding rule. It divides evenly for the auditorium (100 to 120) and Room 4 (25 to 30), but not for the workshops area: 96 plus 20 percent is 115.2. Whether that becomes 115 or 116 is not decided in any source here. |
-| 11 | API credit redemptions | C03 says the link accepts "a fixed number" without naming it. The number is not in any source here. |
+| 1 | House dates | 21 to 24 September 2026 | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 2 | Venue | Carrer de Bilbao 128, Poblenou, Barcelona | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 3 | Floors in use | Lower two floors and the rooftop | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 4 | Community ambassadors | 16, from across Europe | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 5 | Status of the house | Independent community initiative, not an official Anthropic event | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 6 | Entry to a session | By QR code, through that session's own event page | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 7 | Rooftop programme, ownership | Run by a separate organiser, not part of the house programme | [C01](summaries/C01-programme-extract.md) | 2026-09-13 | House organisers |
+| 8 | Rooftop programme, hours | **needs decision:** from 18:00 ([C01](summaries/C01-programme-extract.md), 2026-09-13) against only 16:00 to 18:00 ([C02](summaries/C02-rooms-and-capacity.md), 2026-09-19) | contested | 2026-09-19 | unassigned |
+| 9 | Capacity, Workshops area (cafeteria) | 96 seats, ground floor | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 10 | Capacity, Room 1 | 14 seats | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 11 | Capacity, Room 2 | 16 seats | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 12 | Capacity, Room 3 | 20 seats | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 13 | Capacity, Room 4 | 25 seats | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 14 | Capacity, Auditorium | 100 seats, level minus one, seated | [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | unassigned |
+| 15 | Maximum tickets per session | Room capacity plus 20 percent | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
+| 16 | Slot claiming | Host claims in the backoffice, an organiser releases, only then does the host request the event page | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
+| 17 | Event page requirements | Public, clear description, event image, address Carrer de Bilbao 128, all hosts with photo, bio and social links, three named organisers as co-hosts | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
+| 18 | Sessions per ambassador | At least one session of one to two hours, up to three slots | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
+| 19 | API credit, value | USD 50 per workshop participant, for the API only, not the chat product | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
+| 20 | API credit, redemption | Fixed number of redemptions on the link, one per person, a wrong account ID cannot be fixed afterwards | [C03](summaries/C03-house-rules.md) | 2026-09-13 | House organisers |
 
 ## History of superseded values
 
-| # | Fact | Former value | Valid until | Source of the change |
-|---|---|---|---|---|
-| 6 | Room 4 capacity | 20 seats | 2026-09-19 | C02, which states the raise explicitly |
-| 7 | Workshops area capacity | 120 seats | 2026-09-19 | C02, which states the reduction explicitly |
+| # | Fact | Old value | Old source | Valid until | Replaced by |
+|---|---|---|---|---|---|
+| 9 | Capacity, Workshops area (cafeteria) | 120 seats | Room list of 2026-08-22, quoted in [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | [C02](summaries/C02-rooms-and-capacity.md) |
+| 10 | Capacity, Room 1 | 12 seats | Room list of 2026-08-22, quoted in [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | [C02](summaries/C02-rooms-and-capacity.md) |
+| 11 | Capacity, Room 2 | 12 seats | Room list of 2026-08-22, quoted in [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | [C02](summaries/C02-rooms-and-capacity.md) |
+| 12 | Capacity, Room 3 | 15 seats | Room list of 2026-08-22, quoted in [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | [C02](summaries/C02-rooms-and-capacity.md) |
+| 13 | Capacity, Room 4 | 20 seats | Room list of 2026-08-22, quoted in [C02](summaries/C02-rooms-and-capacity.md) | 2026-09-19 | [C02](summaries/C02-rooms-and-capacity.md) |
+
+The room list of 2026-08-22 is not an ingested source. It is quoted inside C02, which declares it no longer valid.

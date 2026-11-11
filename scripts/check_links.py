@@ -13,6 +13,9 @@ Validation mode exits 1 on any error:
   - a page in entities/, summaries/ or meetings/ is an orphan
   - a text file contains the em-dash character (U+2014)
 
+A wiki is wiki/, every projects/*/wiki/ and every folder in docs/fallback/
+that has an index.md.
+
 Lint mode always exits 0 (2 on a wrong path). It prints candidates for the
 wiki-lint skill: broken links, missing index entries, orphan pages,
 near-duplicate entity names and files waiting in sources/inbox/. The skill
@@ -169,6 +172,14 @@ def wiki_roots():
         for project in sorted(projects.iterdir()):
             if (project / "wiki" / "index.md").is_file():
                 roots.append(project / "wiki")
+    # Readers compare their own run against the prepared outputs, so a wiki in
+    # docs/fallback/ gets the same checks as a live one. Left out, it miscounted
+    # itself and broke the node contract without any check noticing (#21).
+    fallback = ROOT / "docs" / "fallback"
+    if fallback.is_dir():
+        for folder in sorted(fallback.iterdir()):
+            if (folder / "index.md").is_file():
+                roots.append(folder)
     return roots
 
 
