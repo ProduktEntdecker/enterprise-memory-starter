@@ -3,7 +3,7 @@ title: "Claude House wiki"
 type: index
 status: living
 created: 2026-09-20
-updated: 2026-11-08
+updated: 2026-11-11
 ---
 
 # Claude House wiki
@@ -21,7 +21,7 @@ updated: 2026-11-08
 - **meetings/ (0):** call notes and minutes. None ingested yet.
 - **entities/ (5):** the house itself and four rooms named in the sources.
 - **outputs/ (1):** generated reports. Lint report of 2026-09-20 with 5 findings, none resolved.
-- **log.md:** append-only record of the init run, the first lint and a rebuild on 2026-09-20, plus one maintenance entry for this committed copy.
+- **log.md:** append-only record of the init run, the first lint and a rebuild on 2026-09-20, plus two entries for this committed copy: what changed when it was committed, and what a later review found.
 
 ## Links down
 

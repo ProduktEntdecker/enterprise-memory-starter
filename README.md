@@ -69,18 +69,27 @@ separate programme after it, and found no contradiction. Compare what holds in e
 good run instead: each value cites its source, outdated values sit in the history table,
 and each judgement call is written down where you can check it.
 
-**Start over:** these commands discard your local changes in the wiki folders and remove
-a cold-start wiki, so `/wiki-init` can run again.
+The committed run is not free of mistakes either. A review found places where it reads
+more into the sources than they say; the last entry of its `log.md` lists them. They are
+the kind of thing to look for in your own run.
+
+**Start over:** these commands reset both examples. They discard every local change to
+tracked files in `projects/`, `sources/`, `examples/` and `root-map.md`. They delete
+untracked files in `projects/` and `sources/`, and the generated
+`examples/claude-house/wiki/` with everything in it, including any document of your own
+that a run moved into its `_originals/`. Copy out what you want to keep first. To see
+what would be deleted, run the two `git clean` lines with `-n` in place of `-f`.
 
 ```bash
 git restore -- projects sources examples root-map.md
 git clean -fd -- projects sources
-git clean -fdx -- examples
+git clean -fdx -- examples/claude-house/wiki examples/claude-house/sources/inbox
 ```
 
-The `x` in the last line also removes files git ignores, such as the `.DS_Store` a file
-browser leaves behind. Without it the emptied wiki folder stays, and `/wiki-init` refuses
-to overwrite an existing wiki.
+The `x` in the last line also removes files git ignores inside the generated wiki, such
+as the `.DS_Store` a file browser leaves there. Without it the emptied wiki folder stays,
+and `/wiki-init` refuses to overwrite an existing wiki. Files outside those two folders,
+such as a `.env` or a new source you added, are not touched.
 
 ## Folder map
 

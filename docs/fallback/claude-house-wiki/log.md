@@ -3,7 +3,7 @@ title: "Claude House wiki log"
 type: log
 status: living
 created: 2026-09-20
-updated: 2026-11-08
+updated: 2026-11-11
 ---
 
 # Claude House wiki log
@@ -56,3 +56,12 @@ updated: 2026-11-08
 - index.md: the inbox is named as a path, not linked, because the run creates that folder and a fresh clone does not have it.
 - Lint report: the count of pages linked from index.md corrected from 9 to 11.
 - No fact, source or finding changed.
+
+## [2026-11-11] review | gaps found after the run, left as the run wrote them
+
+- A review of this copy found four places where the run reads more into the sources than they say, or leaves a step out. The pages stay as the run wrote them: this copy shows what one run produces, mistakes included.
+  - [summaries/C01-programme-extract.md](summaries/C01-programme-extract.md), TL;DR: says the ambassadors run the programme on the lower two floors and the rooftop. C01 says the rooftop programme from 18:00 has a separate organiser, which FACTS.md row 7 records correctly.
+  - [FACTS.md](FACTS.md) row 15: room capacity plus 20 percent is not a whole number for every room (Room 1: 16.8). No source says how to round, and the run did not flag it.
+  - FACTS.md row 16: after requesting the event page, C03 also has the host send the link back. The row leaves that step out.
+  - [Lint report](outputs/lint-2026-09-20.md), finding 2: states that Room 4 sessions are under-sold and cafeteria sessions over-sold. The sources give the formula and the capacities, not the cap or the sales of any event page, so this is a risk to check, not an observed fact.
+- Lint report, notes: the line on `check_links.py` now says it describes the check at the time of the run. Since 2026-11-08 the global check also covers this copy.
