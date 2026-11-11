@@ -21,8 +21,8 @@ run one of them:
   no new branch, no commit. People watch files appear in the folder in front of
   them; a detour through branch management is not the subject. A personal or
   global rule asking for a branch does not apply to these four commands.
-- **Do not open `docs/`.** It holds the run sheet and the prepared outputs, which
-  describe what the result is supposed to look like. Reading it before a run
+- **Do not open `docs/`.** It holds the prepared outputs, which describe what
+  the result is supposed to look like. Reading it before a run
   makes the run worthless: it stops showing what the sources produce and starts
   reproducing what somebody wrote down beforehand.
 - **Do not commit.** The run is the demonstration, not a change to the project.
@@ -37,7 +37,7 @@ run one of them:
 - Root map, then the `index.md` of one store, then only the pages you need.
 - For numbers, dates, prices, lead times and names in roles, read `FACTS.md` before any other page.
 - Open files in `_originals/` only to verify a quote.
-- `company/COMPANY.md` and `docs/` are not knowledge sources. Do not use them to answer, ingest or lint. COMPANY.md describes the scenario for humans; docs/ holds the talk material and prepared outputs.
+- `company/COMPANY.md` and `docs/` are not knowledge sources. Do not use them to answer, ingest or lint. COMPANY.md describes the scenario for humans; docs/ holds the prepared outputs of earlier runs.
 
 ## Canonical facts
 
@@ -74,7 +74,7 @@ Plain language works too, for example "ingest the Talaverna call note".
 
 - **Project wiki folders:** `summaries/` one page per document, `meetings/` call notes and minutes, `entities/` people, organisations and products, `outputs/` generated reports, `_originals/` ingested raw documents, plus `FACTS.md`, `index.md` and `log.md`.
 - **File names:** lowercase ASCII with hyphens (`garbi.md` for Garbí). Summary and meeting pages keep the file name of their source (`S04-capacity-and-lead-times.md`).
-- **Frontmatter** on every page: `title`, `type` (index, log, canonical, summary, meeting, entity, output, concept), `status` (draft, reviewed, living), `created`, `updated`. Summary and meeting pages add `source_id`, `source_type`, `author`, `source_date`. Entity pages add `kind`, `aliases`, `sources`.
+- **Frontmatter** on every page: `title`, `type` (index, log, canonical, summary, meeting, entity, output), `status` (draft, reviewed, living), `created`, `updated`. Summary and meeting pages add `source_id`, `source_type`, `author`, `source_date`. Entity pages add `kind`, `aliases`, `sources`.
 - **Breadcrumb** below the title: `> Up: [parent](relative path)`.
 - **Links:** relative markdown links only, no wikilinks, so they work on GitHub, in editors and in `scripts/check_links.py`.
 - **Dates:** `YYYY-MM-DD` in wiki pages. Quotes keep the format of the source. A source that carries only a month stays month-only in `source_date` (`YYYY-MM`), and a source without any date uses `unknown`. Never invent a day.
@@ -88,23 +88,3 @@ Plain language works too, for example "ingest the Talaverna call note".
 - `python3 scripts/check_links.py`: links, node contract, index coverage, orphans, em-dash.
 - `python3 scripts/check_links.py --lint projects/sotarena/wiki`: structural candidates for lint.
 - `bash .claude/hooks/tests/run-tests.sh`: hook tests.
-
-## Slide typography
-
-The deck is 1280 by 720 px and prints to a 960 by 540 pt page, so **pt = px times 0.75**.
-
-| Role | Point size | Pixel size in `slides.html` |
-|---|---|---|
-| Target for body text, labels, table cells | 18 pt and up | 24 px and up |
-| Hard floor for anything the audience must read | 14 pt | 19 px |
-| Footnotes only: source lines, tags, slide numbers | 8 to 10.5 pt | 11 to 14 px |
-
-Nothing between 11 and 18 px unless it is a footnote. Check before every export:
-
-```bash
-grep -n "font-size:\s*1[0-8]px" slides/slides.html
-```
-
-Only `.foot` and `.tag` may appear in that output. When raising a size inside an
-SVG, check the y coordinates of stacked labels too: a pair less than 26 px apart
-will collide once the text grows.
