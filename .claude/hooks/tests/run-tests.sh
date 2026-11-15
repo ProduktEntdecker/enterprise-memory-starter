@@ -234,6 +234,10 @@ expect_warning "MultiEdit with e-mail and API key warns about both" \
   warn-private-data.sh pretool-multiedit-wiki-mixed.json "" "E-mail address" "API key or token"
 expect_warning "Relative file path inside a project wiki warns" \
   warn-private-data.sh pretool-write-relative-path-email.json "" "E-mail address"
+expect_warning "Write to the cold-start wiki in examples/ with an e-mail address warns" \
+  warn-private-data.sh pretool-write-examples-wiki-email.json "" "E-mail address"
+expect_warning "Write to a wiki that /wiki-init built in any other folder warns" \
+  warn-private-data.sh pretool-write-folder-wiki-email.json "" "E-mail address"
 expect_warning "python3 parser path warns too" \
   warn-private-data.sh pretool-write-project-wiki-email.json python3 "E-mail address"
 
@@ -255,10 +259,14 @@ expect_silent "python3 parser path stays silent on clean content" \
   warn-private-data.sh pretool-write-wiki-clean.json python3
 expect_silent "Write outside the wiki (docs/) stays silent" \
   warn-private-data.sh pretool-write-docs-email.json
+expect_silent "Write to a wiki folder in docs/fallback/ stays silent (prepared outputs)" \
+  warn-private-data.sh pretool-write-fallback-wiki-email.json
 expect_silent "Write to sources/inbox/ stays silent (raw sources are not wiki pages)" \
   warn-private-data.sh pretool-write-inbox-email.json
 expect_silent "Absolute path to another project's wiki stays silent" \
   warn-private-data.sh pretool-write-other-project-wiki-email.json
+expect_silent "Path that leaves the project through ../ to another wiki stays silent" \
+  warn-private-data.sh pretool-write-parent-dir-wiki-email.json
 expect_silent "Malformed hook input exits 0 without output" \
   warn-private-data.sh malformed-input.txt
 

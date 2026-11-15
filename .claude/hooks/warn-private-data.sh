@@ -3,7 +3,9 @@
 #
 # Warns, never blocks, when new content for a wiki page contains patterns of
 # private data: e-mail addresses, IBANs, phone numbers, API keys and secrets.
-# Scope: wiki/** and projects/*/wiki/** inside the project directory.
+# Scope: every wiki/ folder inside the project directory (wiki/**, */wiki/**,
+# which covers projects/*/wiki/** and the wiki /wiki-init builds), except
+# docs/fallback/**.
 #
 # On a hit it prints JSON with two fields and exits 0:
 #   systemMessage                         the warning, shown to the user
@@ -90,9 +92,15 @@ if [ -n "$project_dir" ]; then
 fi
 rel_path="${rel_path#./}"
 
+# Every wiki/ folder inside the project counts: the top-level wiki/,
+# projects/*/wiki/, and the one /wiki-init builds in the folder it is given, such
+# as examples/claude-house/wiki/ in the README cold start (#38). The exits come
+# first because */wiki/* matches them too: a path that leaves the project through
+# ../, and docs/fallback/, which holds prepared outputs of earlier runs.
 case "$rel_path" in
-  /*) exit 0 ;;
-  wiki/* | projects/*/wiki/*) ;;
+  /* | ../*) exit 0 ;;
+  docs/fallback/*) exit 0 ;;
+  wiki/* | */wiki/*) ;;
   *) exit 0 ;;
 esac
 
