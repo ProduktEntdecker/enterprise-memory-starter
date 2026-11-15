@@ -270,13 +270,13 @@ expect_silent "Malformed hook input exits 0 without output" \
 # the total count: with the remaining trees still returning pages the case reported
 # a pass and the suite kept exiting 0, so a whole tree could drop out unnoticed.
 # The page total does not catch it either, since a growing tree masks a vanished one.
-# Now a tree that is absent is named and skipped, and a tree that is present has to
-# contribute at least one page.
+# Now a tree that is absent fails the case by name, and a tree that is present has
+# to contribute at least one page.
 #
 # Every entry below ships with the kit: the top-level wiki/ went in #25 and left
-# this list in #34. A note about an absent tree therefore means that one was moved
-# or deleted, and the list needs the same change. As agreed in #28 the note does
-# not fail the case.
+# this list in #34. An absent entry therefore means that one was moved or deleted,
+# and the list needs the same change. Until #36 that was only a note, and the note
+# printed on every run from #29 to #34 without anyone changing the list.
 corpus_trees=(projects docs/fallback root-map.md)
 false_positives=""
 empty_trees=""
@@ -289,7 +289,8 @@ for tree in "${corpus_trees[@]}"; do
     # false for both: stat needs search permission on every parent directory. An
     # unreadable parent counted as absent, so the tree was skipped with a note and
     # the run still passed. Measured with docs/ at mode 000: docs/fallback came out
-    # as absent, 16 of 53 pages went unchecked, 23 passed, exit 0.
+    # as absent, 16 of 53 pages went unchecked, 23 passed, exit 0. Both answers
+    # fail the case now (#36); the split only names the right cause.
     tree_parent=$(dirname "$root/$tree")
     if [ -d "$tree_parent" ] && [ ! -x "$tree_parent" ]; then
       failed_finds="$failed_finds $tree"
@@ -333,14 +334,12 @@ print(json.dumps({"hook_event_name": "PreToolUse", "cwd": sys.argv[2], "tool_nam
     empty_trees="$empty_trees $tree"
   fi
 done
-if [ -n "$missing_trees" ]; then
-  printf 'note: corpus trees absent in this checkout, skipped:%s\n' "$missing_trees"
-fi
-if [ -z "$false_positives" ] && [ -z "$empty_trees" ] && [ -z "$failed_finds" ] && [ "$checked" -gt 0 ]; then
+if [ -z "$false_positives" ] && [ -z "$empty_trees" ] && [ -z "$failed_finds" ] &&
+  [ -z "$missing_trees" ] && [ "$checked" -gt 0 ]; then
   ok "No false positives on $checked existing wiki pages and prepared outputs"
 else
   not_ok "No false positives on existing wiki pages" \
-    "warnings for:$false_positives; present but no pages:$empty_trees; search failed:$failed_finds (checked $checked)"
+    "warnings for:$false_positives; absent:$missing_trees; present but no pages:$empty_trees; search failed:$failed_finds (checked $checked)"
 fi
 
 echo
